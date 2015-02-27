@@ -1,0 +1,14 @@
+template( name="skill" )
+  
+  .skill( id="#{id}" )
+  
+    core-tooltip
+      div( tip ) #{summary}
+  
+      paper-button( class="button #{classes}" $dyn=attrs ) 
+        span #{name} 
+        if passive
+          span (Passivo)
+        if unlocked
+          if levelable
+            span (#{level})

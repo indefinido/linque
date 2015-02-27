@@ -1,0 +1,43 @@
+head
+  title Linque
+
+
+body
+  
+  div 
+    if currentUser
+      +loginButtons
+  
+    h1 Linque!
+  
+    unless currentUser
+      +loginButtons
+  
+    if currentUser
+      +user
+      
+      +activities
+      
+      +levelup
+    
+
+template( name="user" )
+
+  +actions
+  
+  p Level: #{level}
+  
+  p 
+    span Experience: #{experience}/#{requiredExperience}
+    span#earned-experience( style="display: none;" ) +#{earnedExperience}
+  
+  paper-progress( value="#{percentage}" )
+    
+  
+  
+    
+template( name="actions" )
+
+  .skills
+    each skills
+      +skill

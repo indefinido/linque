@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="itWorks"
+             errors="0"
+             failures="1"
+             tests="3">
+  
+  <testsuite errors="0" failures="1" hostname="" id=""
+    name="Hello World" package="itWorks" skipped="1"
+    tests="3" time="" timestamp="">
+    
+    
+      <testcase name="Element &lt;body&gt; was visible after 197 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if the page title equals &quot;Hello World&quot;.">
+        
+          <failure message="Expected &quot;Hello World&quot; but got: &quot;Problem loading page&quot;"></failure>
+        
+        
+      </testcase>
+    
+    
+    </testsuite>
+  
+</testsuites>
