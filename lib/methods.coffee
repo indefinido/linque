@@ -6,7 +6,7 @@ Meteor.methods
     
     # get current user skill level
     skillLevel = null
-    _.each skill.levels, (level) ->
+    for level in skill.levels
       if level.level == user.skills[skill._id].level
         skillLevel = level
     
@@ -67,6 +67,10 @@ Meteor.methods
           levelExperience: levelExperience
       
       
+      # update user variable
+      user = Meteor.user()
+      
+      
       # Report earned experience to client
       if Meteor.isClient
         Session.set 'earnedExperience', earnedExperience
@@ -80,12 +84,35 @@ Meteor.methods
           createdAt: new Date
           type: 'levelUp'
           data:
-            level: Meteor.user().level
+            level: user.level
         
         # Notify the client about the new level
         if Meteor.isClient          
-          Session.set 'level', Meteor.user().level   
+          Session.set 'level', user.level   
           
         
-        # TODO check for skill level up here
+        # Check level up for skills
+        skillsChanged = false
+        Skills.find().forEach (skill) ->
+          userSkill = user.skills[skill._id]
+          for skillLevel in skill.levels
+            if user.level is skillLevel.requiredLevel
+              userSkill.level = skillLevel.level
+              skillsChanged   = true
+
+              # Record skill level up
+              Activities.insert 
+                userId: user._id
+                createdAt: new Date
+                type: 'skillLevelUp'
+                data:
+                  skill: skill._id
+                  level: skillLevel.level
+        
+        if skillsChanged
+          Meteor.users.update { _id: user._id }, $set:
+            skills: user.skills
+            
+        
+        # user = Meteor.user()
         

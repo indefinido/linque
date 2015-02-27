@@ -3,8 +3,9 @@ Meteor.startup ->
 
   Accounts.onCreateUser (options, user) ->
 
-    user.experience = 0
-    user.level      = 1
+    user.experience      = 0
+    user.levelExperience = 0
+    user.level           = 1
     
     # initialize skills on User
     user.skills = {}

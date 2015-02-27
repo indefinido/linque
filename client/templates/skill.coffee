@@ -11,7 +11,7 @@ Template.skill.helpers
   name    : -> 
     skillId = @_id
     name = null
-    _.each @levels, (level) ->
+    for level in @levels
       if level.level == (Meteor.user().skills[skillId].level || 1)
         name = level.name
     name
@@ -24,7 +24,7 @@ Template.skill.helpers
     currentLevel = null
     
     # get current level
-    _.each @levels, (level) ->
+    for level in @levels
       if level.level == (Meteor.user().skills[skillId].level || 1)
         currentLevel = level
         

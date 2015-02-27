@@ -31,5 +31,10 @@ Meteor.publish "levels", ->
 Meteor.publish "activities", ->
   return @ready() unless @userId
   
-  Activities.find { userId: this.userId }
+  Activities.find { userId: this.userId }, 
+    fields:
+      id: -1
+      createdAt: 1
+      data: 1
+      type: 1
   

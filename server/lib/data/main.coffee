@@ -1,10 +1,9 @@
 records = @records ||= {}
 
 Meteor.startup () ->
-  _.each _.keys(records), (name) ->
+  for name in _.keys(records)
     collection = global[name]
-    console.log
-    _.each records[name], (record) -> 
+    for record in records[name]
       console.log "Upserting #{name}: #{record._id}"
       collection.upsert { _id: record._id }, record
     
