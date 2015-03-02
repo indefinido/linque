@@ -3,11 +3,12 @@ Meteor.startup ->
 
   Accounts.onCreateUser (options, user) ->
 
+    # default values
     user.experience      = 0
     user.levelExperience = 0
     user.level           = 1
     
-    # initialize skills on User
+    # initialize skills
     user.skills = {}
     Skills.find().forEach (skill) ->
       # get required level of first skill
@@ -17,9 +18,13 @@ Meteor.startup ->
         # gives all skills that start on level 1
         level   : (if requiredLevel == 1 then 1 else null)
         cooldown: null
+        
 
-    # We still want the default hook's 'profile' behavior.
     if options.profile
-      user.profile = options.profile
+      
+      # facebook profile picture
+      options.profile.picture = "http://graph.facebook.com/#{user.services.facebook.id}/picture/?type=large"
+      
+      user.profile = options.profile;
 
     user
