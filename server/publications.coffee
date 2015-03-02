@@ -33,8 +33,9 @@ Meteor.publish "activities", ->
   
   Activities.find { userId: this.userId }, 
     fields:
-      id: -1
       createdAt: 1
       data: 1
       type: 1
+    sort:
+      createdAt: 1
   

@@ -54,8 +54,8 @@ Template.user.events
 
 Meteor.startup ->
   
-  Session.setDefault 'level', null
-  Session.setDefault 'earnedExperience', null
+  Session.set 'level', null
+  Session.set 'earnedExperience', null
   
 
   # Tracks level changes to open level up dialog
