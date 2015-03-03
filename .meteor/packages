@@ -9,7 +9,6 @@ coffeescript
 accounts-ui
 accounts-facebook
 mquandalle:jade
-stylus
 velocity:html-reporter
 spiderable
 ecwyne:polymer
@@ -17,3 +16,5 @@ differential:vulcanize
 mizzao:accounts-testing
 velocity:nightwatch-framework
 clinical:nightwatch
+cryptoquick:stylus-multi
+momentjs:moment

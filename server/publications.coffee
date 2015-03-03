@@ -16,8 +16,7 @@ Meteor.publish "skills", ->
   
   skills = Skills.find {}, 
     sort: 
-      activity: 1
-      _id: 1
+      order: 1
   
   
       
@@ -29,14 +28,83 @@ Meteor.publish "levels", ->
       _id: 1
       
       
-Meteor.publish "activities", ->
-  return @ready() unless @userId
+      
+
+# server: publish the current size of a collection
+Meteor.publish 'activities', ->
+
+  self = @
   
-  Activities.find { userId: this.userId }, 
+  activities = Activities.find { userId: this.userId, type: "skillUse" },
     fields:
       createdAt: 1
       data: 1
-      type: 1
     sort:
-      createdAt: 1
+      createdAt: -1
+  .fetch()
   
+  dayActivities = _.groupBy activities, (activity) -> 
+    moment(activity.createdAt).format('D/MMM/YY')
+  
+
+  initializing = true
+
+
+  handle = Activities.find(userId: this.userId, type: "skillUse" ).observeChanges
+    added: (id, fields) ->
+      
+      date = moment(fields.createdAt).format('D/MMM/YY')
+      
+      fields.id = id
+      
+      # merge activity to day activity and mark as changed
+      if dayActivities[date]      
+        if !initializing
+          dayActivities[date].unshift fields
+          self.changed 'daysActivities', date, activities: dayActivities[date]
+          
+      # create first day activity and mark as added
+      else
+        dayActivities[date] = [ fields ]
+        self.added 'daysActivities', date, activities: dayActivities[date]
+
+
+  initializing = false
+  
+  for timestamp, activities of dayActivities
+    date  = moment(timestamp).format('D/MMM/YY')
+    today = moment().format('D/MMM/YY')
+
+    # report all current activities
+    @added 'daysActivities', date, 
+      activities: activities
+
+    # delete activities that happened before today
+    delete dayActivities[date] if date isnt today
+    
+    
+  @ready()
+  
+  # Stop observing the cursor when client unsubs.
+  # Stopping a subscription automatically takes
+  # care of sending the client any removed messages.
+  @onStop ->
+    handle.stop()
+    return
+    
+  return
+
+
+
+      
+# Meteor.publish "activities", ->
+#   return @ready() unless @userId
+#
+#   Activities.find { userId: this.userId, type: "skillUse" },
+#     fields:
+#       createdAt: 1
+#       data: 1
+#     sort:
+#       createdAt: -1
+#
+#

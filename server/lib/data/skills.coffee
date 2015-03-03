@@ -3,6 +3,7 @@
 @records.Skills = [
     _id: 'container'
     activity: 'passive'
+    order: 2
     levels: [
         name: "Possuir um Copo Pequeno"
         summary: "Você pode ter apenas um Copo de volume entre 200 ml e 300 ml"
@@ -31,6 +32,7 @@
   ,
     _id: 'trigger'
     activity: 'passive'
+    order: 3
     levels: [
         name: "Receber Gatilho"
         summary: "Você sabe receber gatilhos do ambiente. Use a habilidade de Beber Água sempre que beber água imediatamente após receber um gatilho."
@@ -41,6 +43,7 @@
   ,
     _id: 'fill'
     activity: 'active'
+    order: 1
     levels: [
         name: "Encher Recipiente 1 vez por dia"
         summary: "Você pode encher seu recipiente atual apenas 1 vez por dia. Use esta habilidade para registrar todas as vezes que você encheu seu recipiente."
@@ -66,6 +69,7 @@
   ,
     _id: 'drink'
     activity: 'active'
+    order: 4
     levels: [
         name: "Beber Água (pouco)"
         summary: "Você pode beber pouca água. Use esta habilidade para registrar todas as vezes que você bebeu água após receber um gatilho."

@@ -1,7 +1,6 @@
 Meteor.subscribe "user"
 Meteor.subscribe "skills"
 Meteor.subscribe "levels"
-Meteor.subscribe "activities"
 
 
 
@@ -25,10 +24,13 @@ Template.user.helpers
     else
       100
 
-
-Template.actions.helpers
-  skills: ->
-    Skills.find {}
+  skillsLeft: ->
+    skills = Skills.find({}).fetch()
+    skills.splice 0, skills.length / 2
+    
+  skillsRight: ->
+    skills = Skills.find({}).fetch()
+    skills.splice skills.length / 2 , skills.length / 2
 
 
 
@@ -38,7 +40,9 @@ Template.actions.helpers
 
 # TODO move to skills template (and skill.coffe file)?
 Template.user.events
-  'click .skill .button.active': ->
+
+  # FIXME event being fired twice in touch devices
+  'click .skill .button.active, touchstart .skill .button.active': ->
     Meteor.call "useSkill", @_id
 
 
@@ -79,3 +83,8 @@ Meteor.startup ->
         Session.set 'earnedExperience', null
     , 2000
     
+    
+  if Meteor.isClient
+    $('body').attr 'fullbleed', true
+    $('body').attr 'layout', true
+    $('body').attr 'vertical', true

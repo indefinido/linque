@@ -17,7 +17,6 @@ Meteor.startup ->
       user.skills[skill._id] =
         # gives all skills that start on level 1
         level   : (if requiredLevel == 1 then 1 else null)
-        cooldown: null
         
 
     if options.profile

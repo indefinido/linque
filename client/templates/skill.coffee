@@ -46,17 +46,20 @@ Template.skill.helpers
   
   # button attributes
   attrs: ->
-    # unlocked if user has the skill level defined  
+    # unlocked if user has the skill level defined
     unlocked = Meteor.user().skills[@_id].level?
-    
+
     attrs = {}
-    attrs.raised   = true     if @active()
-    attrs.disabled = true unless @active() and unlocked
+    attrs.noink = true unless @active() and unlocked
     attrs
   
   # button classes
   classes : -> 
+    # unlocked if user has the skill level defined  
+    unlocked = Meteor.user().skills[@_id].level?
+    
     classes = []
     classes.push "#{@activity}"
-    classes.join()
+    classes.push "locked" unless unlocked
+    classes.join " "
 

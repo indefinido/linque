@@ -1,7 +1,24 @@
 template( name="activities" )
   
-  each activities
-    +activity
+  each days
+    +day
+  
+  div( horizontal center-justified layout )
+    .activities
+      each daysActivities
+        +day
 
 template( name="activity" )
-  p #{description}
+  div.activity( horizontal layout )
+    span.activity-icon #{data.skillId}
+    span.activity-experience( flex ) 
+      span + 
+      span.activity-experience-value #{data.experience} 
+      span.activity-experience-unit PH
+    span.activity-time às #{createdAt}
+    
+    
+template( name="day" )
+  div #{_id}
+    each activities
+      +activity

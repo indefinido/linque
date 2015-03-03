@@ -1,0 +1,50 @@
+@import 'nib'
+
+
+.skills
+  position relative
+  width 100%
+
+.skill
+
+  .button
+    box-sizing border-box
+    color #FFF
+    margin 0.5em 0
+  
+    &.active
+    
+      background-color rgba(#FFF,0.15)
+      
+      height 95px
+      width 95px
+      
+    &.passive
+      
+      background-color transparent
+      cursor default
+      
+      height 60px
+      width 60px
+      
+    &.locked
+      
+      cursor default
+      opacity 0.1
+      
+
+
++mobile()
+
+  // .skills
+  //   .skill
+  //     .passive
+  //       // position absolute
+  //       // top 0
+
+  .skill
+    .button
+      &.active
+      &.passive
+        width auto
+        height auto
