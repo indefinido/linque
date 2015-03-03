@@ -19,6 +19,6 @@ template( name="activity" )
     
     
 template( name="day" )
-  div #{_id}
+  div #{calendarDate} (#{formattedDate})
     each activities
       +activity

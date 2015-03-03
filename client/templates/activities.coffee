@@ -1,12 +1,12 @@
 @DaysActivities = new Mongo.Collection "daysActivities"
 
-moment.locale 'pt-BR', 
+moment.locale 'en', 
   calendar:
-    lastDay  : '[Yesterday]'
-    sameDay  : '[Today]'
-    nextDay  : '[Tomorrow]'
+    lastDay  : '[Ontem]'
+    sameDay  : '[Hoje]'
+    nextDay  : '[Amanhã]'
     lastWeek : 'dddd'
-    nextWeek : 'dddd que vem'
+    nextWeek : 'dddd [que vem]'
 
 
 
@@ -23,8 +23,11 @@ Template.day.helpers
   activities: ->
     DaysActivities.findOne({_id: @_id}).activities
     
-  _id: ->
-    moment(@_id).calendar()
+  calendarDate: -> 
+    moment(@date).calendar()
+    
+  formattedDate: ->
+    moment(@date).format('D/MMM/YY')
 
         
 Template.activity.helpers
