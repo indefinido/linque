@@ -7,6 +7,7 @@ Meteor.publish "user", ->
       levelExperience: 1
       level: 1
       skills: 1
+      profile: 1
 
     
     

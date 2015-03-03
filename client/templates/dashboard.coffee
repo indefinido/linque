@@ -10,8 +10,6 @@ Meteor.subscribe "activities"
 
 
 Template.user.helpers
-  experience: ->
-    Meteor.user().levelExperience || 0
     
   requiredExperience: ->
     Levels.findOne( _id: Meteor.user().level ).experience || ""
@@ -26,10 +24,6 @@ Template.user.helpers
       user.levelExperience / level.experience * 100
     else
       100
-
-  level: ->
-    level = Meteor.user().level
-    level
 
 
 Template.actions.helpers

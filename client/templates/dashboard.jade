@@ -14,7 +14,8 @@ body
       +loginButtons
   
     if currentUser
-      +user
+      with currentUser
+        +user
       
       +activities
       
@@ -23,12 +24,14 @@ body
 
 template( name="user" )
 
+  img( src="#{profile.picture}")
+
   +actions
   
   p Level: #{level}
   
   p 
-    span Experience: #{experience}/#{requiredExperience}
+    span Experience: #{levelExperience}/#{requiredExperience}
     span#earned-experience( style="display: none;" ) +#{earnedExperience}
   
   paper-progress( value="#{percentage}" )
