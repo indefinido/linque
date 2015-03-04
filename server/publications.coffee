@@ -43,6 +43,7 @@ Meteor.publish 'activities', ->
       createdAt: -1
   .fetch()
 
+
   dayActivities = _.groupBy activities, (activity) ->
     moment(activity.createdAt).format('D/MMM/YY')
 
@@ -66,7 +67,15 @@ Meteor.publish 'activities', ->
       # create first day activity and mark as added
       else
         dayActivities[date] = [ fields ]
-        self.added 'daysActivities', date, activities: dayActivities[date]
+        dateObject = moment fields.createdAt
+
+        self.added 'daysActivities', date,
+          activities: dayActivities[date]
+          date:
+            year : dateObject.year()
+            month: dateObject.month()
+            day  : dateObject.date()
+
 
 
   initializing = false
