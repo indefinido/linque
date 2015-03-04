@@ -1,0 +1,15 @@
+19:30:24.053 INFO - Launching a standalone server
+Setting system property webdriver.chrome.driver to selenium/chromedriver
+19:30:24.099 INFO - Java: Apple Inc. 20.65-b04-466.1
+19:30:24.099 INFO - OS: Mac OS X 10.10.1 x86_64
+19:30:24.111 INFO - v2.44.0, with Core v2.44.0. Built from revision 76d78cf
+19:30:24.170 INFO - Default driver org.openqa.selenium.ie.InternetExplorerDriver registration is skipped: registration capabilities Capabilities [{platform=WINDOWS, ensureCleanSession=true, browserName=internet explorer, version=}] does not match with current platform: MAC
+19:30:24.249 INFO - RemoteWebDriver instances should connect to: http://127.0.0.1:4444/wd/hub
+19:30:24.250 INFO - Version Jetty/5.1.x
+19:30:24.251 INFO - Started HttpContext[/selenium-server/driver,/selenium-server/driver]
+19:30:24.252 INFO - Started HttpContext[/selenium-server,/selenium-server]
+19:30:24.252 INFO - Started HttpContext[/,/]
+19:30:24.294 INFO - Started org.openqa.jetty.jetty.servlet.ServletHandler@7776cad3
+19:30:24.294 INFO - Started HttpContext[/wd,/wd]
+19:30:24.301 INFO - Started SocketListener on 0.0.0.0:4444
+19:30:24.301 INFO - Started org.openqa.jetty.jetty.Server@557ce4e7

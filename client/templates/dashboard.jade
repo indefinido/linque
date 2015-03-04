@@ -20,7 +20,6 @@ body
 template( name="user" )
   
   #toolbar( horizontal center-justified layout )
-    
     .container
       
       div( horizontal center around-justified layout )
@@ -40,7 +39,7 @@ template( name="user" )
           each skillsRight
             +skill
   
-      br
+      br 
   
       .progress( layout vertical title="Pontos de Hábito (PH)" )
         div( layout horizontal end-justified )
@@ -51,5 +50,5 @@ template( name="user" )
       
         paper-progress.progress-bar( flex value="#{percentage}" )
     
-        span#earned-experience( hidden ) +#{earnedExperience}
+        div#earned-experience( hidden ) +#{earnedExperience}
   
