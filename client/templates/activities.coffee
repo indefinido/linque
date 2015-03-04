@@ -1,38 +1,45 @@
 @DaysActivities = new Mongo.Collection "daysActivities"
 
-moment.locale 'en', 
+moment.locale 'pt-BR', 
   calendar:
     lastDay  : '[Ontem]'
     sameDay  : '[Hoje]'
     nextDay  : '[Amanhã]'
     lastWeek : 'dddd'
     nextWeek : 'dddd [que vem]'
+    
+  monthsShort: "Jan_Fev_Mar_Abr_Mai_Jun_Jul_Ago_Set_Out_Nov_Dez".split("_"),
+  weekdays: "Domingo_Segunda_Terça_Quarta_Quinta_Sexta_Sábado".split("_")
+  weekdaysShort: "Dom._Seg._Ter._Qua._Qui._Sex._Sáb.".split("_")
+    
+moment.locale 'pt-BR'
 
 
 
 Template.activities.helpers
   daysActivities: ->
     DaysActivities.find {},
-      fields:
-        activities: 0
       sort:
         _id: -1
     
     
 Template.day.helpers
   activities: ->
-    DaysActivities.findOne({_id: @_id}).activities
+    @activities
     
   calendarDate: -> 
-    moment(@date).calendar()
+    if moment(@date) > moment().subtract(2, 'days')
+      moment(@date).calendar()
+    else
+      false
     
   formattedDate: ->
-    moment(@date).format('D/MMM/YY')
+    moment(@date).format('dddd[,] D/MMM/YY')
 
         
 Template.activity.helpers
   createdAt: ->
-    moment(@createdAt).format 'LT'
+    moment(@createdAt).format 'H:mm'
     
     
     

@@ -1,8 +1,5 @@
 template( name="activities" )
-  
-  each days
-    +day
-  
+    
   div( horizontal center-justified layout )
     .activities
       each daysActivities
@@ -19,6 +16,11 @@ template( name="activity" )
     
     
 template( name="day" )
-  div #{calendarDate} (#{formattedDate})
+  div.activities-day
+    div.activities-header 
+      if calendarDate
+        span.activities-when #{calendarDate}
+        br
+      span.activities-date #{formattedDate}
     each activities
       +activity
