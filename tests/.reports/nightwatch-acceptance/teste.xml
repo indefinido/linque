@@ -2,18 +2,6 @@
 <testsuites name="teste"
              errors="0"
              failures="0"
-             tests="2">
-  
-  <testsuite errors="0" failures="0" hostname="" id=""
-    name="User can sign in" package="teste" skipped="2"
-    tests="2" time="" timestamp="">
-    
-    
-    
-      <system-err>
-        Object #&lt;Object&gt; has no method &#39;waitForElementVisible&#39;
-      </system-err>
-    
-    </testsuite>
+             tests="0">
   
 </testsuites>
