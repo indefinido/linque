@@ -8,7 +8,7 @@ body
   
     if currentUser
       with currentUser
-        +user
+        +dashboard
       
       +activities
       
@@ -17,7 +17,7 @@ body
     +loginButtons
     
 
-template( name="user" )
+template( name="dashboard" )
   
   #toolbar( horizontal center-justified layout )
     .container
@@ -28,13 +28,9 @@ template( name="user" )
           each skillsLeft
             +skill
   
-        #user.user( horizontal center-justified layout )
-          .user-profile( relative title="Você está no nível #{level}" )
-            img.user-picture( src="#{profile.picture}")
-            span.user-level( fit )
-              div.user-level-label Nível
-              div.user-level-value #{level}
-
+        with currentUser
+          +user
+        
         .skills( layout vertical center start-justified flex )
           each skillsRight
             +skill
@@ -51,4 +47,14 @@ template( name="user" )
         paper-progress.progress-bar( flex value="#{percentage}" )
     
         div#earned-experience( hidden ) +#{earnedExperience}
+
+
+
+template( name="user" )  
   
+  .user( horizontal center-justified layout )
+    .user-profile( relative title="Você está no nível #{level}" )
+      img.user-picture( src="#{profile.picture}")
+      span.user-level( fit )
+        div.user-level-label Nível
+        div.user-level-value #{level}

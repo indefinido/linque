@@ -4,7 +4,7 @@ Meteor.subscribe "levels"
 
 ## Helpers
 
-Template.user.helpers
+Template.dashboard.helpers
 
   requiredExperience: ->
     Levels.findOne( _id: Meteor.user().level ).experience || ""
@@ -33,24 +33,18 @@ Template.user.helpers
 ## Events
 
 # TODO move to skills template (and skill.coffe file)?
-Template.user.events
+Template.dashboard.events
 
   # FIXME event being fired twice in touch devices
-  'click .skill .button.active, touchstart .skill .button.active': ->
+  'click .skill .button.active, touchend .skill .button.active': (event) ->
     Meteor.call "useSkill", @_id
+    event.stopPropagation()
+    false
 
 
 Meteor.startup ->
 
-  Session.set 'level', null
   Session.set 'earnedExperience', null
-
-  # Tracks level changes to open level up dialog
-  Tracker.autorun ->
-    level = Session.get 'level'
-    # open level up dialog
-    $('#levelup-dialog').get(0).open() if level
-
 
   experienceTimeout = null
 

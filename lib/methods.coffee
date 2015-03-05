@@ -86,10 +86,6 @@ Meteor.methods
         data:
           level: user.level
 
-      # Notify the client about the new level
-      if Meteor.isClient
-        Session.set 'level', user.level
-
 
       # Check level up for skills
       skillsChanged = false
