@@ -14,12 +14,11 @@ function catch_errors() {
    exit $EXITCODE;
 }
 
-echo "Setting variables..."
 # can not use set -e, sadly - nightwatch bug?
 #set -e
 
 # defaults
-CONFIG=".meteor/local/build/programs/server/assets/packages/clinical_nightwatch/nightwatch_from_app_root.json"
+CONFIG="tests/nightwatch/config.json"
 ENVIRONMENT="default"
 _TESTS=""
 _GROUP=""
@@ -33,7 +32,7 @@ function usage()
 {
     echo "Nightwatch Test Runner"
     echo ""
-    echo "./run_nightwatch.sh"
+    echo "./spec"
     echo "\t-H this script's help"
     echo "\t-h --help Nightwatch's help"
     echo "\t-e | --environment=$ENVIRONMENT (CSV)"
@@ -53,11 +52,6 @@ PARSED_OPTIONS=$(getopt -n "$0"  -o "hHe:c:t:g:s:f:v" --long "help,HELP,env:,con
 eval set -- "$PARSED_OPTIONS"
 #echo "PARSED_OPTIONS:  $PARSED_OPTIONS"
 
-echo "Checking user defined options..."
-echo "$8"
-echo "$9"
-
-echo "Parsing options..."
 # Now goes through all the options with a case and using shift to analyse 1 argument at a time.
 #$1 identifies the first argument, and when we use shift we discard the first argument, so $2 becomes $1 and goes again through the case.
 
@@ -121,19 +115,18 @@ done
 
 # TODO cd into the app dir as PWD
 
-echo "Changing file permissions..."
 # Setup: changing file permissions"
 mkdir -p .meteor/local/build/programs/server/assets/packages/clinical_nightwatch
 chmod +x .meteor/local/build/programs/server/assets/packages/clinical_nightwatch/launch_nightwatch*.sh
-chmod +x .meteor/local/build/programs/server/assets/packages/clinical_nightwatch/selenium/selenium-server-standalone-2.44.0.jar
+chmod +x .meteor/local/build/programs/server/assets/packages/clinical_nightwatch/selenium/chromedriver
 mkdir -p tests/logs
 chmod 0777 tests/logs
 
-
-echo "Looking for Nightwatch executables..."
 # Setup: look for Nightwatch executable
 NWBIN=".meteor/local/build/node_modules/nightwatch/bin/nightwatch"
+
 if [ ! -f $NWBIN ]; then
+    echo "not found $NWBIN"
     NWBIN="node_modules/nightwatch/bin/nightwatch"
 fi
 if [ ! -f $NWBIN ]; then
@@ -168,10 +161,8 @@ fi
 # Build and run nightwatch command
 #   always include the ENVIRONMENT and CONFIG params
 CMD="$NWBIN -e $ENVIRONMENT -c $CONFIG$_TESTS$_GROUP$_SKIP$_FILTER$_VERBOSE$_HELP"
-echo "Stitching together command to run: $CMD"
+echo "   run   $CMD"
 
-
-echo "Running Nightwatch..."
 if [ -n "$_VERBOSE" ]; then
     echo ""
     echo "  $NWBIN"

@@ -2,6 +2,7 @@ module.exports = {
     "User can see skills": function(client) {
         return client
             .login()
+            .pause(500)
             .assert.visible('.skills')
             .end()
      },
@@ -10,8 +11,11 @@ module.exports = {
 
         return client
             .login()
+            .pause(500)
             .count('.activity' , function (result) { activities = result.value; })
-            .click('#drink.skill paper-button')
+            .pause(500)
+            .click('#fill.skill paper-button')
+            .pause(500)
             .count('.activity' , function (result) {
                 this.assert.equal(activities + 1, result.value, "A new activity was displayed.")
             })
@@ -24,7 +28,7 @@ module.exports = {
             .login(function () {
                 experience = this.globals.user.experience;
             })
-            .click('#drink.skill paper-button')
+            .click('#fill.skill paper-button')
             .user(function () {
                 var currentExperience = this.globals.user.experience;
                 this.assert.notEqual(currentExperience, experience, 'User experience has changed by ' + (currentExperience - experience) + '.');

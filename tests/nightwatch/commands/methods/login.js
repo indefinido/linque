@@ -5,5 +5,6 @@ exports.command = function (username, callback) {
     }
     return this.url("http://127.0.0.1:3000")
         .execute('Meteor.insecureUserLogin("' + (username || 'mafagafo-' + '" + Random.id() + "') + '")', [], callback)
+        .pause(500)
         .user();
 }
