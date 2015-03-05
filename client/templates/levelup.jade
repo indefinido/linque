@@ -12,3 +12,28 @@ template( name="levelup" )
       
       div( horizontal end-justified layout )
         paper-button.colored( raised core-overlay-toggle ) Continuar
+        
+        
+template( name="skillLevelUps" )        
+  each skillLevelUps
+    +skillLevelUp
+        
+        
+template( name="skillLevelUp" )
+  paper-dialog.dialog.dialog-levelup.dialog-skill-levelup( id="skill-levelup-dialog-#{_id}" style="display: none;" transition="core-transition-bottom" autoCloseDisabled layered backdrop )
+    
+    header.header( vertical layout )
+
+      +newSkillLevel(skill)
+      
+    div.content
+      
+      div( horizontal end-justified layout )
+        paper-button.colored( raised core-overlay-toggle ) Continuar
+
+
+template( name="newSkillLevel" )
+  span #{skill.name}
+  span (#{qualifier})
+  
+  

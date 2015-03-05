@@ -3,5 +3,6 @@ template( name="skill" )
   .skill( id="#{id}" )
   
     paper-button( class="button #{classes}" title="#{name}" $dyn=attrs )
-      span #{id}
+      span #{name}
+      span (#{qualifier})
       

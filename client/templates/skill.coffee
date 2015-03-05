@@ -8,13 +8,13 @@ Template.skill.helpers
   
   # name of current level of user skill
   # TODO improve
-  name    : -> 
-    skillId = @_id
-    name = null
+  qualifier: ->
+    skillId   = @_id
+    qualifier = null
     for level in @levels
       if level.level == (Meteor.user().skills[skillId].level || 1)
-        name = level.name
-    name
+        qualifier = level.qualifier
+    qualifier
 
       
   # name of current level of user skill      

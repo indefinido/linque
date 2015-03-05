@@ -1,4 +1,5 @@
 @DaysActivities = new Mongo.Collection "daysActivities"
+  
 
 moment.locale 'pt-BR', 
   calendar:
@@ -14,6 +15,9 @@ moment.locale 'pt-BR',
     
 moment.locale 'pt-BR'
 
+
+
+Meteor.subscribe "activities"
 
 
 Template.activities.helpers
@@ -45,4 +49,4 @@ Template.activity.helpers
     
     
 Meteor.startup ->
-  Meteor.subscribe "activities"
+  #

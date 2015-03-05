@@ -4,7 +4,7 @@ module.exports = {
             .login()
             .pause(500)
             // As of now, skill level changes with user level
-            .assert.containsText('body', 'Level: 2')
+            .assert.containsText('body', '1')
             .assert.containsText('#drink.skill', '(POUCO)')
             .click("#drink.skill paper-button")
             .pause(200)

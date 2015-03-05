@@ -28,7 +28,7 @@ Template.dashboard.helpers
   skillsRight: ->
     skills = Skills.find({}).fetch()
     skills.splice skills.length / 2 , skills.length / 2
-
+    
 
 ## Events
 
