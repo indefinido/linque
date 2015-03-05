@@ -1,14 +1,14 @@
-
 Template.skill.helpers
 
   id      : -> @_id
-  passive : -> not @active()
-  level   : -> Meteor.user().skills[@_id].level 
 
-  
+  passive : -> not @active()
+
+  level   : -> Meteor.user().skills[@_id].level
+
   # name of current level of user skill
   # TODO improve
-  name    : -> 
+  name    : ->
     skillId = @_id
     name = null
     for level in @levels
@@ -16,34 +16,34 @@ Template.skill.helpers
         name = level.name
     name
 
-      
-  # name of current level of user skill      
-  # TODO improve
-  summary : -> 
-    skillId = @_id
-    currentLevel = null
-    
+
+  # name of current level of user skill
+  currentLevel : ->
+    skillId      = @_id
+
+    @currentLevel.unlocked = false if @currentLevel
+
     # get current level
     for level in @levels
       if level.level == (Meteor.user().skills[skillId].level || 1)
         currentLevel = level
-        
-    summary = currentLevel.summary
-    
-    # Inform when level is unlockd, if locked
-    # TODO move to appropriate place
-    if Meteor.user().skills[skillId].level == null
-      summary = "(Libera no level #{currentLevel.requiredLevel}) #{summary}"
-      
-    summary
 
-  
+    currentLevel.unlocked = true
+
+    @currentLevel = currentLevel
+
+  nextSkillLevels : ->
+
+    _.filter @levels, (level) =>
+      level.level > @currentLevel.level
+
+
   # current user acquired skill?
   unlocked:  -> Meteor.user().skills[@_id].level?
-  
+
   # skill can level up?
   levelable: -> @levelable()
-  
+
   # button attributes
   attrs: ->
     # unlocked if user has the skill level defined
@@ -52,14 +52,13 @@ Template.skill.helpers
     attrs = {}
     attrs.noink = true unless @active() and unlocked
     attrs
-  
+
   # button classes
-  classes : -> 
-    # unlocked if user has the skill level defined  
+  classes : ->
+    # unlocked if user has the skill level defined
     unlocked = Meteor.user().skills[@_id].level?
-    
+
     classes = []
     classes.push "#{@activity}"
     classes.push "locked" unless unlocked
     classes.join " "
-

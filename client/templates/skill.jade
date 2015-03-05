@@ -1,7 +1,15 @@
 template( name="skill" )
   
   .skill( id="#{id}" )
-  
-    paper-button( class="button #{classes}" title="#{name}" $dyn=attrs )
-      span #{id}
-      
+
+    core-tooltip
+    
+      paper-button( class="button #{classes}" title="#{name}" $dyn=attrs )
+        span #{id}
+
+      div(tip)
+        +skillLevel(currentLevel)
+        
+        each nextSkillLevels
+          +skillLevel
+        

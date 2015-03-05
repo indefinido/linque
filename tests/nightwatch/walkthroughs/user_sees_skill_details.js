@@ -1,10 +1,22 @@
 module.exports = {
   "Hovering a skill shows up basic info": function(client) {
-     return client
-           .login()
-           .moveToElement('#fill.skill', 5, 5)
-           .waitForElementVisible("#fill.skill div[tip]", 1000)
-           .assert.containsText("#fill.skill div", "Você pode encher seu recipiente")
-           .end();
+      return client
+          .login()
+          .moveToElement('#fill.skill', 15, 15)
+          .waitForElementVisible("#fill.skill div[tip]", 1000)
+          .assert.containsText("#fill.skill div[tip]", "Encher Recipiente", "Skill Name")
+          .assert.containsText("#fill.skill div[tip]", "Você pode encher seu recipiente", "Skill Pontos de Hábito")
+          .assert.containsText("#fill.skill div[tip]", "Requer nível 1", "Skill Required Level")
+          .end();
+  },
+  "Hovering a skill shows next skill levels": function (client) {
+      return client
+          .login()
+          .moveToElement('#fill.skill', 15, 15)
+          .waitForElementVisible("#fill.skill div[tip]", 1000)
+          .assert.containsText(  "#fill.skill div[tip]", "Requer nível 1", "Current Skill Required Level")
+          .assert.containsText(  "#fill.skill div[tip]", "Requer nível 2", "Next Skill Required Level")
+          .assert.containsText(  "#fill.skill div[tip]", "Requer nível 3", "Last Skill Required Level")
+          .end();
   }
 };
