@@ -3,6 +3,9 @@ var user = {
        return Meteor.user()
     },
     asked: function (result) {
+        if (!result.value)
+            console.log("user command: Could not get user from meteor client client");
+
         this.globals.user = result.value;
     }
 };
