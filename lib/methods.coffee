@@ -72,7 +72,6 @@ Meteor.methods
 
     # Report earned experience to client
     if Meteor.isClient
-      console.log("reporting earned experience")
       Session.set 'earnedExperience', earnedExperience
 
 

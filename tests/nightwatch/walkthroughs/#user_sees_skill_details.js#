@@ -1,12 +1,12 @@
 module.exports = {
-  "Hovering a skill shows up current skill level info": function(client) {
+  "Hovering a skill shows up basic info": function(client) {
       return client
           .login()
           .moveToElement('#fill.skill', 15, 15)
           .waitForElementVisible("#fill.skill div[tip]", 1000)
-          .assert.containsText("#fill.skill div[tip]", "Encher Recipiente", "Skill Name")
-          .assert.containsText("#fill.skill div[tip]", "Você pode encher seu recipiente", "Skill Pontos de Hábito")
+          .assert.attributteEquals("#fill.skill paper-button", "title", "Encher Recipiente", "Skill Name")
           .assert.containsText("#fill.skill div[tip]", "Requer nível 1", "Skill Required Level")
+          .assert.containsText("#fill.skill div[tip]", "Você pode encher seu recipiente", "Skill Pontos de Hábito")
           .end();
   },
   "Hovering a skill shows next skill levels": function (client) {

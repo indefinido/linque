@@ -30,7 +30,6 @@ Meteor.publish "levels", ->
 
 
 
-# server: publish the current size of a collection
 Meteor.publish 'activities', ->
 
   self = @
@@ -108,7 +107,22 @@ Meteor.publish 'activities', ->
 
   return
 
+    
 
+
+Meteor.publish "skillLevelUps", () ->
+  self = @
+  initializing = true
+  
+  handle = Activities.find( userId: this.userId, type: "skillLevelUp").observeChanges
+    added: (id, fields) ->
+      if !initializing
+        self.added 'skillLevelUps', id, _.extend fields
+      
+  initializing = false
+  @ready()
+  @onStop -> handle.stop()
+      
 
 
 # Meteor.publish "activities", ->
