@@ -7,16 +7,17 @@ Meteor.subscribe "levels"
 Template.dashboard.helpers
 
   requiredExperience: ->
-    Levels.findOne( _id: Meteor.user().level ).experience || ""
+    level = Levels.findOne( _id: Meteor.user().level )
+    if level then level.experience else false
 
   earnedExperience: ->
     Session.get 'earnedExperience'
 
   percentage: ->
     user  = Meteor.user()
-    level = Levels.findOne( _id: Meteor.user().level )
+    level = Levels.findOne( _id: user.level )
 
-    if level.experience
+    if level and level.experience
       user.levelExperience / level.experience * 100
     else
       100
@@ -47,22 +48,22 @@ Meteor.startup ->
   Session.set 'earnedExperience', null
 
   experienceTimeout = null
+  earnedPlaceholder = null
 
-  # Show earned experience
-  # TODO refactor!
+  clearExperience = _.debounce ->
+    earnedPlaceholder.removeClass 'visible'
+    Session.set 'earnedExperience', null
+  , 2000
+
+
   Tracker.autorun ->
-    Meteor.clearTimeout experienceTimeout
-
-    experience = Session.get 'earnedExperience'
-    return unless experience
-
-    earned = $ '#earned-experience'
-    earned.hide()
-    earned.fadeIn 'fast'
-    experienceTimeout = Meteor.setTimeout ->
-      earned.fadeOut 'slow', ->
-        Session.set 'earnedExperience', null
-    , 2000
+    return unless Session.get 'earnedExperience'
+    
+    earnedPlaceholder ||= $ '#earned-experience'
+    earnedPlaceholder.removeClass 'visible'
+    earnedPlaceholder.addClass 'visible'
+    
+    clearExperience()
 
 
   if Meteor.isClient
