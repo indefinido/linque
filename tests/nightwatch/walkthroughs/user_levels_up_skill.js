@@ -1,23 +1,22 @@
 module.exports = {
     "User sees feedback of leveling up": function(client) {
+        var levelUpDialog      = "core-overlay-layer ::shadow .dialog.dialog-levelup",
+            skillLevelUpDialog = "core-overlay-layer ::shadow .dialog.dialog-skill-levelup";
         return client
             .login()
-            // As of now, skill level changes with user level
-            .level(2)
-            .moveToElement('#drink.skill')
-            .assert.containsText('#drink.skill', '(POUCO)')
-            .click("#drink.skill paper-button")
-            .pause(200)
-            .click("#drink.skill paper-button")
-            .pause(200)
-            .click("#drink.skill paper-button")
-            .pause(200)
-            .click("#drink.skill paper-button")
-            .pause(200)
-            .click("#drink.skill paper-button")
-            .pause(200)
-            .level(3)
-            .assert.containsText('#drink.skill', '(MÉDIO)')
+            .level(1)
+            .click("#fill.skill")
+            
+            .waitForElementVisible(levelUpDialog, 3000)
+            .click(levelUpDialog + " paper-button")
+            
+            .waitForElementVisible(skillLevelUpDialog, 5000)
+            .assert.containsText(skillLevelUpDialog, 'Possuir um Recipiente')
+            .click(skillLevelUpDialog + " paper-button")
+            .waitForElementNotVisible(skillLevelUpDialog, 5000)
+            
+            .waitForElementVisible(   skillLevelUpDialog, 5000)
+            .assert.containsText(skillLevelUpDialog, 'Receber Gatilho')
             .end();
     }
 };
