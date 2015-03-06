@@ -15,19 +15,19 @@
         qualifier: "Garrafa Pequena"
         summary: "Você pode ter apenas uma Garrafa de volume entre 500 ml e 600 ml"
         description: ""
-        requiredLevel: 2
+        requiredLevel: 3
         level: 2
       ,
         qualifier: "Garrafa Média"
         summary: "Você pode ter apenas uma Garrafa de volume entre 900 ml e 1100 ml (1,1 L)"
         description: ""
-        requiredLevel: 3
+        requiredLevel: 4
         level: 3
       ,
         qualifier: "Garrafa Grande"
         summary: "Você pode ter apenas uma Garrafa de volume entre 1,4 L e 1,6 L"
         description: ""
-        requiredLevel: 4
+        requiredLevel: 5
         level: 4
     ]
   ,
@@ -58,14 +58,14 @@
         summary: "Você pode encher seu recipiente atual até 2 vez por dia. Use esta habilidade para registrar todas as vezes que você encheu seu recipiente."
         description: ""
         experience: 75
-        requiredLevel: 2
+        requiredLevel: 3
         level: 2
       ,
         qualifier: "Quantas vezes quiser"
         summary: "Você pode encher seu recipiente quantas vezes quiser no mesmo dia (cuidado para não tomar água em excesso!). Use esta habilidade para registrar todas as vezes que você encheu seu recipiente."
         description: ""
         experience: 75
-        requiredLevel: 3
+        requiredLevel: 5
         level: 3
     ]
   ,
