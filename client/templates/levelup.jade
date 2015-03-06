@@ -24,16 +24,22 @@ template( name="skillLevelUp" )
     
     header.header( vertical layout )
 
-      +newSkillLevel(skill)
-      
+      h1 Agora você pode...
+            
     div.content
+      
+      +newSkillLevel(skill)
       
       div( horizontal end-justified layout )
         paper-button.colored( raised core-overlay-toggle ) Continuar
 
 
 template( name="newSkillLevel" )
-  span #{skill.name}
-  span (#{qualifier})
+  
+  div.skill.skill-levelup
+    div Icon
+    div #{skill.name}
+    if qualifier
+      div (#{qualifier})
   
   

@@ -1,6 +1,6 @@
 template( name="skill" )
   
-  .skill( id="#{id}" )
+  .skill.skill-action( id="#{id}" )
 
     core-tooltip
     
@@ -8,7 +8,7 @@ template( name="skill" )
         span #{id}
         span (#{qualifier})
 
-      div(tip)
+      div( tip )
         h2 #{name}
       
         +skillLevel(currentLevel)
