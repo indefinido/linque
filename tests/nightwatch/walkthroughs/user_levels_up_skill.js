@@ -11,12 +11,12 @@ module.exports = {
             .click(levelUpDialog + " paper-button")
             
             .waitForElementVisible(skillLevelUpDialog, 5000)
-            .assert.containsText(skillLevelUpDialog, 'Possuir um Recipiente')
+            .assert.containsText(skillLevelUpDialog, 'Receber Gatilho')
             .click(skillLevelUpDialog + " paper-button")
             .waitForElementNotVisible(skillLevelUpDialog, 5000)
             
-            .waitForElementVisible(   skillLevelUpDialog, 5000)
-            .assert.containsText(skillLevelUpDialog, 'Receber Gatilho')
+            .waitForElementVisible(skillLevelUpDialog, 5000)
+            .assert.containsText(skillLevelUpDialog, 'Beber Água')
             .end();
     }
 };

@@ -15,8 +15,8 @@ module.exports = {
           .moveToElement('#fill.skill', 15, 15)
           .waitForElementVisible("#fill.skill div[tip]", 1000)
           .assert.containsText(  "#fill.skill div[tip]", "Requer nível 1", "Current Skill Required Level")
-          .assert.containsText(  "#fill.skill div[tip]", "Requer nível 2", "Next Skill Required Level")
-          .assert.containsText(  "#fill.skill div[tip]", "Requer nível 3", "Last Skill Required Level")
+          .assert.containsText(  "#fill.skill div[tip]", "Requer nível 3", "Next Skill Required Level")
+          .assert.containsText(  "#fill.skill div[tip]", "Requer nível 5", "Last Skill Required Level")
           .end();
   }
 };
