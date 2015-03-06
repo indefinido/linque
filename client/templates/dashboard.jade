@@ -4,19 +4,22 @@ head
 
 body
   
-  div
   
-    if currentUser
+  if currentUser
+    div
       with currentUser
         +dashboard
       
       +activities
-      
       +levelup
-      
       +skillLevelUps
     
-    +loginButtons
+      div.user.user-login.user-signed-out( horizontal end-justified layout )
+        +loginButtons
+        
+  else
+    div.user.user-login.user-signed-in( horizontal flex center center-justified layout style="height: 100%" )
+      +loginButtons
     
 
 template( name="dashboard" )
