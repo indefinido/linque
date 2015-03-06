@@ -46,7 +46,5 @@ Template.activity.helpers
     moment(@createdAt).format 'H:mm'
     
     
-    
-    
 Meteor.startup ->
   #
