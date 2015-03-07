@@ -37,7 +37,10 @@ template( name="skillLevelUp" )
 template( name="newSkillLevel" )
   
   div.skill.skill-levelup
-    div Icon
+  
+    div
+      img( src="/images/skills/#{skill.id}_#{level}.svg")
+      
     div #{skill.name}
     if qualifier
       div (#{qualifier})

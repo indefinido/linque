@@ -5,7 +5,6 @@ Meteor.subscribe "skillLevelUps"
 
 
 Template.levelup.helpers
-
   level: ->
     Meteor.user().level
 
@@ -17,6 +16,7 @@ Template.skillLevelUps.helpers
     
     
 Template.skillLevelUp.helpers
+  
   skill: -> 
     skill = Skills.findOne _id: @data.skill
     currentLevel = null
@@ -25,7 +25,7 @@ Template.skillLevelUp.helpers
     for level in skill.levels
       currentLevel = level if level.level is @data.level 
       
-    currentLevel.skill = { name: skill.name }
+    currentLevel.skill = { name: skill.name, id: @data.skill }
     currentLevel
   
   
