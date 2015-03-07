@@ -5,7 +5,7 @@ template( name="skill" )
     core-tooltip
     
       paper-button( class="button #{classes}" title="#{name}" $dyn=attrs )
-        span #{id}
+        img( src="/images/skills/#{id}_#{level}.svg" )
 
       div( tip )
         h2 #{name}
@@ -14,4 +14,4 @@ template( name="skill" )
         
         each nextSkillLevels
           +skillLevel
-      
+       

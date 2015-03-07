@@ -10,7 +10,7 @@
         summary: "Você pode ter apenas um Copo de volume entre 200 ml e 300 ml"
         description: ""
         requiredLevel: 1
-        level: 1
+        level: 1 
       ,
         qualifier: "Garrafa Pequena"
         summary: "Você pode ter apenas uma Garrafa de volume entre 500 ml e 600 ml"
