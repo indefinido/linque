@@ -6,25 +6,25 @@
     name: "Possuir um Recipiente"
     order: 2
     levels: [
-        qualifier: "Copo Pequeno"
+        qualifier: "300 ml"
         summary: "Você pode ter apenas um Copo de volume entre 200 ml e 300 ml"
         description: ""
         requiredLevel: 1
         level: 1 
       ,
-        qualifier: "Garrafa Pequena"
+        qualifier: "600 ml"
         summary: "Você pode ter apenas uma Garrafa de volume entre 500 ml e 600 ml"
         description: ""
         requiredLevel: 3
         level: 2
       ,
-        qualifier: "Garrafa Média"
+        qualifier: "1 L"
         summary: "Você pode ter apenas uma Garrafa de volume entre 900 ml e 1100 ml (1,1 L)"
         description: ""
         requiredLevel: 4
         level: 3
       ,
-        qualifier: "Garrafa Grande"
+        qualifier: "1,5 L"
         summary: "Você pode ter apenas uma Garrafa de volume entre 1,4 L e 1,6 L"
         description: ""
         requiredLevel: 5
@@ -47,21 +47,21 @@
     name: "Encher Recipiente"
     order: 1
     levels: [
-        qualifier: "1 vez por dia"
+        qualifier: "1x / dia"
         summary: "Você pode encher seu recipiente atual apenas 1 vez por dia. Use esta habilidade para registrar todas as vezes que você encheu seu recipiente."
         description: ""
         experience: 100
         requiredLevel: 1
         level: 1
       ,
-        qualifier: "2 vezes por dia"
+        qualifier: "2x / dia"
         summary: "Você pode encher seu recipiente atual até 2 vez por dia. Use esta habilidade para registrar todas as vezes que você encheu seu recipiente."
         description: ""
         experience: 75
         requiredLevel: 3
         level: 2
       ,
-        qualifier: "Quantas vezes quiser"
+        qualifier: "Livre"
         summary: "Você pode encher seu recipiente quantas vezes quiser no mesmo dia (cuidado para não tomar água em excesso!). Use esta habilidade para registrar todas as vezes que você encheu seu recipiente."
         description: ""
         experience: 75

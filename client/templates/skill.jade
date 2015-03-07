@@ -4,8 +4,9 @@ template( name="skill" )
 
     core-tooltip
     
-      paper-button( class="button #{classes}" title="#{name}" $dyn=attrs )
+      paper-button( class="button #{classes}" title="#{name}" touch-action="none" $dyn=attrs )
         img( src="/images/skills/#{id}_#{level}.svg" )
+        .qualifier #{qualifier}
 
       div( tip )
         h2 #{name}

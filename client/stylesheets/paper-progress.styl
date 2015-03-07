@@ -5,13 +5,29 @@ paper-progress
   width 100%
   height 18px
   
+  // safari
   #progressContainer
     border-radius 4px
     background-color rgba(#000,0.2)
-    
+  
   #activeProgress
     background-color #FFF
     border-radius left 4px
     transition transform 0.5s ease-out
+  
+  
+  
+  // chrome 
+  &::shadow
+    #progressContainer
+      border-radius 4px
+      background-color rgba(#000,0.2)
+  
+    #activeProgress
+      background-color #FFF
+      border-radius left 4px
+      transition transform 0.5s ease-out
+  
+  
     
     

@@ -14,13 +14,14 @@
       box-sizing border-box
       color #FFF
       margin 0.5em 0
+      padding 7px
 
       &.active
     
         background-color rgba(#FFF,0.15)
       
-        height 95px
-        width 95px
+        height 90px
+        width 90px
       
       &.passive
       
@@ -29,13 +30,25 @@
       
         height 60px
         width 60px
+        
+        img, svg
+          width 50%
       
       &.locked
       
         cursor default
         opacity 0.1
 
-      img
+      img, svg
+        width 100%
+        
+      .qualifier
+        
+        bottom 0
+        left 0
+        font-size 0.6em
+        position absolute
+        text-transform lowercase
         width 100%
       
 
@@ -51,6 +64,8 @@
   .skill
     &.skill-action
       .button
+        margin 0
+        
         &.active
         &.passive
           width auto
