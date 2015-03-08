@@ -1,5 +1,26 @@
 @import 'nib'
 
+skill-button
+
+  core-tooltip
+    height 100%
+    width 100%
+
+  #icon
+    margin auto
+    height 75%
+    width  75%
+  
+skill-button /deep/
+
+  core-tooltip
+    height 100%
+    width 100%
+  
+  #icon
+    margin auto
+    height 75%
+    width  75%
 
 
 .skills
@@ -11,6 +32,7 @@
   &.skill-action
 
     .button
+      border-radius 4px
       box-sizing border-box
       color #FFF
       margin 0.5em 0
@@ -30,17 +52,11 @@
       
         height 60px
         width 60px
-        
-      &.passive /deep/ #icon
-          width 46px
       
       &.locked
       
         cursor default
-        opacity 0.1
-
-      // /deep/ #icon
-      //   width 100px
+        opacity 0.15
         
       .qualifier
         
@@ -48,6 +64,7 @@
         left 0
         font-size 0.6em
         position absolute
+        text-align center
         text-transform lowercase
         width 100%
       
@@ -66,7 +83,7 @@
       .button
         margin 0
         
-        &.active
-        &.passive
-          width auto
-          height auto
+        // &.active
+        // &.passive
+        //   width auto
+        //   height auto

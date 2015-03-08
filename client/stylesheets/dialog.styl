@@ -2,50 +2,57 @@
 @import 'theme'
 
 
-html /deep/ .dialog
-  border-radius 4px
-  
-  #scroller
-    padding 0
-    
-    
-    
-  &.dialog-levelup
-  
-    background-color linear-gradient(top, white, black)
-  
-    .header
-      background-color #ebdd46
-      padding 2em 2em 1.5em
-      
-      h1
-        color blueTitleColor
-        font-size 1.9em
-        font-weight 200
-        line-height 1.1em
-        margin-top 0.5em
-        text-align center
-        
-    .content
-      padding 2em
 
-    .skill-levelup
-      text-align center
-      
-      [icon]
-        color black
-        width 250px
-        height 250px
-      
-      
-    +mobile()
+for shadow in true false
+  dialog = shadow ? 'html /deep/ .dialog' : '.dialog'
+    
+  {dialog}
+  
+    border-radius 4px
+  
+    scroller = shadow ? '&::shadow #scroller' : '#scroller'
+    
+    {scroller}
+      padding 0
+    
+    
+    
+    &.dialog-levelup
+  
+      background-color #FFF
+  
       .header
-        padding 1.5em 1.5em 1em
-        
+        background-color #ebdd46
+        padding 2em 2em 1.5em
+      
         h1
-          font-size 1.7em
-          margin-top 0.2em
-          
+          color blueTitleColor
+          font-size 1.9em
+          font-weight 200
+          line-height 1.1em
+          margin-top 0.5em
+          text-align center
+        
       .content
-        padding 1em
+        padding 2em
+
+      .skill-levelup
+        text-align center
+      
+        [icon]
+          color black
+          width 250px
+          height 250px
+      
+      
+      +mobile()
+        .header
+          padding 1.5em 1.5em 1em
+        
+          h1
+            font-size 1.7em
+            margin-top 0.2em
+          
+        .content
+          padding 1em
       

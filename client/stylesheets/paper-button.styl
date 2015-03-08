@@ -1,14 +1,15 @@
 @import 'theme'
 
-paper-button
-  background-color #FFF
+for selector in 'paper-button' 'html /deep/ paper-button'
+  {selector}
+    background-color #FFF
   
-  &[disabled]
-    background transparent
+    &[disabled]
+      background transparent
     
-  &::shadow #shadow
-    display none
+    &::shadow #shadow
+      display none
     
-  &.colored
-    background-color #005d8f
-    color white
+    &.colored
+      background-color #005d8f
+      color white

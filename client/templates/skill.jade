@@ -15,15 +15,15 @@ template( name="skill" )
           +skillLevel
   
     //div
-    //  paper-button( class="button #{classes}" title="#{name}" touch-action="none" $dyn=attrs )
-    //    img( src="/images/skills/#{id}_#{level}.svg" )
-    //    .qualifier #{qualifier}
+      paper-button( class="button #{classes}" title="#{name}" touch-action="none" $dyn=attrs )
+        img( src="/images/skills/#{id}_#{level}.svg" )
+        .qualifier #{qualifier}
 
-    //  div( tip )
-    //    h2 #{name}
-    //  
-    //    +skillLevel(currentLevel)
-    //    
-    //    each nextSkillLevels
-    //      +skillLevel
+      div( tip )
+        h2 #{name}
+      
+        +skillLevel(currentLevel)
+        
+        each nextSkillLevels
+          +skillLevel
        
