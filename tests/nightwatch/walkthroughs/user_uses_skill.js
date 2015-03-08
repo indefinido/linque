@@ -14,7 +14,7 @@ module.exports = {
             .pause(500)
             .count('.activity' , function (result) { activities = result.value; })
             .pause(500)
-            .click('#fill.skill paper-button')
+            .click('#fill.skill skill-button')
             .pause(500)
             .count('.activity' , function (result) {
                 this.assert.equal(activities + 1, result.value, "A new activity was displayed.")
@@ -28,7 +28,7 @@ module.exports = {
             .login(function () {
                 experience = this.globals.user.experience;
             })
-            .click('#fill.skill paper-button')
+            .click('#fill.skill skill-button')
             .user(function () {
                 var currentExperience = this.globals.user.experience;
                 this.assert.notEqual(currentExperience, experience, 'User experience has changed by ' + (currentExperience - experience) + '.');

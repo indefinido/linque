@@ -10,7 +10,7 @@ module.exports = {
             .getAttribute("paper-progress", 'value', function (result) {
                 experience = result.value
             })
-            .click("#fill.skill paper-button")
+            .click("#fill.skill skill-button")
 
             .assert.containsText('body', "NÍVEL\n2")
 

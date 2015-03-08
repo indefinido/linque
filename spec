@@ -126,6 +126,7 @@ chmod 0777 tests/logs
 NWBIN=".meteor/local/build/node_modules/nightwatch/bin/nightwatch"
 
 if [ ! -f $NWBIN ]; then
+    pwd
     echo "not found $NWBIN"
     NWBIN="node_modules/nightwatch/bin/nightwatch"
 fi
@@ -143,7 +144,7 @@ if [ ! -f $NWBIN ]; then
     echo "  installing nightwatch in .meteor/local/build"
     # or, depending on Node, might roll up to Dart repo parent
     cd .meteor/local/build
-    npm install nightwatch@0.5.36
+    npm install nightwatch@0.5
     cd ../../..
     NWBIN=".meteor/local/build/node_modules/nightwatch/bin/nightwatch"
 fi

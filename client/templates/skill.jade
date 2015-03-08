@@ -2,12 +2,10 @@ template( name="skill" )
   
   .skill.skill-action( id="#{id}" )
 
-    core-tooltip
-    
-      paper-button( class="button #{classes}" title="#{name}" touch-action="none" $dyn=attrs )
-        img( src="/images/skills/#{id}_#{level}.svg" )
-        .qualifier #{qualifier}
+    skill-button( class="button #{classes}" title="#{name}" icon="water:#{id}_#{level}" $dyn=attrs )
 
+      .qualifier #{qualifier}
+            
       div( tip )
         h2 #{name}
       
@@ -15,4 +13,17 @@ template( name="skill" )
         
         each nextSkillLevels
           +skillLevel
+  
+    //div
+    //  paper-button( class="button #{classes}" title="#{name}" touch-action="none" $dyn=attrs )
+    //    img( src="/images/skills/#{id}_#{level}.svg" )
+    //    .qualifier #{qualifier}
+
+    //  div( tip )
+    //    h2 #{name}
+    //  
+    //    +skillLevel(currentLevel)
+    //    
+    //    each nextSkillLevels
+    //      +skillLevel
        

@@ -38,11 +38,12 @@ template( name="newSkillLevel" )
   
   div.skill.skill-levelup
   
-    div
-      img( src="/images/skills/#{skill.id}_#{level}.svg")
+    core-icon( icon="water:#{skill.id}_#{level}")
       
     div #{skill.name}
     if qualifier
       div (#{qualifier})
+
+   br
   
   

@@ -4,7 +4,7 @@ Template.skill.helpers
 
   passive : -> not @active()
 
-  level   : -> Meteor.user().skills[@_id].level
+  level   : -> Meteor.user().skills[@_id].level || 1
 
   qualifier: ->
     skillId   = @_id

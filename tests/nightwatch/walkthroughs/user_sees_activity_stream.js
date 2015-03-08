@@ -10,7 +10,7 @@ module.exports = {
     "User can see skill usage activity": function (client) {
         return client
             .login()
-            .click('#fill.skill paper-button')
+            .click('#fill.skill skill-button')
             .assert.containsText('.activities', 'fill')
             .end()
     },
@@ -19,7 +19,7 @@ module.exports = {
         // TODO test for another days grouping
         return client
             .login()
-            .click('#fill.skill paper-button')
+            .click('#fill.skill skill-button')
             .assert.containsText('.activities', 'HOJE')
             .end()
     }

@@ -2,7 +2,7 @@
 @import 'theme'
 
 
-.dialog
+html /deep/ .dialog
   border-radius 4px
   
   #scroller
@@ -29,6 +29,14 @@
     .content
       padding 2em
 
+    .skill-levelup
+      text-align center
+      
+      [icon]
+        color black
+        width 250px
+        height 250px
+      
       
     +mobile()
       .header

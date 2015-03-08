@@ -37,7 +37,7 @@ Template.dashboard.helpers
 Template.dashboard.events
 
   # FIXME event being fired twice in touch devices
-  'tap .skill .button.active': (event) ->
+  'click .skill .button.active': (event) ->
     Meteor.call "useSkill", @_id
     event.stopPropagation()
     false
