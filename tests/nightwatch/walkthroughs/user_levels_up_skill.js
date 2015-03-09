@@ -12,12 +12,12 @@ module.exports = {
             .click(levelUpDialog + " paper-button")
 
             .waitForElementVisible(skillLevelUpDialog, 5000, "Skill level up dialog was visible.")
-            .assert.containsText(skillLevelUpDialog, 'Receber Gatilho', "Dialog contains 'Receber Gatilho' ")
+            .assert.containsText(skillLevelUpDialog, 'RECEBER GATILHO', "Dialog contains 'RECEBER GATILHO' ")
             .click(skillLevelUpDialog + " paper-button")
             .waitForElementNotVisible(skillLevelUpDialog, 5000, "Skill level up dialog was closed.")
 
             .waitForElementVisible(skillLevelUpDialog, 5000, "Second skill level up dialog was displayed.")
-            .assert.containsText(skillLevelUpDialog, 'Beber Água', "Dialog contains 'Beber Água'")
+            .assert.containsText(skillLevelUpDialog, 'BEBER ÁGUA', "Dialog contains 'BEBER ÁGUA'")
             .end();
     }
 };

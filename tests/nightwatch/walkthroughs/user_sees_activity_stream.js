@@ -11,7 +11,8 @@ module.exports = {
         return client
             .login()
             .click('#fill.skill skill-button')
-            .assert.containsText('.activities', 'fill')
+            .waitForElementPresent('.activities .activity', 5000)
+            .assert.attributeEquals(".activities .activity core-icon", "icon", "water:fill_1")
             .end()
     },
 
