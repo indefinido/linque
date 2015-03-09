@@ -1,6 +1,5 @@
 Meteor.startup ->
 
-
   Accounts.onCreateUser (options, user) ->
 
     # default values
@@ -27,3 +26,7 @@ Meteor.startup ->
       user.profile = options.profile;
 
     user
+
+Meteor.methods 
+  getEnvironment: -> if process.env.ROOT_URL == "http://localhost:3000/" then "development" else "staging"
+

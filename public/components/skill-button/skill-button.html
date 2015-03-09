@@ -18,7 +18,7 @@
   @homepage http://indefinido.github.io/skill-button
 -->
 
-<polymer-element name="skill-button" extends="paper-icon-button">
+<polymer-element name="skill-button" extends="paper-icon-button" touch-action="none">
 
   <template>
     <style>
@@ -26,13 +26,24 @@
         width: 76px;
         height: 76px;
       }
+      
     </style>
+    <!-- TODO Implement a better solution to avoid displaying tooltip on mobile -->
     
     <core-media-query query="max-width: 640px" queryMatches="{{phoneScreen}}"></core-media-query>
-    <core-tooltip disabled?="{{phoneScreen}}">
+    
+    <template if="{{! phoneScreen}}">
+      <core-tooltip>
+        <shadow></shadow>
+        <content></content>
+      </core-tooltip>
+    </template>
+
+    <template if="{{phoneScreen}}">
       <shadow></shadow>
-      <content></content>
-    </core-tooltip> 
+      <content select=":not([tip])"></content>
+    </template>
+    
   </template>
   <script>
   //<![CDATA[

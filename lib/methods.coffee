@@ -1,5 +1,4 @@
 Meteor.methods
-
   useSkill: (id) ->
     skill = Skills.findOne { _id: id }
     user  = Meteor.user()
@@ -74,6 +73,11 @@ Meteor.methods
     # Report earned experience to client
     if Meteor.isClient
       Session.set 'earnedExperience', earnedExperience
+
+    # Report earned experience to client
+    # TODO move to a analytics special place
+    if Meteor.isClient && Meteor.env == 'staging'
+      GAnalytics.event 'Skill', 'Use', "id: #{skill._id} - level: #{skillLevel.level}"
 
 
     if leveledUp

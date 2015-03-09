@@ -50,7 +50,7 @@
         qualifier: "1x / dia"
         summary: "Você pode encher seu recipiente atual apenas 1 vez por dia. Use esta habilidade para registrar todas as vezes que você encheu seu recipiente."
         description: ""
-        experience: 100
+        experience: 75
         requiredLevel: 1
         level: 1
       ,

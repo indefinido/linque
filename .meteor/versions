@@ -16,6 +16,7 @@ check@1.0.4
 clinical:nightwatch@2.0.0
 coffeescript@1.0.5
 cryptoquick:stylus-multi@1.2.1
+datariot:ganalytics@0.2.1
 ddp@1.0.14
 deps@1.0.6
 differential:vulcanize@0.0.3

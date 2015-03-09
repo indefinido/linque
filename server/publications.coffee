@@ -124,7 +124,6 @@ Meteor.publish "skillLevelUps", () ->
   @onStop -> handle.stop()
       
 
-
 # Meteor.publish "activities", ->
 #   return @ready() unless @userId
 #
