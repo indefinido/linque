@@ -1,4 +1,6 @@
+@import 'theme'
 @import 'nib'
+
 
 skill-button
 
@@ -26,6 +28,8 @@ skill-button /deep/
 .skills
   position relative
   width 100%
+
+
 
 .skill
 
@@ -68,6 +72,35 @@ skill-button /deep/
         text-transform lowercase
         width 100%
       
+      
+  for shadow in true false
+    selector = shadow ? 'html /deep/ &.skill-info' : '&.skill-info'
+    
+    {selector}
+      text-align center
+      
+      &.skill-levelup
+        background-color blueLabelColor
+        border-radius 4px
+        padding 1.5em
+  
+      .skill-icon
+        color #FFF
+        height 100px
+        width 100px
+    
+      .skill-name
+        color rgba(#FFF, 0.6)
+        font-size 1.1em
+        font-weight bold
+        upcase()
+      
+      .skill-qualifier
+        color rgba(#FFF, 0.9)
+        font-size 1.3em
+        font-weight 300
+        // line-height 0.8em
+        downcase()
 
 
 +mobile()

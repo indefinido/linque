@@ -7,12 +7,12 @@ template( name="activities" )
 
 template( name="activity" )
   div.activity( horizontal layout )
-    span.activity-icon #{data.skillId}
-    span.activity-experience( flex ) 
+    core-icon.activity-icon( icon="water:#{data.skill}_#{data.level}" title="#{data.name} (#{data.qualifier})" )
+    span.activity-time( flex )  às #{createdAt}
+    span.activity-experience
       span + 
       span.activity-experience-value #{data.experience} 
       span.activity-experience-unit PH
-    span.activity-time às #{createdAt}
     
     
 template( name="day" )

@@ -28,9 +28,10 @@ Meteor.methods
       createdAt: new Date
       type: 'skillUse'
       data:
-        skillId: skill._id
-        name : skillLevel.name
-        level: skillLevel.level
+        skill     : skill._id
+        name      : skill.name
+        qualifier : skillLevel.qualifier
+        level     : skillLevel.level
         experience: earnedExperience
 
 
@@ -101,9 +102,10 @@ Meteor.methods
               createdAt: new Date
               type: 'skillLevelUp'
               data:
-                skill: skill._id
-                name : skillLevel.name
-                level: skillLevel.level
+                skill    : skill._id
+                name     : skill.name
+                qualifier: skillLevel.qualifier
+                level    : skillLevel.level
 
       if skillsChanged
         Meteor.users.update { _id: user._id }, $set:

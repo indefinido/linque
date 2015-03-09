@@ -36,14 +36,16 @@ template( name="skillLevelUp" )
 
 template( name="newSkillLevel" )
   
-  div.skill.skill-levelup
+  div.skill.skill-info.skill-levelup
   
-    core-icon( icon="water:#{skill.id}_#{level}")
-      
-    div #{skill.name}
-    if qualifier
-      div (#{qualifier})
+    .skill-name #{skill.name}
 
-   br
+    core-icon.skill-icon( icon="water:#{skill.id}_#{level}" )
+      
+    if qualifier
+      .skill-qualifier #{qualifier}
+
+  br
+  br
   
   
