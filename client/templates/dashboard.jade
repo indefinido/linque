@@ -4,43 +4,62 @@ head
 
 body
   
-  div 
-    if currentUser
-      +loginButtons
   
-    h1 Linque!
-  
-    unless currentUser
-      +loginButtons
-  
-    if currentUser
+  if currentUser
+    div
       with currentUser
-        +user
+        +dashboard
       
       +activities
-      
       +levelup
+      +skillLevelUps
+    
+      div.user.user-login.user-signed-out( horizontal end-justified layout )
+        +loginButtons
+        
+  else
+    div.user.user-login.user-signed-in( horizontal flex center center-justified layout style="height: 100%" )
+      +loginButtons
     
 
-template( name="user" )
-
-  img( src="#{profile.picture}")
-
-  +actions
+template( name="dashboard" )
   
-  p Level: #{level}
+  #toolbar( horizontal center-justified layout )
+    .container
+      
+      div( horizontal center around-justified layout )
   
-  p 
-    span Experience: #{levelExperience}/#{requiredExperience}
-    span#earned-experience( style="display: none;" ) +#{earnedExperience}
+        .skills( layout vertical reverse center end-justified flex )
+          each skillsLeft
+            +skill
   
-  paper-progress( value="#{percentage}" )
+        with currentUser
+          +user
+        
+        .skills( layout vertical center start-justified flex )
+          each skillsRight
+            +skill
+  
+      br 
+  
+      .progress( relative vertical layout )
+        div( layout horizontal end-justified )
+          //- span.progress-label( title="Pontos de Hábito" ) PH
+          span.progress-numbers 
+            span.progress-current( title="Você tem #{levelExperience} PH" ) #{levelExperience}
+            span.progress-required( title="São necessários #{requiredExperience} PH para ir para o próximo nível" ) /#{requiredExperience}
+      
+        paper-progress.progress-bar( flex value="#{percentage}" title="Pontos de Hábito (PH)" )
     
-  
-  
-    
-template( name="actions" )
+        div.progress-earned#earned-experience( fit ) +#{earnedExperience} PH
 
-  .skills
-    each skills
-      +skill
+
+
+template( name="user" )  
+  
+  .user( horizontal center-justified layout )
+    .user-profile( relative title="Você está no nível #{level}" )
+      img.user-picture( src="#{profile.picture}")
+      span.user-level( fit )
+        div.user-level-label Nível
+        div.user-level-value #{level}

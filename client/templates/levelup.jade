@@ -1,4 +1,50 @@
 template( name="levelup" )
-  paper-dialog#levelup-dialog( style="display: none;" heading="Level Up!" transition="core-transition-bottom" autoCloseDisabled layered backdrop )
-    p Uhul!!! Você passou para o level #{level}!
-    button( core-overlay-toggle ) Gradei! (clique pra continuar)
+  paper-dialog.dialog.dialog-levelup#levelup-dialog( style="display: none;" transition="core-transition-bottom" autoCloseDisabled layered backdrop )
+    
+    header.header( vertical layout )
+      if currentUser
+        with currentUser
+          +user
+    
+      h1 Você passou para o nível #{level}!
+      
+    div.content
+      
+      div( horizontal end-justified layout )
+        paper-button.colored( raised core-overlay-toggle ) Continuar
+        
+        
+template( name="skillLevelUps" )        
+  each skillLevelUps
+    +skillLevelUp
+        
+        
+template( name="skillLevelUp" )
+  paper-dialog.dialog.dialog-levelup.dialog-skill-levelup( id="skill-levelup-dialog-#{_id}" style="display: none;" transition="core-transition-bottom" autoCloseDisabled layered backdrop )
+    
+    header.header( vertical layout )
+
+      h1 Agora você pode...
+            
+    div.content
+      
+      +newSkillLevel(skill)
+      
+      div( horizontal end-justified layout )
+        paper-button.colored( raised core-overlay-toggle ) Continuar
+
+
+template( name="newSkillLevel" )
+  
+  div.skill.skill-info.skill-levelup
+  
+    .skill-name #{skill.name}
+
+    core-icon.skill-icon( icon="water:#{skill.id}_#{level}" )
+      
+    if qualifier
+      .skill-qualifier #{qualifier}
+
+  br
+  
+  

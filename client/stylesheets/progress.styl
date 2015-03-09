@@ -1,0 +1,39 @@
+@import 'theme'
+
+
+
+@keyframes fadeInUp
+  0%
+    opacity 0
+    transform translateY(20px);
+  100%
+    opacity 1
+    transform translateY(0);
+
+
+
+.progress
+  color #FFF
+
+  .progress-current
+    font-weight 700
+    
+    
+  .progress-required
+    font-size 0.8em
+    font-weight 200
+    
+  .progress-earned
+    color #FFF
+    display block
+    font-weight bold
+    opacity 0
+    
+    &.visible
+      opacity 1
+    
+      animation-name fadeInUp
+      animation-duration 0.5s
+      animation-fill-mode both
+      animation-timing-function ease-out
+      

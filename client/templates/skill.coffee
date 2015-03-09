@@ -1,62 +1,66 @@
-
 Template.skill.helpers
 
   id      : -> @_id
+
   passive : -> not @active()
-  level   : -> Meteor.user().skills[@_id].level 
 
-  
-  # name of current level of user skill
-  # TODO improve
-  name    : -> 
-    skillId = @_id
-    name = null
+  level   : -> Meteor.user().skills[@_id].level || 1
+
+  qualifier: ->
+    skillId   = @_id
+    qualifier = null
+
     for level in @levels
-      if level.level == (Meteor.user().skills[skillId].level || 1)
-        name = level.name
-    name
+      if level.level == Meteor.user().skills[skillId].level
+        qualifier = level.qualifier
+    qualifier
 
-      
-  # name of current level of user skill      
-  # TODO improve
-  summary : -> 
-    skillId = @_id
-    currentLevel = null
+
+  # name of current level of user skill
+  currentLevel : ->
+    skillId      = @_id
     
+    currentLevel = null
+    @currentLevel.unlocked = false if @currentLevel
+
     # get current level
     for level in @levels
-      if level.level == (Meteor.user().skills[skillId].level || 1)
+      if level.level == Meteor.user().skills[skillId].level
         currentLevel = level
-        
-    summary = currentLevel.summary
-    
-    # Inform when level is unlockd, if locked
-    # TODO move to appropriate place
-    if Meteor.user().skills[skillId].level == null
-      summary = "(Libera no level #{currentLevel.requiredLevel}) #{summary}"
-      
-    summary
 
-  
+    currentLevel.unlocked = true
+
+    @currentLevel = currentLevel
+
+  nextSkillLevels : ->
+
+    return @levels unless @currentLevel?
+    
+    _.filter @levels, (level) =>
+      level.level > @currentLevel.level
+
+
   # current user acquired skill?
   unlocked:  -> Meteor.user().skills[@_id].level?
-  
+
   # skill can level up?
   levelable: -> @levelable()
-  
+
   # button attributes
   attrs: ->
-    # unlocked if user has the skill level defined  
+    # unlocked if user has the skill level defined
     unlocked = Meteor.user().skills[@_id].level?
-    
+
     attrs = {}
-    attrs.raised   = true     if @active()
-    attrs.disabled = true unless @active() and unlocked
+    attrs.noink = true unless @active() and unlocked
     attrs
-  
+
   # button classes
-  classes : -> 
+  classes : ->
+    # unlocked if user has the skill level defined
+    unlocked = Meteor.user().skills[@_id].level?
+
     classes = []
     classes.push "#{@activity}"
-    classes.join()
-
+    classes.push "locked" unless unlocked
+    classes.join " "

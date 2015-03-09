@@ -1,81 +1,74 @@
 Meteor.subscribe "user"
 Meteor.subscribe "skills"
 Meteor.subscribe "levels"
-Meteor.subscribe "activities"
-
-
-
 
 ## Helpers
 
+Template.dashboard.helpers
 
-Template.user.helpers
-    
   requiredExperience: ->
-    Levels.findOne( _id: Meteor.user().level ).experience || ""
-    
+    level = Levels.findOne( _id: Meteor.user().level )
+    if level then level.experience else false
+
   earnedExperience: ->
     Session.get 'earnedExperience'
-    
+
   percentage: ->
     user  = Meteor.user()
-    level = Levels.findOne( _id: Meteor.user().level )
-    if level.experience
+    level = Levels.findOne( _id: user.level )
+
+    if level and level.experience
       user.levelExperience / level.experience * 100
     else
       100
 
+  skillsLeft: ->
+    skills = Skills.find({}).fetch()
+    skills.splice 0, skills.length / 2
 
-Template.actions.helpers
-  skills: ->
-    Skills.find {}
-
-
-
+  skillsRight: ->
+    skills = Skills.find({}).fetch()
+    skills.splice skills.length / 2 , skills.length / 2
+    
 
 ## Events
 
-
 # TODO move to skills template (and skill.coffe file)?
-Template.user.events
-  'click .skill .button.active': ->
+Template.dashboard.events
+
+  # FIXME event being fired twice in touch devices
+  'click .skill .button.active': (event) ->
     Meteor.call "useSkill", @_id
+    event.stopPropagation()
+    false
 
-
-
-
+  
 
 
 Meteor.startup ->
-  
-  Session.set 'level', null
-  Session.set 'earnedExperience', null
-  
 
-  # Tracks level changes to open level up dialog
-  Tracker.autorun ->
-    level = Session.get 'level'
-    # open level up dialog
-    $('#levelup-dialog').get(0).open() if level
-    
-  
-  
-    
+  Session.set 'earnedExperience', null
+
   experienceTimeout = null
-  
-  # Show earned experience
-  # TODO refactor!
+  earnedPlaceholder = null
+
+  clearExperience = _.debounce ->
+    earnedPlaceholder.removeClass 'visible'
+    Session.set 'earnedExperience', null
+  , 2000
+
+
   Tracker.autorun ->
-    Meteor.clearTimeout experienceTimeout
+    return unless Session.get 'earnedExperience'
     
-    experience = Session.get 'earnedExperience'
-    return unless experience
+    earnedPlaceholder ||= $ '#earned-experience'
+    earnedPlaceholder.removeClass 'visible'
+    earnedPlaceholder.addClass 'visible'
     
-    earned = $ '#earned-experience'
-    earned.hide()
-    earned.fadeIn 'fast'
-    experienceTimeout = Meteor.setTimeout -> 
-      earned.fadeOut 'slow', -> 
-        Session.set 'earnedExperience', null
-    , 2000
-    
+    clearExperience()
+
+
+  if Meteor.isClient
+    $('body').attr 'fullbleed', true
+    $('body').attr 'layout', true
+    $('body').attr 'vertical', true

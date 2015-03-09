@@ -1,7 +1,26 @@
 template( name="activities" )
   
-  each activities
-    +activity
+  div( horizontal center-justified layout )
+    .activities
+      each daysActivities
+        +day
 
 template( name="activity" )
-  p #{description}
+  div.activity( horizontal layout )
+    core-icon.activity-icon( icon="water:#{data.skill}_#{data.level}" title="#{data.name} (#{data.qualifier})" )
+    span.activity-time( flex )  às #{createdAt}
+    span.activity-experience
+      span + 
+      span.activity-experience-value #{data.experience} 
+      span.activity-experience-unit PH
+    
+    
+template( name="day" )
+  div.activities-day
+    div.activities-header 
+      if calendarDate
+        span.activities-when #{calendarDate}
+        br
+      span.activities-date #{formattedDate}
+    each activities
+      +activity

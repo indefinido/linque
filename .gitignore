@@ -1,2 +1,9 @@
 .meteor/local
 .meteor/meteorite
+tests/.reports
+tests/*/logs
+
+# Emacs Temporary Files
+*~
+*#
+.#*

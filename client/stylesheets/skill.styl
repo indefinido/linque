@@ -1,0 +1,197 @@
+@import 'theme'
+@import 'nib'
+
+
+
+skill-button
+  z-index 1
+    
+  for shadow, i in true false
+    
+    { (' /deep/' '&')[i] }
+      core-tooltip
+        height 100%
+        width 100%
+
+      #icon
+        margin auto
+        height 75%
+        width  75%
+  
+  
+
+
+.skills
+  position relative
+  width 100%
+
+
+
+.skill
+
+  &.skill-action
+
+    .button
+      border-radius 4px
+      box-sizing border-box
+      color #FFF
+      margin 0.5em 0
+      padding 7px
+
+      &.active
+    
+        background-color rgba(#FFF,0.15)
+      
+        height 90px
+        width 90px
+      
+      &.passive
+      
+        background-color transparent
+        cursor default
+      
+        height 60px
+        width 60px
+        z-index 2
+      
+      &.locked
+        cursor default
+      
+        
+        for shadow, i in true false
+          { ('& /deep/' '&')[i] }
+            #icon
+            .qualifier
+              opacity 0.15
+          
+        
+      .qualifier
+        
+        bottom 0
+        left 0
+        font-size 0.6em
+        position absolute
+        text-align center
+        text-transform lowercase
+        width 100%
+        
+        
+    for shadow, i in true false
+      { ('& /deep/' '&')[i] }
+        .core-tooltip
+          background-color dialogContentColor
+          box-shadow 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.3)
+          font-size 1em
+          line-height 1.2em
+          padding 0
+          white-space normal
+          transition visibility 0 1s
+      
+          &:not(.show)
+            transition visibility 0 0.5s
+      
+          &::after
+            border 8px solid transparent
+        
+          &.bottom::after
+            border-bottom-color dialogHeaderColor
+            left calc(50% - 8px)
+
+    
+      
+  for shadow, i in true false
+    
+    { ('html /deep/ &' '&')[i] }
+    
+      &.skill-info
+      
+        &.skill-levelup
+          background-color blueLabelColor
+          border-radius 4px
+          text-align center
+  
+        .skill-icon
+          color #FFF
+          height 100px
+          width 100px
+    
+        .skill-name
+          color rgba(#FFF, 0.6)
+          font-size 1.1em
+          font-weight bold
+          upcase()
+      
+        .skill-qualifier
+          color rgba(#FFF, 0.9)
+          font-size 1.3em
+          font-weight 300
+          // line-height 0.8em
+          downcase()
+
+
+
+  &.skill-info.skill-complete
+    color #000
+    width 320px
+    
+    .skill-name
+      background-color dialogHeaderColor
+      border-radius top 4px
+      color rgba(#000, 0.6)
+      font-size 1em
+      line-height 1em
+      
+    .skill-level
+    
+      margin-top 1em
+      opacity 0.6
+      
+      &:first-child
+        margin-top 0
+      
+      .skill-qualifier
+        color rgba(#000, 0.8)
+        font-size 1.3em
+        line-height 1em
+        
+      .skill-required-level
+        font-size 0.8em
+        color #d13f19
+        line-height 1.3em
+        
+      .skill-summary
+        font-size 0.9em
+        margin 0.5em 0 0.3em
+        width auto
+        
+      .skill-experience
+        font-size 0.8em
+
+      &.skill-current-level
+        opacity 1
+      
+        .skill-qualifier
+          font-size 1.5em
+          
+        .skill-required-level
+          color rgba(#000,0.4)
+      
+      
+
++mobile()
+
+  // .skills
+  //   .skill
+  //     .passive
+  //       // position absolute
+  //       // top 0
+
+  .skill
+    &.skill-action
+      .button
+        margin 0
+        
+        // &.active
+        // &.passive
+        //   width auto
+        //   height auto

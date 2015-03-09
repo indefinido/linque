@@ -1,14 +1,21 @@
 template( name="skill" )
   
-  .skill( id="#{id}" )
+  .skill.skill-action( id="#{id}" )
+
+    skill-button( class="button #{classes}" icon="water:#{id}_#{level}" $dyn=attrs )
+
+      .qualifier #{qualifier}
+            
+      div.skill.skill-info.skill-complete( tip )
+        h2.skill-name 
+          .core-tooltip-header #{name}
+      
+        .core-tooltip-content
+          if currentLevel
+            .skill-level.skill-current-level
+              +skillLevel(currentLevel)
+        
+          each nextSkillLevels
+            .skill-level
+              +skillLevel
   
-    core-tooltip
-      div( tip ) #{summary}
-  
-      paper-button( class="button #{classes}" $dyn=attrs ) 
-        span #{name} 
-        if passive
-          span (Passivo)
-        if unlocked
-          if levelable
-            span (#{level})
