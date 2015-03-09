@@ -2,15 +2,20 @@ template( name="skill" )
   
   .skill.skill-action( id="#{id}" )
 
-    skill-button( class="button #{classes}" title="#{name}" icon="water:#{id}_#{level}" $dyn=attrs )
+    skill-button( class="button #{classes}" icon="water:#{id}_#{level}" $dyn=attrs )
 
       .qualifier #{qualifier}
             
-      div( tip )
-        h2 #{name}
+      div.skill.skill-info.skill-complete( tip )
+        h2.skill-name 
+          .core-tooltip-header #{name}
       
-        +skillLevel(currentLevel)
+        .core-tooltip-content
+          if currentLevel
+            .skill-level.skill-current-level
+              +skillLevel(currentLevel)
         
-        each nextSkillLevels
-          +skillLevel
+          each nextSkillLevels
+            .skill-level
+              +skillLevel
   

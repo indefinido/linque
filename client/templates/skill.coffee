@@ -11,7 +11,7 @@ Template.skill.helpers
     qualifier = null
 
     for level in @levels
-      if level.level == (Meteor.user().skills[skillId].level || 1)
+      if level.level == Meteor.user().skills[skillId].level
         qualifier = level.qualifier
     qualifier
 
@@ -19,12 +19,13 @@ Template.skill.helpers
   # name of current level of user skill
   currentLevel : ->
     skillId      = @_id
-
+    
+    currentLevel = null
     @currentLevel.unlocked = false if @currentLevel
 
     # get current level
     for level in @levels
-      if level.level == (Meteor.user().skills[skillId].level || 1)
+      if level.level == Meteor.user().skills[skillId].level
         currentLevel = level
 
     currentLevel.unlocked = true
@@ -33,6 +34,8 @@ Template.skill.helpers
 
   nextSkillLevels : ->
 
+    return @levels unless @currentLevel?
+    
     _.filter @levels, (level) =>
       level.level > @currentLevel.level
 

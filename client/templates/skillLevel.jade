@@ -1,11 +1,15 @@
 template( name="skillLevel" )
 
-    p #{qualifier}
+  .skill-qualifier #{qualifier}
 
-    p Requer nível #{requiredLevel}
-    
-    if unlocked
-      p #{summary}
+  if unlocked
+    .skill-required-level Adquirido no nível #{requiredLevel}
+  else
+    .skill-required-level Requer nível #{requiredLevel}
+  
+  if unlocked
+    .skill-summary #{summary}
 
-      p
+    if experience
+      .skill-experience
         b +#{experience} PH
