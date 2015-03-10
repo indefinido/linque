@@ -10,7 +10,7 @@ Session.set 'loaded', false
 
 Template.loading.rendered = ->
   @loading = window.pleaseWait
-    logo: '/images/Meteor-logo.png'
+    logo: '/images/logo.svg'
     backgroundColor: '#2689be'
     loadingHtml: spinner
 
@@ -19,4 +19,4 @@ Template.loading.destroyed = ->
     
       
 Template.main.rendered = ->
-  Session.set 'loaded', true
+  # Session.set 'loaded', true
