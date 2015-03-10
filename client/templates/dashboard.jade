@@ -21,11 +21,12 @@ template( name="main" )
       +levelup
       +skillLevelUps
 
-      div.user.user-login.user-signed-out( horizontal end-justified layout )
+      div.user.user-login.user-signed-in( horizontal end-justified layout )
         +loginButtons
   
   else
-    div.user.user-login.user-signed-in( horizontal flex center center-justified layout style="height: 100%" )
+    div.user.user-login.user-signed-out( horizontal flex center center-justified layout style="height: 100%" )
+          
       +loginButtons
     
 
