@@ -16,4 +16,4 @@ Template.loading.destroyed = ->
   @loading.finish() if @loading
 
 Template.main.rendered = ->
-  # Session.set 'loaded', true
+  Session.set 'loaded', true

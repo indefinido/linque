@@ -76,7 +76,7 @@ Meteor.methods
 
     # Report earned experience to client
     # TODO move to a analytics special place
-    if Meteor.isClient && Meteor.env == 'staging'
+    if Meteor.isClient && Meteor.env != 'development'
       GAnalytics.event 'Skill', 'Use', "id: #{skill._id} - level: #{skillLevel.level}"
 
 
