@@ -22,9 +22,13 @@
 
   <template>
     <style>
-      :host /deep/ #icon {
+      /deep/ #icon {
         width: 76px;
         height: 76px;
+      }
+
+      :host [tip] {
+        display: none;
       }
       
     </style>
@@ -48,7 +52,6 @@
   <script>
   //<![CDATA[
   Polymer('skill-button', {
-    
   });
   //]]>
   </script>
