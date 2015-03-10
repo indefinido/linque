@@ -42,6 +42,7 @@ Template.dashboard.events
     event.stopPropagation()
     false
 
+
   
 
 

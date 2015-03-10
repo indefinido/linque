@@ -3,23 +3,29 @@ head
 
 
 body
-  
-  
-  if currentUser
-    div
+
+  unless loaded
+    +loading
+    
+  +main
+
+
+template( name="main" )
+  #main
+    if currentUser
       with currentUser
         +dashboard
-      
+
       +activities
       +levelup
       +skillLevelUps
-    
+
       div.user.user-login.user-signed-out( horizontal end-justified layout )
         +loginButtons
-        
-  else
-    div.user.user-login.user-signed-in( horizontal flex center center-justified layout style="height: 100%" )
-      +loginButtons
+    
+    else
+      div.user.user-login.user-signed-in( horizontal flex center center-justified layout style="height: 100%" )
+        +loginButtons
     
 
 template( name="dashboard" )
@@ -63,3 +69,5 @@ template( name="user" )
       span.user-level( fit )
         div.user-level-label Nível
         div.user-level-value #{level}
+
+
