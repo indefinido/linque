@@ -11,8 +11,9 @@ body
 
 
 template( name="main" )
-  #main
-    if currentUser
+  if currentUser     
+    #main
+  
       with currentUser
         +dashboard
 
@@ -22,16 +23,19 @@ template( name="main" )
 
       div.user.user-login.user-signed-out( horizontal end-justified layout )
         +loginButtons
-    
-    else
-      div.user.user-login.user-signed-in( horizontal flex center center-justified layout style="height: 100%" )
-        +loginButtons
+  
+  else
+    div.user.user-login.user-signed-in( horizontal flex center center-justified layout style="height: 100%" )
+      +loginButtons
     
 
 template( name="dashboard" )
   
   #toolbar( horizontal center-justified layout )
     .container
+      
+      div.logo( horizontal center center-justified layout )
+        img( src="/images/logo.svg" )
       
       div( horizontal center around-justified layout )
   

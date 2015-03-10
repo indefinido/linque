@@ -19,4 +19,4 @@ Template.loading.destroyed = ->
     
       
 Template.main.rendered = ->
-  # Session.set 'loaded', true
+  Session.set 'loaded', true
