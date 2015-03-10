@@ -55,7 +55,7 @@ template( name="dashboard" )
             span.progress-current( title="Você tem #{levelExperience} PH" ) #{levelExperience}
             span.progress-required( title="São necessários #{requiredExperience} PH para ir para o próximo nível" ) /#{requiredExperience}
       
-        paper-progress.progress-bar( flex value="#{percentage}" title="Pontos de Hábito (PH)" )
+        paper-progress.progress-bar( flex value="#{percentage}" )
     
         div.progress-earned#earned-experience( fit ) +#{earnedExperience} PH
 

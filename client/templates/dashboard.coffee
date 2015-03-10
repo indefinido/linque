@@ -44,6 +44,11 @@ Template.dashboard.events
 
 
   
+Template.dashboard.rendered = ->
+  Meteor.setTimeout ->
+    progress = document.querySelector '.progress paper-progress::shadow #progressContainer, .progress paper-progress #progressContainer'
+    progress.title = "Pontos de Hábito (PH)"
+  , 5000
 
 
 Meteor.startup ->
@@ -69,7 +74,9 @@ Meteor.startup ->
     clearExperience()
 
 
-  if Meteor.isClient
-    $('body').attr 'fullbleed', true
-    $('body').attr 'layout', true
-    $('body').attr 'vertical', true
+  $('body').attr 'fullbleed', true
+  $('body').attr 'layout', true
+  $('body').attr 'vertical', true
+  
+  
+  
