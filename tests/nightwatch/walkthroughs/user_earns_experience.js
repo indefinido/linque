@@ -1,15 +1,17 @@
 module.exports = {
+  before: function () {
+    return this.client
+          .url("http://127.0.0.1:3000")
+          .waitForSplash()
+          .login()
+  },
   "User sees feedback in context": function(client) {
       var progress;
 
       var levelUpDialog      = "core-overlay-layer ::shadow .dialog.dialog-levelup",
           skillLevelUpDialog = "core-overlay-layer ::shadow .dialog.dialog-skill-levelup";
 
-
       return this.client
-          .login()
-          .pause(200)
-
           // current bar experience
           .getAttribute("paper-progress", 'value', function (result) {
               progress = result.value;

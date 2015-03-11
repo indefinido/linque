@@ -1,4 +1,10 @@
 module.exports = {
+    beforeEach: function () {
+        return this.client
+            .url("http://127.0.0.1:3000")
+            .waitForSplash()
+    },
+
     "User can see skills": function(client) {
         return client
             .login()
@@ -28,6 +34,8 @@ module.exports = {
             .login(function () {
                 experience = this.globals.user.experience;
             })
+            // Figure out why splash screen is getting loaded twice
+            .pause(500)
             .click('#fill.skill skill-button')
             .user(function () {
                 var currentExperience = this.globals.user.experience;

@@ -7,6 +7,8 @@ Template.registerHelper 'loaded', ->
 Session.set 'loaded', false
 
 Template.loading.rendered = ->
+  return if Session.get 'loaded'
+  
   @loading = window.pleaseWait
     logo: '/images/logo.svg'
     backgroundColor: '#0074b3'

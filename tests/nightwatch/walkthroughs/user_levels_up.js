@@ -1,8 +1,16 @@
 module.exports = {
-    "When leveling up": function (client) {
-        experience = null;
-        return client
+
+    beforeEach: function () {
+        return this.client
+            .url("http://127.0.0.1:3000")
+            .waitForSplash()
             .login()
+    },
+
+    "When leveling up": function (client) {
+        var experience = null;
+
+        return client
             .pause(500)
 
             .assert.containsText('body', "NÍVEL\n1")
@@ -21,7 +29,6 @@ module.exports = {
 
             .end();
     },
-
 
     "Level up associated skills": function(client) {
         console.log("Pending")
