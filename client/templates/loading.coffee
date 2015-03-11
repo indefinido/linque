@@ -19,3 +19,9 @@ Template.loading.destroyed = ->
 
 Template.main.rendered = ->
   Session.set 'loaded', true
+
+Template.loginButtons.rendered = ->
+  console.log(this)
+  $('#login-sign-in-link').text "Efetuar Login"
+  $('#login-sign-in-link .sign-in-text-facebook').text "Entrar com Facebook"
+  $('#login-sign-in-link .sign-in-text-google').text "Entrar com Google"

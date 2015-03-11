@@ -9,7 +9,7 @@ body
     
   +main
 
-
+  
 template( name="main" )
   if currentUser     
     #main
@@ -25,8 +25,9 @@ template( name="main" )
         +loginButtons
   
   else
-    div.user.user-login.user-signed-out( horizontal flex center center-justified layout style="height: 100%" )
-          
+    div.user.user-login.user-signed-out( vertical flex center center-justified layout style="height: 100%" )
+      img( class="pg-loading-logo" src="/images/logo.svg" )
+      
       +loginButtons
     
 

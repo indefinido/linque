@@ -1,0 +1,5 @@
+#!/env/bash
+
+meteor remove clinical:nightwatch
+meteor deploy linque.meteor.com --settings settings.json
+meteor add clinical:nightwatch
