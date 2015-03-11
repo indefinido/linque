@@ -11,7 +11,7 @@ Template.loading.rendered = ->
   
   @loading = window.pleaseWait
     logo: '/images/logo.svg'
-    backgroundColor: '#2689be'
+    backgroundColor: '#0074b3'
     loadingHtml: spinner
 
 Template.loading.destroyed = ->
