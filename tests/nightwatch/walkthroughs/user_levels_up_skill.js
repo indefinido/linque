@@ -1,10 +1,15 @@
 module.exports = {
+    beforeEach: function () {
+        return this.client
+            .url("http://127.0.0.1:3000")
+            .waitForSplash()
+            .login()
+    },
     "User sees feedback of leveling up": function(client) {
         var levelUpDialog      = "core-overlay-layer ::shadow .dialog.dialog-levelup",
             skillLevelUpDialog = "core-overlay-layer ::shadow .dialog.dialog-skill-levelup";
 
         return client
-            .login()
             .level(1)
             .click("#fill.skill")
 
