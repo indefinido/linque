@@ -19,9 +19,16 @@ Meteor.startup ->
 
 
     if options.profile
+      
+      console.log options
+      console.log user
 
-      # facebook profile picture
-      options.profile.picture = "http://graph.facebook.com/#{user.services.facebook.id}/picture/?type=large"
+      if user.services.facebook?
+        # facebook profile picture
+        options.profile.picture = "http://graph.facebook.com/#{user.services.facebook.id}/picture/?type=large"
+        
+      if user.services.google?
+        options.profile.picture = user.services.google.picture
 
       user.profile = options.profile;
 
