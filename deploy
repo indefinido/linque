@@ -1,4 +1,4 @@
-#!/env/bash
+#!/bin/sh
 
 meteor remove clinical:nightwatch
 meteor deploy linque.meteor.com --settings settings.json
