@@ -6,10 +6,10 @@ Meteor.startup ->
      
   Tracker.autorun ->
     
-    if Meteor.user()
+    if Meteor.userId()
       user = Meteor.user()
 	
-	    unless Meteor.env == 'development'
+      unless Meteor.env == 'development'
         ga 'set', '&uid', user._id
         GAnalytics.event "User", "Session Restored"
 

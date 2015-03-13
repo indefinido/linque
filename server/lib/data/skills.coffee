@@ -58,7 +58,7 @@
         summary: "Você pode encher seu recipiente atual até 2 vez por dia. Use esta habilidade para registrar todas as vezes que você encheu seu recipiente."
         description: ""
         experience: 75
-        requiredLevel: 3
+        requiredLevel: 4
         level: 2
       ,
         qualifier: "Livre"
