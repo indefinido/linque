@@ -3,11 +3,11 @@ Meteor.startup ->
     Meteor.env = environment
     GAnalytics.pageview() unless environment == 'development'
 
-     
-  Tracker.autorun ->
     
-    if Meteor.userId()
-      user = Meteor.user()
+  Tracker.autorun ->
+    user = Meteor.user()
+    
+    if user
 	
       unless Meteor.env == 'development'
         ga 'set', '&uid', user._id
@@ -18,9 +18,9 @@ Meteor.startup ->
 
         unless details.fullName == user.profile.name
           olark 'api.visitor.updateFullName',
-	          fullName: user.profile.name
+          fullName: user.profile.name
 
         emailAddress = user.services.facebook?.email || user.services.google?.email
         unless details.emailAddress == emailAddress 
           olark 'api.visitor.updateEmailAddress',
-		        emailAddress: emailAddress
+          emailAddress: emailAddress
