@@ -8,6 +8,8 @@ Meteor.publish "user", ->
       level: 1
       skills: 1
       profile: 1
+      "services.google": 1
+      "services.facebook.email": 1
 
 
 
