@@ -1,0 +1,16 @@
+#!/usr/bin/ruby
+
+
+puts "Getting connection data..."
+connection = `meteor mongo --url linque.meteor.com`
+
+_, username, password = * connection.match(/(client\-\w+)?:([\w\-]+)?@/)
+
+
+puts
+puts "  mongo -u #{username} -p #{password} production-db-d2.meteor.io:27017/linque_meteor_com"
+
+puts
+puts "Useful commands: "
+puts "  db.users.find({},{level:1, levelExperience:1, 'profile.name':1}).pretty()"
+puts
