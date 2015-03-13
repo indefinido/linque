@@ -19,9 +19,6 @@ Meteor.startup ->
 
 
     if options.profile
-      
-      console.log options
-      console.log user
 
       if user.services.facebook?
         # facebook profile picture
