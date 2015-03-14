@@ -1,0 +1,57 @@
+
+<link href="../../bower_components/polymer/polymer.html" rel="import" />
+
+
+<!--
+  Element to a single timeline dot
+  
+  ##### Example
+  
+  <linque-path>
+    <linque-dot></linque-dot>
+  </linque-path>
+  
+  @element linque-dot
+  @blurb Basically a responsive paper button with tooltip
+  @status alpha
+  @homepage http://indefinido.github.io/linque-dot
+-->
+
+<polymer-element name="linque-dot" attributes="size">
+
+  <template>
+    <style>
+      :host {
+        width: 1em;
+        height: 0.8em;
+        margin: 0.1em 0;
+        background-color: white;
+        transition: width 1s ease-out, height 1s ease-out;
+      }
+
+      /* TODO use core overlay! In the path element and target the dot with that
+      overlay */
+
+      :host([size="big"]) {
+        width: 10em;
+        height: 10em;
+        margin-top: -10em;
+        transition: width 1s ease-out, height 1s ease-out, margin 1s ease-out;
+      }
+    </style>
+    
+    <content></content>
+  </template>
+  <script>
+  //<![CDATA[
+  proto = {
+    publish: {
+       size: {value: 'small', reflect: true}
+    }
+  };
+
+  Polymer.mixin2(proto, Polymer.CoreFocusable);
+  Polymer('linque-dot', proto);
+  //]]>
+  </script>
+</polymer-element>

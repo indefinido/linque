@@ -33,37 +33,47 @@ template( name="main" )
 
 template( name="dashboard" )
   
-  #toolbar( horizontal center-justified layout )
-    .container
-      
-      div.logo( horizontal center center-justified layout )
-        img( src="/images/logo.svg" )
-      
-      div( horizontal center around-justified layout )
-  
-        .skills( layout vertical reverse center end-justified flex )
-          each skillsLeft
-            +skill
-  
-        with currentUser
-          +user
-        
-        .skills( layout vertical center start-justified flex )
-          each skillsRight
-            +skill
-  
-      br 
-  
-      .progress( relative vertical layout )
-        div( layout horizontal end-justified )
-          //- span.progress-label( title="Pontos de Hábito" ) PH
-          span.progress-numbers 
-            span.progress-current( title="Você tem #{levelExperience} PH" ) #{levelExperience}
-            span.progress-required( title="São necessários #{requiredExperience} PH para ir para o próximo nível" ) /#{requiredExperience}
-      
-        paper-progress.progress-bar( flex value="#{percentage}" )
+  #toolbar
+    div.logo( flex left )
+      img( src="/images/logo.svg" )
+
+
+    linque-path
     
-        div.progress-earned#earned-experience( fit ) +#{earnedExperience} PH
+     linque-dot(size="big") a
+     linque-dot b
+     linque-dot c
+     linque-dot d
+     linque-dot e
+     linque-dot f
+     linque-dot g
+       
+      
+      // div( horizontal center around-justified layout )
+  
+      //   .skills( layout vertical reverse center end-justified flex )
+      //     each skillsLeft
+      //       +skill
+  
+      //   with currentUser
+      //     +user
+        
+      //   .skills( layout vertical center start-justified flex )
+      //     each skillsRight
+      //       +skill
+  
+      // br 
+  
+      // .progress( relative vertical layout )
+      //   div( layout horizontal end-justified )
+      //     //- span.progress-label( title="Pontos de Hábito" ) PH
+      //     span.progress-numbers 
+      //       span.progress-current( title="Você tem #{levelExperience} PH" ) #{levelExperience}
+      //       span.progress-required( title="São necessários #{requiredExperience} PH para ir para o próximo nível" ) /#{requiredExperience}
+      
+      //   paper-progress.progress-bar( flex value="#{percentage}" )
+    
+      //   div.progress-earned#earned-experience( fit ) +#{earnedExperience} PH
 
 
 

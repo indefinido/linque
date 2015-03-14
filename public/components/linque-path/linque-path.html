@@ -1,0 +1,44 @@
+
+<link href="../../bower_components/polymer/polymer.html" rel="import" />
+<link href="../linque-dot/linque-dot.html" rel="import" />
+
+<!--
+  Element to provide a timeline like placeholder
+  
+  ##### Example
+  
+  <linque-path></linque-path>
+  
+  @element linque-path
+  @blurb Basically a responsive paper button with tooltip
+  @status alpha
+  @homepage http://indefinido.github.io/linque-path
+-->
+
+<polymer-element name="linque-path" vertical bottom center layout attributes="size">
+
+  <template>
+    <style>
+      :host {
+        border: 1px solid red;
+        width: 100%;
+      }
+      
+      :host #path {
+        float: left;
+        padding: 0.3em;
+        background-color: rgba(0, 0, 0, 0.3)
+      }
+      
+    </style>
+    <div id="path" vertical center center-justified layout>
+      <content></content>
+    </div>
+  </template>
+  <script>
+  //<![CDATA[
+  Polymer('linque-path', {
+  });
+  //]]>
+  </script>
+</polymer-element>
