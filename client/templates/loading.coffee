@@ -17,5 +17,5 @@ Template.loading.rendered = ->
 Template.loading.destroyed = ->
   @loading.finish() if @loading
 
-Template.main.rendered = ->
+Template.signIn.rendered = Template.dashboard.rendered = ->
   Session.set 'loaded', true

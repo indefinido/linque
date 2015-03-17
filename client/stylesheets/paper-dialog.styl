@@ -1,0 +1,21 @@
+@import 'theme'
+
+for selector in 'paper-dialog' 'html /deep/ paper-dialog'
+  {selector}
+    background-color #FFF
+  
+    &[disabled]
+      background transparent
+    
+    // &::shadow #shadow
+    //   display none
+
+    &.start
+      left 1em
+      
+    &.center
+      top 40%
+    
+    &.colored
+      background-color buttonColor
+      color white

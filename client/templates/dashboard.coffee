@@ -22,13 +22,9 @@ Template.dashboard.helpers
     else
       100
 
-  skillsLeft: ->
-    skills = Skills.find({}).fetch()
-    skills.splice 0, skills.length / 2
+  passiveSkills: -> Skills.find(activity: 'active' ).fetch()
+  activeSkills : -> Skills.find(activity: 'passive').fetch()
 
-  skillsRight: ->
-    skills = Skills.find({}).fetch()
-    skills.splice skills.length / 2 , skills.length / 2
     
 
 ## Events
@@ -42,13 +38,12 @@ Template.dashboard.events
     event.stopPropagation()
     false
 
-
-  
-Template.dashboard.rendered = ->
-  Meteor.setTimeout ->
-    progress = document.querySelector '.progress paper-progress::shadow #progressContainer, .progress paper-progress #progressContainer'
-    progress.title = "Pontos de Hábito (PH)"
-  , 5000
+# Remove when pathway implementation is finished
+# Template.dashboard.rendered = ->
+#   Meteor.setTimeout ->
+#     progress = document.querySelector '.progress paper-progress::shadow #progressContainer, .progress paper-progress #progressContainer'
+#     progress.title = "Pontos de Hábito (PH)"
+#   , 5000
 
 
 Meteor.startup ->

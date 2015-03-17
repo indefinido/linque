@@ -6,77 +6,47 @@ body
 
   unless loaded
     +loading
-    
-  +main
 
-  
-template( name="main" )
-  if currentUser     
-    #main
-  
-      with currentUser
-        +dashboard
-
-      +activities
-      +levelup
-      +skillLevelUps
-
-      div.user.user-login.user-signed-in( horizontal end-justified layout )
-        +loginButtons
-  
+  if currentUser
+    +dashboard
   else
-    div.user.user-login.user-signed-out( vertical flex center center-justified layout style="height: 100%" )
-      img( class="pg-loading-logo" src="/images/logo.svg" )
-      
-      +loginButtons
-    
+    +signIn
 
+  
 template( name="dashboard" )
   
   #toolbar
-    div.logo( flex left )
+    .logo( flex left )
       img( src="/images/logo.svg" )
-
-
-    linque-path
-    
-     linque-dot(size="big") a
-     linque-dot b
-     linque-dot c
-     linque-dot d
-     linque-dot e
-     linque-dot f
-     linque-dot g
-       
       
-      // div( horizontal center around-justified layout )
-  
-      //   .skills( layout vertical reverse center end-justified flex )
-      //     each skillsLeft
-      //       +skill
-  
-      //   with currentUser
-      //     +user
+      
+    .active.skills( layout vertical reverse center end-justified flex )
+      each activeSkills
+        +skill
         
-      //   .skills( layout vertical center start-justified flex )
-      //     each skillsRight
-      //       +skill
-  
-      // br 
-  
-      // .progress( relative vertical layout )
-      //   div( layout horizontal end-justified )
-      //     //- span.progress-label( title="Pontos de Hábito" ) PH
-      //     span.progress-numbers 
-      //       span.progress-current( title="Você tem #{levelExperience} PH" ) #{levelExperience}
-      //       span.progress-required( title="São necessários #{requiredExperience} PH para ir para o próximo nível" ) /#{requiredExperience}
       
-      //   paper-progress.progress-bar( flex value="#{percentage}" )
+  #board
+    +pathway
+      
+  #statusbar
+    .passive.skills( layout vertical reverse center end-justified flex )
+      each passiveSkills
+        +skill
+        
+    .user.user-login.user-signed-in( horizontal end-justified layout )
+      +loginButtons
+       
+
+             
+
     
-      //   div.progress-earned#earned-experience( fit ) +#{earnedExperience} PH
+template( name="signIn")
+  .user.user-login.user-signed-out( vertical flex center center-justified layout style="height: 100%" )
+    img( class="pg-loading-logo" src="/images/logo.svg" )
+    
+    +loginButtons
 
-
-
+    
 template( name="user" )  
   
   .user( horizontal center-justified layout )
