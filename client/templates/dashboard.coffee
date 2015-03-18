@@ -22,8 +22,8 @@ Template.dashboard.helpers
     else
       100
 
-  passiveSkills: -> Skills.find(activity: 'active' ).fetch()
-  activeSkills : -> Skills.find(activity: 'passive').fetch()
+  passiveSkills: -> Skills.find(activity: 'passive').fetch()
+  activeSkills : -> Skills.find(activity: 'active' ).fetch()
 
     
 
@@ -69,9 +69,6 @@ Meteor.startup ->
     clearExperience()
 
 
-  $('body').attr 'fullbleed', true
-  $('body').attr 'layout', true
-  $('body').attr 'vertical', true
-  
+  $('body').attr 'fullbleed', true  
   
   

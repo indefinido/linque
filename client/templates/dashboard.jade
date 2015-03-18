@@ -15,26 +15,32 @@ body
   
 template( name="dashboard" )
   
-  #toolbar
-    .logo( flex left )
+  
+  #dashboard( horizontal center flex layout )
+
+    +pathway
+
+
+    .tool.top-left.logo
       img( src="/images/logo.svg" )
-      
-      
-    .active.skills( layout vertical reverse center end-justified flex )
+                      
+    .tool.top-right.skills
       each activeSkills
         +skill
-        
-      
-  #board
-    +pathway
-      
-  #statusbar
-    .passive.skills( layout vertical reverse center end-justified flex )
+
+    .tool.bottom-left.skills( vertical layout )
       each passiveSkills
         +skill
-        
-    .user.user-login.user-signed-in( horizontal end-justified layout )
-      +loginButtons
+    
+    .tool.bottom-right
+      .user.user-login.user-signed-in( horizontal end-justified layout )
+        +loginButtons
+    
+
+
+  //- #toolbar
+  //-
+  //- #statusbar
        
 
              
