@@ -22,15 +22,13 @@ Template.rule.helpers
     skillId      = @_id
     
     currentLevel = null
-    @currentLevel.unlocked = false if @currentLevel
 
     # get current level
     for level in @levels
       if level.level == Meteor.user().skills[skillId].level
         currentLevel = level
 
-    currentLevel.unlocked = true
-
+    currentLevel.skill = @name
     @currentLevel = currentLevel
 
 

@@ -5,10 +5,5 @@ template( name="rule" )
     .qualifier #{qualifier}
           
     div.rule-info( tip )
-      h2.rule-name
-        .core-tooltip-header #{name}
-    
-      .core-tooltip-content
-        if currentLevel
-          .rule-level.rule-current-level
-            +ruleLevel(currentLevel)
+      +ruleLevel currentLevel
+        
