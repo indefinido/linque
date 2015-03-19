@@ -1,7 +1,6 @@
 head
   title Linque
 
-
 body
 
   unless loaded
@@ -20,7 +19,6 @@ template( name="dashboard" )
 
     +pathway
 
-
     .tool.top-left.logo
       img( src="/images/logo.svg" )
                       
@@ -35,17 +33,8 @@ template( name="dashboard" )
     .tool.bottom-right
       .user.user-login.user-signed-in( horizontal end-justified layout )
         +loginButtons
-    
 
 
-  //- #toolbar
-  //-
-  //- #statusbar
-       
-
-             
-
-    
 template( name="signIn")
   .user.user-login.user-signed-out( vertical flex center center-justified layout style="height: 100%" )
     img( class="pg-loading-logo" src="/images/logo.svg" )

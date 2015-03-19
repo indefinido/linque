@@ -3,21 +3,16 @@ Meteor.startup ->
   Accounts.onCreateUser (options, user) ->
 
     # default values
-    user.experience      = 0
-    user.levelExperience = 0
-    user.level           = 1
+    user.position      = 0
+    user.rules         = {}
+    user.profile     ||= {}
+    user.services    ||= {}
 
-    # initialize skills
-    user.skills = {}
-    Skills.find().forEach (skill) ->
-      # get required level of first skill
-      requiredLevel = skill.levels[0].requiredLevel
+    # initialize rules
+    # gives all rules at level 1
+    Rules.find().forEach (rule) -> user.rules[rule._id] = level: 1
 
-      user.skills[skill._id] =
-        # gives all skills that start on level 1
-        level   : (if requiredLevel == 1 then 1 else null)
-
-
+    # Set default profile picture
     if options.profile
 
       if user.services.facebook?
@@ -27,8 +22,11 @@ Meteor.startup ->
       if user.services.google?
         options.profile.picture = user.services.google.picture
 
-      user.profile = options.profile;
+      user.profile = options.profile
+      
+    user.profile.picture = 'http://placehold.it/250/0074B3/FFFFFF' unless user.profile.picture?
 
+    # return user document
     user
 
 Meteor.methods 
