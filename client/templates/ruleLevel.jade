@@ -1,15 +1,6 @@
 template( name="ruleLevel" )
 
   .rule-qualifier #{qualifier}
-
-  if unlocked
-    .rule-required-level Adquirido no nível #{requiredLevel}
-  else
-    .rule-required-level Requer nível #{requiredLevel}
   
-  if unlocked
-    .rule-summary #{summary}
+  .rule-summary #{summary}
 
-    if experience
-      .rule-experience
-        b +#{experience} PH

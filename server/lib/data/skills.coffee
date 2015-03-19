@@ -31,19 +31,8 @@
         level: 4
     ]
   ,
-    _id: 'trigger'
-    activity: 'passive'
-    name: "Receber Gatilho"
-    order: 3
-    levels: [
-        summary: "Você sabe receber gatilhos do ambiente. Use a habilidade de Beber Água sempre que beber água imediatamente após receber um gatilho."
-        description: ""
-        requiredLevel: 2
-        level: 1
-    ]
-  ,
     _id: 'fill'
-    activity: 'active'
+    activity: 'passive'
     name: "Encher Recipiente"
     order: 1
     levels: [
@@ -68,6 +57,8 @@
         requiredLevel: 5
         level: 3
     ]
+  ,
+    _id: 'trigger'
   ,
     _id: 'drink'
     activity: 'active'

@@ -33,13 +33,6 @@ Template.rule.helpers
 
     @currentLevel = currentLevel
 
-  nextRuleLevels : ->
-
-    return @levels unless @currentLevel?
-    
-    _.filter @levels, (level) =>
-      level.level > @currentLevel.level
-
 
   # current user acquired skill?
   unlocked:  -> Meteor.user().skills[@_id].level?

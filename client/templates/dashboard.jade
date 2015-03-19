@@ -29,7 +29,8 @@ template( name="dashboard" )
 
     .tool.bottom-left.rules( vertical layout )
       each rules
-        +rule
+        div( horizontal layout )
+          +rule
     
     .tool.bottom-right
       .user.user-login.user-signed-in( horizontal end-justified layout )
