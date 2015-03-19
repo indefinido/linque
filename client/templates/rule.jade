@@ -1,0 +1,20 @@
+template( name="rule" )
+  
+  .rule.rule-action( id="#{id}" )
+
+    rule-item( class="#{classes}" icon="water:#{id}_#{level}" $dyn=attrs )
+
+      .qualifier #{qualifier}
+            
+      div.rule.rule-info.rule-complete( tip )
+        h2.rule-name
+          .core-tooltip-header #{name}
+      
+        .core-tooltip-content
+          if currentLevel
+            .rule-level.rule-current-level
+              +ruleLevel(currentLevel)
+        
+          each nextRuleLevels
+            .rule-level
+              +ruleLevel

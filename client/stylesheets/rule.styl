@@ -3,7 +3,7 @@
 
 
 
-skill-button
+rule-item
   z-index 1
     
   for shadow, i in true false
@@ -21,13 +21,13 @@ skill-button
   
 
 
-.skills
+.rules
   //
 
 
-.skill
+.rule
 
-  &.skill-action
+  &.rule-action
 
     .button
       border-radius 4px
@@ -101,25 +101,25 @@ skill-button
     
     { ('html /deep/ &' '&')[i] }
     
-      &.skill-info
+      &.rule-info
       
-        &.skill-levelup
+        &.rule-levelup
           background-color blueLabelColor
           border-radius 4px
           text-align center
   
-        .skill-icon
+        .rule-icon
           color #FFF
           height 100px
           width 100px
     
-        .skill-name
+        .rule-name
           color rgba(#FFF, 0.6)
           font-size 1.1em
           font-weight bold
           upcase()
       
-        .skill-qualifier
+        .rule-qualifier
           color rgba(#FFF, 0.9)
           font-size 1.3em
           font-weight 300
@@ -128,18 +128,18 @@ skill-button
 
 
 
-  &.skill-info.skill-complete
+  &.rule-info.rule-complete
     color #000
     width 320px
     
-    .skill-name
+    .rule-name
       background-color dialogHeaderColor
       border-radius top 4px
       color rgba(#000, 0.6)
       font-size 1em
       line-height 1em
       
-    .skill-level
+    .rule-level
     
       margin-top 1em
       opacity 0.6
@@ -147,45 +147,45 @@ skill-button
       &:first-child
         margin-top 0
       
-      .skill-qualifier
+      .rule-qualifier
         color rgba(#000, 0.8)
         font-size 1.3em
         line-height 1em
         
-      .skill-required-level
+      .rule-required-level
         font-size 0.8em
         color #d13f19
         line-height 1.3em
         
-      .skill-summary
+      .rule-summary
         font-size 0.9em
         margin 0.5em 0 0.3em
         width auto
         
-      .skill-experience
+      .rule-experience
         font-size 0.8em
 
-      &.skill-current-level
+      &.rule-current-level
         opacity 1
       
-        .skill-qualifier
+        .rule-qualifier
           font-size 1.5em
           
-        .skill-required-level
+        .rule-required-level
           color rgba(#000,0.4)
       
       
 
 +mobile()
 
-  // .skills
-  //   .skill
+  // .rules
+  //   .rule
   //     .passive
   //       // position absolute
   //       // top 0
 
-  .skill
-    &.skill-action
+  .rule
+    &.rule-action
       .button
         margin 0
         

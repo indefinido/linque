@@ -1,0 +1,55 @@
+
+<link href="../../bower_components/polymer/polymer.html" rel="import" />
+<link href="../../bower_components/core-tooltip/core-tooltip.html" rel="import" />
+<link href="../../bower_components/core-media-query/core-media-query.html" rel="import" />
+<link href="../../bower_components/paper-item/paper-item.html" rel="import" />
+<link href="../../components/water-iconset/water-iconset.html" rel="import" />
+
+<!--
+  Element to provide a rule item: Basically a responsive paper item with tooltip
+  
+  ##### Example
+  
+  <rule-item></rule-item>
+  
+  @element rule-item
+  @blurb Basically a responsive paper item with tooltip
+  @status alpha
+  @homepage http://indefinido.github.io/rule-item
+-->
+
+<polymer-element name="rule-item" extends="paper-item" attributes="icon">
+
+  <template>
+    <style>
+      /deep/ #icon {
+        width: 76px;
+        height: 76px;
+      }
+    </style>
+    <!-- TODO Implement a better solution to avoid displaying tooltip on mobile -->
+    
+    <core-media-query query="max-width: 640px" queryMatches="{{phoneScreen}}"></core-media-query>
+    
+    <template if="{{! phoneScreen}}">
+      <core-tooltip position="right">
+        <shadow></shadow>
+        <core-icon icon="{{icon}}"></core-icon>
+        <content></content>
+      </core-tooltip>
+    </template>
+
+    <template if="{{phoneScreen}}">
+      <shadow></shadow>
+      <core-icon icon="{{icon}}"></core-icon>
+      <content select=":not([tip])"></content>
+    </template>
+    
+  </template>
+  <script>
+  //<![CDATA[
+  Polymer('rule-item', {
+  });
+  //]]>
+  </script>
+</polymer-element>
