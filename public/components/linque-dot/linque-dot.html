@@ -48,9 +48,7 @@
     </style>
 
     <!-- <div hidden?="{{! opened}}"> -->
-    <div>
-      <content></content>
-    </div>
+    <content></content>
               
   </template>
   <script>
@@ -59,7 +57,7 @@
     opened: false,
     attached: function () {
       // TODO look for openable objects, not only dialogs
-      this.dialog = this.querySelector('paper-dialog');
+      this.dialog = this.querySelector('core-overlay');
     },
     openedChanged: function (old, value) {
       this.dialog    && (this.dialog.opened    = value)

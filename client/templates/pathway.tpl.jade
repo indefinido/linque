@@ -3,19 +3,28 @@ linque-path
   
    if isStoryEvent
      linque-dot 
-       paper-dialog.start.center(heading="#{heading}") #{body}
+       core-overlay( autoCloseDisabled backdrop layered="false" )
+         h2 #{heading}
+         div #{body}
    else if isWarning
      linque-dot 
-       paper-dialog.start.center(heading="#{heading}") #{body}
+       core-overlay( autoCloseDisabled backdrop layered="false" )
+         h2 #{heading}
+         div #{body}
    else if isTip
      linque-dot( vivid )
-       paper-dialog.start.center(heading="#{heading}") #{body}
+       core-overlay( autoCloseDisabled backdrop layered="false" )
+         h2 #{heading}
+         div #{body}
    else if isDecisionPoint
      linque-dot 
-       paper-dialog.start.center(heading="#{heading}") #{body}
+       core-overlay( autoCloseDisabled backdrop layered="false" )
+         h2 #{heading}
+         div #{body}
    else if isUser
      linque-dot( free )
        div( center )
          +user
    else
      linque-dot
+       
