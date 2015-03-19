@@ -23,7 +23,6 @@
        width: 1em;
        height: 0.8em;
        margin: 0.1em 0;
-       background-color: rgba(255,255,255,0.3);
      }
      
      :host([completed]) {
@@ -59,7 +58,7 @@
     opened: false,
     attached: function () {
       // TODO look for openable objects, not only dialogs
-      this.dialog = this.querySelector('paper-dialog');
+      this.dialog = this.querySelector('core-overlay');
     },
     openedChanged: function (old, value) {
       this.dialog    && (this.dialog.opened    = value)
