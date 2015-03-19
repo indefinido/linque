@@ -23,13 +23,11 @@
        width: 1em;
        height: 0.8em;
        margin: 0.1em 0;
-       background-color: white;
-       transform: scale(1);
-       transition: transform 0.2s ease-in-out;
+       background-color: rgba(255,255,255,0.3);
      }
-
-     :host(:hover) {
-       transform: scale(1.25);
+     
+     :host([completed]) {
+       background-color: white;
      }
      
      :host([free]) {
