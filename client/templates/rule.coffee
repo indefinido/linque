@@ -1,4 +1,5 @@
-Template.skill.helpers
+# TODO rename skills to rule
+Template.rule.helpers
 
   id      : -> @_id
 
@@ -32,7 +33,7 @@ Template.skill.helpers
 
     @currentLevel = currentLevel
 
-  nextSkillLevels : ->
+  nextRuleLevels : ->
 
     return @levels unless @currentLevel?
     

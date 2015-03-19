@@ -24,13 +24,12 @@ template( name="dashboard" )
     .tool.top-left.logo
       img( src="/images/logo.svg" )
                       
-    .tool.top-right.skills
-      each activeSkills
-        +skill
+    .tool.top-right.tracker
+      +tracker
 
-    .tool.bottom-left.skills( vertical layout )
-      each passiveSkills
-        +skill
+    .tool.bottom-left.rules( vertical layout )
+      each rules
+        +rule
     
     .tool.bottom-right
       .user.user-login.user-signed-in( horizontal end-justified layout )

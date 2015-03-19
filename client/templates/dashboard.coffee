@@ -22,8 +22,9 @@ Template.dashboard.helpers
     else
       100
 
-  passiveSkills: -> Skills.find(activity: 'passive').fetch()
-  activeSkills : -> Skills.find(activity: 'active' ).fetch()
+  rules: ->
+    # TODO implement rule datamodel
+    Skills.find(activity: 'passive').fetch()
 
     
 

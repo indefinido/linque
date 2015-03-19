@@ -6,19 +6,19 @@
 <link href="../../components/water-iconset/water-iconset.html" rel="import" />
 
 <!--
-  Element to provide a skill button: Basically a responsive paper button with tooltip
+  Element to provide a track button: Basically a responsive paper button with tooltip
   
   ##### Example
   
-  <skill-button></skill-button>
+  <track-button></track-button>
   
-  @element skill-button
+  @element track-button
   @blurb Basically a responsive paper button with tooltip
   @status alpha
-  @homepage http://indefinido.github.io/skill-button
+  @homepage http://indefinido.github.io/track-button
 -->
 
-<polymer-element name="skill-button" extends="paper-icon-button" touch-action="none">
+<polymer-element name="track-button" tooltip="left" extends="paper-icon-button" attributes="tooltip">
 
   <template>
     <style>
@@ -32,7 +32,7 @@
     <core-media-query query="max-width: 640px" queryMatches="{{phoneScreen}}"></core-media-query>
     
     <template if="{{! phoneScreen}}">
-      <core-tooltip>
+      <core-tooltip position="{{ tooltip }}">
         <shadow></shadow>
         <content></content>
       </core-tooltip>
@@ -46,7 +46,7 @@
   </template>
   <script>
   //<![CDATA[
-  Polymer('skill-button', {
+  Polymer('track-button', {
   });
   //]]>
   </script>
