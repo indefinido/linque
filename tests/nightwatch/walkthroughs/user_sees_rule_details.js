@@ -6,17 +6,18 @@ module.exports = {
             .login()
     },
 
-    "Hover on a Rule shows up a tooltip with basic info": function(client) {
+    "Current rule level summary": function(client) {
+        var hoverable = 'rule-item#container /deep/ #question-mark',
+            summaryHolder = 'rule-item#container div[tip]'
+
+
         return client
-            .moveToElement('#fill.rule', 15, 15)
-            .waitForElementVisible("#fill.rule div[tip]", 1000)
+            .moveToElement(hoverable, 1, 1)
+            .waitForElementVisible(summaryHolder, 1000, "Tooltip appeared")
             // Rule level summary
-            .assert.containsText("#fill.rule div[tip]", "ENCHER RECIPIENTE", "Rule Name")
-            .assert.containsText("#fill.rule div[tip]", "Adquirido no nível 1", "Rule Required Level")
-            // When next level will be obtained
-            .assert.containsText("#fill.rule div[tip]", "Adquirido no nível 1", "Current Rule Required Level")
-            .assert.containsText("#fill.rule div[tip]", "Requer nível 5", "Last Rule Required Level")
-            .assert.containsText("#fill.rule div[tip]", "Requer nível 3", "Next Rule Required Level")
+            .assert.containsText(summaryHolder, "Você pode ter apenas um Copo de volume de 250 ml", "Current rule level summary was visible.")
+
+            // TODO Test next level rule summary
             .end();
     }
 };
