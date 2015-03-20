@@ -4,30 +4,45 @@ linque-path
    if isStoryEvent
      linque-dot 
        core-overlay( autoCloseDisabled backdrop )
-         h2 #{heading}
+         h2 
+           core-icon.dot( icon="dot:storyEvent" )
+           span #{heading}
          div #{body}
          button( core-overlay-toggle ) Continuar 
+         
    else if isWarning
      linque-dot 
        core-overlay( autoCloseDisabled backdrop )
-         h2 #{heading}
+         h2 
+           core-icon.decision( icon="decision:warning" )
+           span #{heading}
          div #{body}
          button( core-overlay-toggle ) Entendi 
+         
    else if isTip
      linque-dot( vivid )
        core-overlay( autoCloseDisabled backdrop )
-         h2 #{heading}
+         h2 
+           core-icon.dot( icon="dot:tip" )
+           span #{heading}
          div #{body}
          button( core-overlay-toggle ) Entendi 
+         
    else if isDecisionPoint
-     linque-dot 
+     linque-dot( free )
+       div( center horizontal center-justified layout )
+         core-icon.decision( icon="decision:decision" )
        core-overlay( autoCloseDisabled backdrop )
-         h2 #{heading}
+         h2 
+           core-icon.decision( icon="decision:decision" )
+           span #{heading}
          div #{body}
+         
    else if isUser
      linque-dot( free )
        div( center )
          +user
+         
    else
      linque-dot
        
