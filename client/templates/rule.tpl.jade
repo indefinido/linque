@@ -1,6 +1,8 @@
 
 rule-item.rule( id="#{id}" icon="water:#{id}_#{level}" $dyn=attrs )
 
+  .qualifier #{currentLevel.qualifier}
+
   div.rule-info( tip )
     span #{currentLevel.summary}
         
