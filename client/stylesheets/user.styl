@@ -1,57 +1,57 @@
 @import 'theme'
 
-for shadow in true false
-  user = shadow? 'html /deep/ .user' : '.user'
+// for shadow in true false
+//   user = shadow? 'html /deep/ .user' : '.user'
 
-  .user
+.user
 
-    .user-profile
-      rounded()
-      border 4px solid pathColor
-      height 168px
-      width 168px
+  .user-profile
+    rounded()
+    border 4px solid pathColor
+    height 168px
+    width 168px
 
-    .user-picture
-      rounded()
+  .user-picture
+    rounded()
 
-      border 4px solid #FFF
-    
-      height 160px
-      width 160px
-    
-    &.user-login
-    
-      &.user-signed-in
-        padding 15px
-        font-size 0.8em
-      
-      &.user-signed-out
-        background-color #0074b3
-
-      .pg-loading-logo
-        padding 1em
-
-      #login-buttons
-        margin-top 0.25em
-        padding 1em
-        background-color white
-        
-        a
-          font-size 1em
-          text-decoration none
-
-        .accounts-dialog
-          left -93px
-          
-        
-        
-      
-    
-    
-    
-  +mobile()
+    border 4px solid #FFF
   
-    {user}
-      .user-picture
-        height 80px
-        width 80px
+    height 160px
+    width 160px
+  
+  &.user-login
+  
+    &.user-signed-in
+      padding 15px
+      font-size 0.8em
+    
+    &.user-signed-out
+      background-color #0074b3
+
+    .pg-loading-logo
+      padding 1em
+
+    #login-buttons
+      margin-top 0.25em
+      padding 1em
+      background-color white
+      
+      a
+        font-size 1em
+        text-decoration none
+
+      .accounts-dialog
+        left -93px
+        
+      
+      
+    
+  
+  
+  
+// +mobile()
+//
+//   .user
+//     .user-picture
+//       height 80px
+//       width 80px
