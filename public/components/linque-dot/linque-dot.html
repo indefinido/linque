@@ -15,7 +15,7 @@
   @homepage http://indefinido.github.io/linque-dot
 -->
 
-<polymer-element name="linque-dot" on-click="clicked" attributes="opened">
+<polymer-element name="linque-dot" on-click="clicked" attributes="opened" on-core-overlay-close-completed="overlayClosed">
 
   <template>
     <style>
@@ -43,12 +43,11 @@
      }
      
      :host([vivid]) {
-       background-color: #EADC60;
+      background-color: #EADC60;
      }
 
     </style>
 
-    <!-- <div hidden?="{{! opened}}"> -->
     <content></content>
               
   </template>
@@ -57,18 +56,19 @@
   proto = {
     opened: false,
     attached: function () {
-      // TODO look for openable objects, not only dialogs
-      this.dialog = this.querySelector('core-overlay');
+      // TODO look for openable objects, not only overlays
+      this.overlay = this.querySelector('core-overlay');
     },
     openedChanged: function (old, value) {
-      this.dialog    && (this.dialog.opened    = value)
+      if (this.overlay && !this.overlay.opened && value) {
+        this.overlay.opened = true;
+      }
     },
     clicked: function () {
       this.opened = ! this.opened;
     }
   };
 
-  Polymer.mixin2(proto, Polymer.CoreFocusable);
   Polymer('linque-dot', proto);
   //]]>
   </script>
