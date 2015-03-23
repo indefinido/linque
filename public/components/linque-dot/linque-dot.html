@@ -60,18 +60,12 @@
       this.overlay = this.querySelector('core-overlay');
     },
     openedChanged: function (old, value) {
-      this.overlay    && (this.overlay.opened    = value)
+      if (this.overlay && !this.overlay.opened && value) {
+        this.overlay.opened = true;
+      }
     },
     clicked: function () {
       this.opened = ! this.opened;
-    },
-    // TODO check why overlay is not removing backdrop
-    overlayClosed: function (event) {
-      var backdrop, overlay = event.target;
-      if (overlay.backdrop) {
-        backdrop = document.querySelector('.core-overlay-backdrop');
-        backdrop.parentNode.removeChild(backdrop);
-      }
     }
   };
 
