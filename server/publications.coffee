@@ -18,17 +18,3 @@ Meteor.publish "rules", ->
 
   Rules.find {}, sort: {order: 1}
 
-
-# TODO remove: Waiting to make sure we will not use when user reachs a decision point
-Meteor.publish "skillLevelUps", () ->
-  self = @
-  initializing = true
-  
-  handle = Activities.find( userId: this.userId, type: "skillLevelUp").observeChanges
-    added: (id, fields) ->
-      if !initializing
-        self.added 'skillLevelUps', id, _.extend fields
-      
-  initializing = false
-  @ready()
-  @onStop -> handle.stop()

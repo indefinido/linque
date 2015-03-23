@@ -19,7 +19,7 @@ Template.pathway.helpers
     dots.unshift new Dot 'user'
     dots.unshift new Dot 'storyEvent', "Acontecimento misterioso na timeline"
     dots.unshift new Dot 'warning', "Você não pode comer sua garrafa!"
-    dots.unshift new Dot 'decisionPoint', "Essa não tem corpo de mensagem provavelmente"
+    dots.unshift new Dot 'decisionPoint', "Essa não tem corpo de mensagem provavelmente. UPDATE: Teeeeeemmmmmmm :D"
     dots.unshift new Dot 'tip', "Você deveria fazer sua garrafa durar um dia"
 
     i = 10
