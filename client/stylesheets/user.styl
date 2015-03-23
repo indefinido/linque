@@ -12,13 +12,19 @@
     width 168px
 
   .user-picture
+  .user-circle
     rounded()
 
     border 4px solid #FFF
   
     height 160px
     width 160px
-  
+    
+  &.vivid
+    .user-picture
+    .user-circle
+      border-color vividColor
+    
   &.user-login
   
     &.user-signed-in

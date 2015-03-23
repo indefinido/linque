@@ -1,0 +1,21 @@
+core-animation#blink( duration="1200" iterations="Infinity" easing="ease-out" )
+  core-animation-keyframe( offset="0" )
+    core-animation-prop( name="opacity" value="1" )
+  core-animation-keyframe( offset="0.3" )
+    core-animation-prop( name="opacity" value="0.1" )
+  core-animation-keyframe( offset="0.8" )
+    core-animation-prop( name="opacity" value="1" )
+  core-animation-keyframe( offset="1" )
+    core-animation-prop( name="opacity" value="1" )
+
+
+core-animation#pulse( duration="1200" iterations="Infinity" easing="ease-out" )
+  core-animation-keyframe
+    core-animation-prop( name="transform" value="scale(1)" )
+    core-animation-prop( name="opacity" value="1" )
+  core-animation-keyframe( offset="0.9" )
+    core-animation-prop( name="transform" value="scale(1.2)" )
+    core-animation-prop( name="opacity" value="0" )
+  core-animation-keyframe( offset="1" )
+    core-animation-prop( name="transform" value="scale(1.2)" )
+    core-animation-prop( name="opacity" value="0" )

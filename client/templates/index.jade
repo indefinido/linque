@@ -7,3 +7,15 @@ head
   link( rel="apple-touch-icon-precomposed" sizes="76x76"   href="/images/apple-touch-icon-76x76-precomposed.png"   )
   link( rel="apple-touch-icon-precomposed"                 href="/images/apple-touch-icon-60x60-precomposed.png"   )
   link( rel="shortcut icon" href="/assets/default/apple-touch-icon-60x60-precomposed.png" )
+  
+  title Linque
+
+body
+
+  unless loaded
+    +loading
+
+  if currentUser
+    +dashboard
+  else
+    +signIn
