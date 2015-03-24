@@ -1,18 +1,22 @@
 meta =
-  insertActivity: (user) ->
+  insertActivity: (user, data) ->
     # Record skill usage
     Activities.insert
       userId: user._id
       createdAt: new Date
       type: 'track'
-      data: 1
+      data: data
+      
+  logTrack: (user) ->
+    @insertActivity user, position: user.position
+    
         
 
 Meteor.methods
   track: () ->
     user  = Meteor.user()
 
-    # meta.insertActivity(user)
+    meta.logTrack user
 
     # update user position
     Meteor.users.update { _id: user._id },

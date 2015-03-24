@@ -1,4 +1,3 @@
-Meteor.subscribe "user"
 Meteor.subscribe "rules"
 
 ## Helpers

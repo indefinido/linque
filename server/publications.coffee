@@ -1,13 +1,14 @@
-Meteor.publish "user", ->
+Meteor.publish null, ->
   return @ready() unless @userId
 
   Meteor.users.find { _id: @userId },
     fields:
       rules: 1
+      position: 1
 
       # We use profile picture
       profile: 1
-
+      
       # To send email for olark
       "services.google": 1
       "services.facebook.email": 1

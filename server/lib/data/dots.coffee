@@ -6,7 +6,11 @@
     type: 'storyEvent'
     body: 'Sua jornada começa aqui'
   ,
-    _id: 200
+    _id: 5
+    type: 'decisionPoint'
+    body: 'Hora de decidir!'
+  ,
+    _id: 10
     type: 'storyEvent'
     body: 'Sua jornada termina aqui'
 ]
