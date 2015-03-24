@@ -6,6 +6,11 @@
     type: 'storyEvent'
     body: 'Sua jornada começa aqui'
   ,
+    _id: 2
+    type: 'tip'
+    title: 'Dica da galere!'
+    body: 'Essa é a dica. Dica da dica.'
+  ,
     _id: 5
     type: 'decisionPoint'
     body: 'Hora de decidir!'

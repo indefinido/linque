@@ -6,7 +6,7 @@ linque-path
        core-overlay.console( autoCloseDisabled backdrop )
          h2.console-title
            core-icon.icon-dot( icon="dot:storyEvent" )
-           span #{heading}
+           span #{title}
          div.console-content #{body}
          div( horizontal end-justified layout )
            paper-button( core-overlay-toggle ) Continuar
@@ -16,7 +16,7 @@ linque-path
        core-overlay.console( autoCloseDisabled backdrop )
          h2.console-title
            core-icon.icon-decision( icon="decision:warning" )
-           span #{heading}
+           span #{title}
          div.console-content #{body}
          div( horizontal end-justified layout )
            paper-button( core-overlay-toggle ) Entendi 
@@ -26,8 +26,7 @@ linque-path
        core-overlay.console( autoCloseDisabled backdrop vertical layout )
          h2.console-title
            core-icon.icon-dot( icon="dot:tip" )
-           span.console-title-   Dica:
-           span #{heading}
+           span.console-title Dica: #{title}
          div.console-content #{body}
          div( horizontal end-justified layout )
            paper-button( core-overlay-toggle ) Entendi 
@@ -39,7 +38,7 @@ linque-path
        core-overlay.console( autoCloseDisabled backdrop )
          h2.console-title
            core-icon.icon-decision( icon="decision:decision" )
-           span #{heading}
+           span #{title}
          div.console-content 
            div #{body}
            br
