@@ -3,7 +3,7 @@ Meteor.startup ->
   Accounts.onCreateUser (options, user) ->
 
     # default values
-    user.position      = 0
+    user.position      = 1
     user.rules         = {}
     user.profile     ||= {}
     user.services    ||= {}

@@ -1,31 +1,29 @@
-class Dot
-  
-  constructor: (type = 'empty', @body, @heading) ->
-    @setType type
-    @heading ||= "#{@type} Dot"
+Meteor.subscribe 'dots'
 
-  setType: (type) ->
-    @[$.camelCase 'is-' + type] = true
-    @type = type
-
+dot =
+  empty:
+    type: 'empty'
+    isEmpty: true
 
 Template.pathway.helpers
   dots: ->
+    dots     = Dots.find().fetch()
+    i        = dots.length - 1
+    path     = []
 
-    dots = []
+    previous = dots.shift()
+    path.push previous
     
-    dots.unshift new Dot for i in [1..50]
-    
-    dots.unshift new Dot 'user'
-    dots.unshift new Dot 'storyEvent', "Acontecimento misterioso na timeline"
-    dots.unshift new Dot 'warning', "Você não pode comer sua garrafa!"
-    dots.unshift new Dot 'decisionPoint', "Essa não tem corpo de mensagem provavelmente. UPDATE: Teeeeeemmmmmmm :D"
-    dots.unshift new Dot 'tip', "Você deveria fazer sua garrafa durar um dia"
-
-    i = 10
     while (i--)
-      dot = new Dot
-      dot.setType 'tip' if i % 7 == 0
-      dots.unshift dot
+      next  = dots.shift()
+      empty = next.position - previous.position
+
+      while (empty--)
+        path.push dot.empty
       
-    dots
+      path.push next
+ 
+
+    # TODO implement path construction in the write order
+    path.reverse()
+    path
