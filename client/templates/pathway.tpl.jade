@@ -2,7 +2,7 @@ linque-path
   each dots
   
    if isStoryEvent
-     linque-dot 
+     linque-dot( completed = completed ) 
        core-overlay.console( autoCloseDisabled backdrop )
          h2.console-title
            core-icon.icon-dot( icon="dot:storyEvent" )
@@ -12,7 +12,7 @@ linque-path
            paper-button( core-overlay-toggle ) Continuar
          
    else if isWarning
-     linque-dot 
+     linque-dot( completed = completed ) 
        core-overlay.console( autoCloseDisabled backdrop )
          h2.console-title
            core-icon.icon-decision( icon="decision:warning" )
@@ -22,7 +22,7 @@ linque-path
            paper-button( core-overlay-toggle ) Entendi 
          
    else if isTip
-     linque-dot( vivid )
+     linque-dot( vivid completed = completed )
        core-overlay.console( autoCloseDisabled backdrop vertical layout )
          h2.console-title
            core-icon.icon-dot( icon="dot:tip" )
@@ -32,7 +32,7 @@ linque-path
            paper-button( core-overlay-toggle ) Entendi 
          
    else if isDecisionPoint
-     linque-dot( free )
+     linque-dot( free completed = completed )
        div( center horizontal center-justified layout )
          core-icon.icon-decision( icon="decision:decision" )
        core-overlay.console( autoCloseDisabled backdrop )
@@ -59,6 +59,6 @@ linque-path
                    core-icon( id="icon" icon="water:fill_2" )
                    span 2x/dia
    else
-     linque-dot
+     linque-dot( completed = completed )
 
 //- +character

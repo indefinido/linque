@@ -6,7 +6,7 @@ Meteor.publish null, ->
       rules: 1
       position: 1
 
-      # We use profile picture
+      # We use profile picture, and profile name
       profile: 1
       
       # To send email for olark
@@ -22,10 +22,10 @@ Meteor.publish "movement", ->
 Meteor.publish "rules", ->
   return @ready() unless @userId
 
-  Rules.find {}, sort: {order: 1}
+  Rules.find {}, sort: { order: 1 }
 
 Meteor.publish "dots", ->
   return @ready() unless @userId
 
-  Dots.find {}, sort: {position: 1}
+  Dots.find {}, sort: { _id: 1 }
 
