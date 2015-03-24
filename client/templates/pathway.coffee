@@ -45,8 +45,10 @@ dot =
 
 Template.pathway.helpers
   dots: ->
+    user     = Meteor.user()
     dots     = Dots.find({}, sort: { _id: 1 }).fetch()
     i        = dots.length - 1
+    j        = 1
     path     = []
 
     previous = dots.shift()
@@ -57,9 +59,13 @@ Template.pathway.helpers
       empty = next.position - previous.position
 
       while (--empty)
-        path.push _.extend {}, dot.empty, _id: "empty-#{i}-#{empty}"
+        path.push _.extend {}, dot.empty, 
+          _id      : "empty-#{i}-#{empty}"
+          completed: user.position >= j
+        j++
 
       path.push next
+      j++
 
 
     # TODO implement path construction in the write order
