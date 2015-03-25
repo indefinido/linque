@@ -12,7 +12,7 @@
     body: 'Essa é a dica. Dica da dica.'
   ,
     _id: 5
-    type: 'decisionPoint'
+    type: 'decision'
     body: 'Hora de decidir!'
   ,
     _id: 10

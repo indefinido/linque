@@ -7,25 +7,25 @@ module.exports = {
 
     "User walks on pathway": function(client) {
         return client
-            .assert.elementPresent('linque-dot:last-child .user')
+            .assert.elementPresent('linque-dot:last-child .user', 'User avatar inside first point.')
             .moveTo('.user')
             .click('track-button')
-            .assert.elementPresent('linque-dot:nth-last-child(2) .user')
+            .waitForElementPresent('linque-dot:nth-last-child(2) .user', 2000, 'User avatar moved to second point.')
             .end()
     },
 
     "User sees feedback of tracking": function(client) {
         return client
-            .assert.elementPresent('linque-dot:last-child .user')
+            .assert.elementPresent('linque-dot:last-child .user', 'User on first dot.')
             .moveTo('.user')
             .click('track-button')
 
-        // Feedback is created
-            .assert.elementPresent('linque-dot[completed]:last-child(1)')
+            .waitForElementPresent('linque-dot[completed]:nth-last-child(1)', 2000, 'First completed dot created.')
 
-        // Feedback is preserved
             .url("http://127.0.0.1:3000")
-            .assert.elementPresent('linque-dot[completed]:last-child(1)')
+            .waitForSplash()
+
+            .waitForElementPresent('linque-dot[completed]:nth-last-child(1)', 2000, 'First completed dot persisted.')
             .end()
     }
 };

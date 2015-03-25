@@ -5,24 +5,26 @@ module.exports = {
             .waitForSplash()
             .login()
     },
-    "User sees feedback of leveling up": function(client) {
-        var levelUpDialog      = "core-overlay-layer ::shadow .dialog.dialog-levelup",
-            ruleLevelUpDialog = "core-overlay-layer ::shadow .dialog.dialog-rule-levelup";
-
+    "User sees upcoming Decision dot in path": function(client) {
         return client
-            .level(1)
-            .click("#fill.rule")
+            .walkUntilDot('decision', function (dot) {
+                var currentDot = dot.selector();
 
-            .waitForElementVisible(levelUpDialog, 3000, "Level up dialog was visible.")
-            .click(levelUpDialog + " paper-button")
+                client
+                    .waitForElementVisible(currentDot + 'core-overlay'            , 2000, 'Current dot overlay opened.')
+                    .waitForElementVisible(currentDot + '[icon="dot:decision"]'   , 2000, 'Overlay of type Decision detected.')
+                    .click(currentDot + 'core-overlay paper-button')
+                    .waitForElementNotVisible(currentDot + 'core-overlay'         , 2000, 'Current dot overlay closed.')
+                    .end()
+            });
 
-            .waitForElementVisible(ruleLevelUpDialog, 5000, "Skill level up dialog was visible.")
-            .assert.containsText(ruleLevelUpDialog, 'RECEBER GATILHO', "Dialog contains 'RECEBER GATILHO' ")
-            .click(ruleLevelUpDialog + " paper-button")
-            .waitForElementNotVisible(ruleLevelUpDialog, 5000, "Skill level up dialog was closed.")
-
-            .waitForElementVisible(ruleLevelUpDialog, 5000, "Second rule level up dialog was displayed.")
-            .assert.containsText(ruleLevelUpDialog, 'BEBER ÁGUA', "Dialog contains 'BEBER ÁGUA'")
+    },
+    "User is prompted to make a decision in a pre-defined Dot in the path": function(client) {
+        return client
+            .end();
+    },
+    "User sees feedback of leveling up Rule": function(client) {
+        return client
             .end();
     }
 };

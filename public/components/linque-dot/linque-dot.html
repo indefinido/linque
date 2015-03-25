@@ -14,8 +14,7 @@
   @status alpha
   @homepage http://indefinido.github.io/linque-dot
 -->
-
-<polymer-element name="linque-dot" on-click="clicked" attributes="opened" on-core-overlay-close-completed="overlayClosed">
+<polymer-element name="linque-dot" on-click="clicked" attributes="opened free vivid completed" on-core-overlay-close-completed="overlayClosed">
 
   <template>
     <style>
@@ -54,7 +53,13 @@
   <script>
   //<![CDATA[
   proto = {
+    // TODO migrate these attributes to classes
+    completed: false,
+    free: false,
+    vivid: false,
+
     opened: false,
+
     attached: function () {
       // TODO look for openable objects, not only overlays
       this.overlay = this.querySelector('core-overlay');

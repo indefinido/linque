@@ -1,21 +1,27 @@
 meta =
-  insertActivity: (user, data) ->
+  insertActivity: (user, type, data) ->
     # Record skill usage
     Activities.insert
       userId: user._id
       createdAt: new Date
-      type: 'track'
+      type: type
       data: data
       
-  logTrack: (user) ->
-    @insertActivity user, position: user.position
+  logTrack: (user, position) ->
+    @insertActivity user, 'track', position: position
+
+  logDecision: (user, id) ->
+    @insertActivity user, 'decision', rule: id
+
+  analytics: (entity, action, data) ->
+    return unless Meteor.isClient && Meteor.env != 'development'
+    GAnalytics.event 
+
 
 
 Meteor.methods
   track: ->
     user     = Meteor.user()
-
-    meta.logTrack user
     position = user.position
 
     # update user position
@@ -23,9 +29,19 @@ Meteor.methods
       $inc:
         position: 1
 
-    # update user variable
-    user = Meteor.user()
+    meta.logTrack user, position
+    meta.analytics 'Routine', 'Track', "position: #{position}"
+      
+  decide: (id) ->
+    user      = Meteor.user()
 
-    # TODO move to a analytics special place
-    if Meteor.isClient && Meteor.env != 'development'
-      GAnalytics.event 'Trigger', 'Register', "position: #{position}"
+
+    # update user rule level
+    operation = $inc: {}
+    operation.$inc["rules.#{id}.level"] = 1
+    Meteor.users.update { _id: user._id }, operation
+
+    # log user decision
+    meta.logDecision user, id
+    meta.analytics 'Decision', 'Rule', "id: #{id}, level: #{user.rules[id].level}"
+    

@@ -31,7 +31,7 @@ linque-path
          div( horizontal end-justified layout )
            paper-button( core-overlay-toggle ) Entendi 
          
-   else if isDecisionPoint
+   else if isDecision
      linque-dot( free completed = completed )
        div( center horizontal center-justified layout )
          core-icon.icon-decision( icon="decision:decision" )
@@ -43,22 +43,19 @@ linque-path
            div #{body}
            br
            div.decision( horizontal around-justified layout )
-             div( vertical layout )
-               div( horizontal center-justified layout )
-                 paper-button.decision-rule( disabled ) 250ml
-               div( horizontal center-justified layout )
-                 paper-button.decision-rule.decision-rule-next() 
-                   core-icon( id="icon" icon="water:container_2" )
-                   span 500ml
-             div( horizontal center layout ) ou
-             div( vertical layout )
-               div( horizontal center-justified layout )
-                 paper-button.decision-rule( disabled ) 1x/dia
-               div( horizontal center-justified layout )
-                 paper-button.decision-rule.decision-rule-next() 
-                   core-icon( id="icon" icon="water:fill_2" )
-                   span 2x/dia
+             each options
+               div( vertical layout )
+                 div( horizontal center-justified layout )
+                   paper-button.decision-rule( disabled ) #{current.qualifier}
+                     
+                 div( horizontal center-justified layout )
+                   paper-button.decision-rule.decision-rule-next
+                     core-icon( id="icon" icon="water:#{id}_#{next.number}" )
+                     span #{next.qualifier}
+                         
+               if splited
+                 div( horizontal center layout ) ou
+                 
+                 
    else
      linque-dot( completed = completed )
-
-//- +character
