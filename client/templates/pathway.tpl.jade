@@ -1,11 +1,11 @@
 linque-path
   each dots
   
-   if isStoryEvent
+   if isEvent
      linque-dot( completed = completed ) 
        core-overlay.console( autoCloseDisabled backdrop )
          h2.console-title
-           core-icon.icon-dot( icon="dot:storyEvent" )
+           core-icon.icon-dot( icon="dot:event" )
            span #{title}
          div.console-content #{body}
          div( horizontal end-justified layout )

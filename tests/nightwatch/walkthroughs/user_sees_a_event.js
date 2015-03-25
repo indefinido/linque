@@ -8,7 +8,7 @@ module.exports = {
     "A message to motivate or guide decisions that shows up in a pre-defined Dot in the path": function(client) {
 
         return client
-            .walkUntilDot('storyEvent', function (dot) {
+            .walkUntilDot('event', function (dot) {
                 var currentDot = dot.selector();
 
                 client

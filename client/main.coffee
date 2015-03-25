@@ -4,7 +4,7 @@ Meteor.startup ->
     GAnalytics.pageview() unless environment == 'development'
 
     
-  Tracker.autorun ->
+  Tracker.autorun (computation) ->
     user = Meteor.user()
     
     if user
@@ -24,3 +24,7 @@ Meteor.startup ->
         unless details.emailAddress == emailAddress 
           olark 'api.visitor.updateEmailAddress',
           emailAddress: emailAddress
+
+      
+      computation.stop()
+      

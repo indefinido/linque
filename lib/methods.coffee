@@ -13,9 +13,9 @@ meta =
   logDecision: (user, id) ->
     @insertActivity user, 'decision', rule: id
 
-  analytics: (entity, action, data) ->
+  analytics: (category, action, label) ->
     return unless Meteor.isClient && Meteor.env != 'development'
-    GAnalytics.event 
+    GAnalytics.event category, action, label
 
 
 

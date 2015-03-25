@@ -1,48 +1,29 @@
-var extend = require('util')._extend,
-    domable = {
-        selector: function (children) {
-            return this.selector = 'linque-dot:nth-last-child(' + this.position + ') ' + (children || '');
-        }
-    },
-    dot = {
-        dots: null,
-        findByType: function (type) {
-            var dot = null, i = this.dots.length;
-
-            while (i--) {
-                dot = extend(this.dots[i], domable);
-                if (dot.type === type) break;
-            }
-
-            return dot;
-        },
-        findByPosition: function (position) {
-            var dot = null, i = this.dots.length;
-
-            while (i--) {
-                dot = extend(this.dots[i], domable);
-                if (dot.position === position) break;
-            }
-
-            return dot;
-        }
-    };
-
 exports.command = function (type, callback /* , position */) {
+    var client = this;
     return this.dots(function () {
-        var i = undefined, j = 0, typed = undefined, positionated = undefined;
-        dot.dots = this.globals.dots;
+        var i = undefined, j = 1, typed = undefined, positionated = undefined,
+            dots = client.globals.dots;
 
-        typed = dot.findByType(type);
+        typed = dots.findByType(type);
 
         i = typed.position;
+
         while (--i) {
-            this.click('track-button');
-            positionated = dot.findByPosition(j++);
-            if (positionated) {
-                this.click(positionated.selector('core-overlay paper-button'));
-            }
+            client.click('track-button', function () {
+                positionated = dots.findByPosition(j++);
+                if (positionated)
+                  switch (positionated.type) {
+                    case 'decision':
+                      client.pause(500).execute('$("' + positionated.selector('core-overlay:visible paper-button:not([disabled]):first') + '").click()')
+                      break;
+                    default:
+                      client.click(positionated.selector('core-overlay paper-button:not([disabled])'));
+                      break;
+                  }
+            });
         }
+
+        client.click('track-button');
 
         callback && callback(typed);
     });
