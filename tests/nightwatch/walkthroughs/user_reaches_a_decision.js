@@ -7,13 +7,13 @@ module.exports = {
             .waitForSplash()
             .login()
     },
-    "User sees upcoming Decision in path": function(client) {
+    "User sees warning Decision in path": function(client) {
         return client
             .dots(function () {
                 var dots = client.globals.dots, decision = dots.findByType('decision');
 
                 client
-                    .assert.visible(decision.selector('.icon-decision'))
+                    .assert.visible(decision.selector(' .icon-decision'), 'Decision icon is displayed on path')
                     .end()
             });
 
@@ -24,11 +24,11 @@ module.exports = {
                 var currentDot = dot.selector();
 
                 client
-                    .waitForElementVisible(currentDot + 'core-overlay'               , 2000, 'Current dot overlay opened.')
-                    .waitForElementVisible(currentDot + '[icon="decision:decision"]' , 2000, 'Overlay of type Decision detected.')
-                    .pause(200)
-                    .execute('$("' + dot.selector('core-overlay:visible paper-button:not([disabled]):first') + '").click()')
-                    .waitForElementNotVisible(currentDot + 'core-overlay'            , 2000, 'Current dot overlay closed.')
+                    .waitForElementVisible(currentDot + ' core-overlay'               , 2000, 'Current dot overlay opened.')
+                    .waitForElementVisible(currentDot + ' [icon="decision:decision"]' , 2000, 'Overlay of type Decision detected.')
+                    .pause(500)
+                    .execute('$("' + dot.selector(' core-overlay:visible paper-button:not([disabled]):first') + '").click()')
+                    .waitForElementNotVisible(currentDot + ' core-overlay'            , 2000, 'Current dot overlay closed.')
                     .end()
             });
     },
@@ -37,10 +37,10 @@ module.exports = {
         return client
             .walkUntilDot('decision', function (dot) {
                 var currentDot = dot.selector();
-                console.log(Logger.colors.yellow('! Pending: Wainting for animations implementation.'))
+                console.log(Logger.colors.yellow('! Pending: Wainting for animations implementation.'));
 
                 client
-                    .end()
+                    .end();
             });
     }
 };

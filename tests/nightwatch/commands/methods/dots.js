@@ -1,9 +1,9 @@
 var extend = require('util')._extend,
-    Logger = require('nightwatch/lib/util/logger.js'),<
+    Logger = require('nightwatch/lib/util/logger.js'),
 
     domable = {
         selector: function (children) {
-            return 'linque-dot:nth-last-child(' + this.position + ') ' + (children || '');
+            return 'linque-dot:nth-last-child(' + this.position + ')' + (children || '');
         }
     },
 

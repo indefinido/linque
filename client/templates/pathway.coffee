@@ -1,60 +1,78 @@
 Meteor.subscribe 'dots'
+{animator} = share
+
+domable =
+  element: ->
+    holder  = $ "linque-path > linque-dot:nth-last-child(#{@dot.position})"
+    console.error("moverable.move: Target dot not found with position: #{@dot.position}}") unless holder.length
+    @holder = holder.get(0)
 
 moverable =
-  move: (userDot) ->
-    @remove() if @userDot
-    @userDot = userDot
+  move: (@dot) ->
+    @remove() if @holder
+    opener.target = @element()
+    
     @positionate()
   
+  arrive: ->
+    if @freed = not @holder.getAttribute('free')?
+      @holder.setAttribute 'free', true
+
+    opener.open @dot
+    
   # remove user from current dot
   remove: ->
     Blaze.remove @userView
     
-    @userDot.removeAttribute 'free'   if @freed
-    @userDot.removeAttribute 'opened' if @opened
-
-  arrive: ->
-    if @freed = not @userDot.getAttribute('free')?
-      @userDot.setAttribute 'free', true
-
-    if @opened = not @userDot.getAttribute('opened')?
-      @userDot.setAttribute 'opened', true
-        
+    @holder.removeAttribute 'free'   if @freed
+    opener.close @dot
+    
   # put user in position
   positionate: ->
     @arrive()
-    @userView = Blaze.render Template.character, @userDot
+    @userView = Blaze.render Template.character, @holder
 
- 
+opener =
+  target: null
+  open: (dot) ->
+    switch dot.type
+      when 'warning'
+        @target.setAttribute 'opened', true
+        holder = domable.element Dots.find(type: 'decision', _id: {$gt: dot.position})[0]
+        animator.blink target, true
+      else
+        @target.setAttribute 'opened', true
+        
+        
+  
+  close: (dot) ->
+    switch dot.type
+      when 'warning'
+        @target.setAttribute 'opened', false
+        holder = domable.element Dots.find(type: 'decision', _id: {$gt: dot.position})[0]
+        animator.blink target, false
+      else
+        @target.setAttribute 'opened', false
+    
+emptyDotable =
+  _id: null
+  type: 'empty'
+  isEmpty: true
+  completed: false
+
 Template.pathway.onRendered ->
-  # First mover
-  mover = Object.create moverable,
-    move: value: ->
-      moverable.move.apply @, arguments
-      
-      # TODO forward own properties except functions
-      moverable.userView = @userView
-      moverable.userDot  = @userDot
-
-      # Overrides mover after first movement. Maybe it is not his responsibility
-      # to execute the dot action?
-      mover = moverable
-      
-    # put user in position
-    arrive: value: ->
-      if @freed = not @userDot.getAttribute('free')?
-        @userDot.setAttribute 'free', true
+  mover    = $.extend moverable, domable
   
   @autorun ->
     return unless user = Meteor.user()
-    dot = $ "linque-path > linque-dot:nth-last-child(#{user.position})"
-    mover.move dot.get(0)
 
+    # Search for user current position
+    dot = Dots.find(_id: user.position).fetch()[0]
 
-dot =
-  empty:
-    type: 'empty'
-    isEmpty: true
+    # User is not in any actionable dot, use an empty dot in his current position
+    dot = _.extend position: user.position, emptyDotable unless dot
+    
+    mover.move dot
 
 Template.pathway.helpers
   dots: ->
@@ -76,7 +94,7 @@ Template.pathway.helpers
 
       
       while (--empty)
-        path.push _.extend {}, dot.empty, 
+        path.push _.extend {}, emptyDotable, 
           _id      : "empty-#{i}-#{empty}"
           completed: userPosition > j
           
@@ -118,3 +136,6 @@ Template.pathway.events
       # TODO check why linque-dot.opened = false is not working 
       $(event.target).parents('core-overlay').get(0).close()
     , 10
+
+  'core-overlay-close-completed core-overlay': ->
+  'core-overlay-open-completed core-overlay': ->

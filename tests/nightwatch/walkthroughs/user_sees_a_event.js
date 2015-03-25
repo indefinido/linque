@@ -12,10 +12,10 @@ module.exports = {
                 var currentDot = dot.selector();
 
                 client
-                    .waitForElementVisible(currentDot + 'core-overlay'            , 2000, 'Current dot overlay opened.')
-                    .waitForElementVisible(currentDot + '[icon="dot:storyEvent"]' , 2000, 'Overlay of type Story Event detected.')
-                    .click(currentDot + 'core-overlay paper-button')
-                    .waitForElementNotVisible(currentDot + 'core-overlay'         , 2000, 'Current dot overlay closed.')
+                    .waitForElementVisible(currentDot + ' core-overlay'       , 2000, 'Current dot overlay opened.')
+                    .waitForElementVisible(currentDot + ' [icon="dot:event"]' , 2000, 'Overlay of type Event detected.')
+                    .click(currentDot + ' core-overlay paper-button')
+                    .waitForElementNotVisible(currentDot + ' core-overlay'    , 2000, 'Current dot overlay closed.')
                     .end()
             })
 
