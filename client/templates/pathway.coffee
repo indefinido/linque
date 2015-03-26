@@ -94,6 +94,7 @@ Template.pathway.onRendered ->
       if @freed = not @holder.getAttribute('free')?
         @holder.setAttribute 'free', true
         @holder.classList.add 'current'
+      
 
   user = Meteor.user()
   

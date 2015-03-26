@@ -27,5 +27,16 @@ share.animator =
       blink.target.classList.toggle 'core-animation-target', false
       blink.target = null
       blink.cancel()
-
+      
+  presentTo: (target) ->
+    container = $('html, body')
+    container.scrollTop(0)
+    container.animate
+      scrollTop: document.body.scrollHeight
+      , 1000
+      , ->
+        container.delay(700).animate
+          scrollTop: $(target).offset().top - $(window).height() + $(target).height()*1.5
+          , 1000
+    
 Template.animations.onRendered share.animator.initialize
