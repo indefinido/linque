@@ -104,7 +104,7 @@
     body: 'O que você prefere? (1) Trocar seu recipiente por outro maior; ou (2) Poder encher seu recipiente atual mais vezes.'
   ,
     _id: 661
-    type: 'event'
+    type: 'final'
     body: 'Sua jornada termina aqui'
 
   # ,

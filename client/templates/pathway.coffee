@@ -53,6 +53,9 @@ opener =
         # TODO simplify query, maybe store next dot on current dot?
         holder = domable.element Dots.find(type: 'decision', _id: {$gt: dot.position}).fetch()[0]
         animator.blink holder, true
+      when 'decision'
+        @target.setAttribute 'opened', true
+        animator.pulse $('.user-circle').get(0), true
       else
         @target.setAttribute 'opened', true
         
@@ -66,6 +69,9 @@ opener =
         # TODO simplify query, maybe store next dot on current dot?
         holder = domable.element Dots.find(type: 'decision', _id: {$gt: dot.position}).fetch()[0]
         animator.blink holder, false
+      when 'decision'
+        @target.setAttribute 'opened', false
+        animator.pulse $('.user-circle').get(0), false
       else
         @target.setAttribute 'opened', false
     

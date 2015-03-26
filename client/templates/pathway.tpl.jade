@@ -61,6 +61,10 @@ linque-path
                if splited
                  div( horizontal center layout ) ou
                  
-                 
+   else if isFinal
+     linque-dot.dot-final( free completed = completed )
+       div( center horizontal center-justified layout )              
+         img( src="/images/final-dot.png" )
+
    else
      linque-dot( completed = completed )
