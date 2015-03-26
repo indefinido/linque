@@ -26,28 +26,41 @@
       border-color vividColor
     
   &.user-login
-  
-    &.user-signed-in
-      padding 15px
-      font-size 0.8em
-    
-    &.user-signed-out
-      background-color #0074b3
 
     .pg-loading-logo
       padding 1em
 
     #login-buttons
-      margin-top 0.25em
-      padding 1em
-      background-color white
-      
       a
-        font-size 1em
         text-decoration none
-
       .accounts-dialog
         left -93px
+  
+    &.user-signed-in
+      font-size 0.8em
+
+      #login-buttons
+        a.login-link-text
+          color #FFF          
+        .accounts-dialog
+          left -143px
+          top -74px
+      
+    
+    &.user-signed-out
+      background-color transparent
+
+      #login-buttons
+        margin-top 0.25em
+        padding 1em
+        background-color white
+      
+        a
+          font-size 1em
+          text-decoration none
+
+        .accounts-dialog
+          left -93px
         
       
       
