@@ -4,7 +4,10 @@ Meteor.subscribe 'dots'
 domable =
   element: (dot = @dot) ->
     holder  = $ "linque-path > linque-dot:nth-last-child(#{dot.position})"
-    console.error("moverable.move: Target dot not found with position: #{dot.position}}") unless holder.length
+    unless holder.length
+      console.error("moverable.move: Target dot not found with position: #{dot.position}")
+      # debugger
+      
     @holder = holder.get(0)
 
 moverable =
@@ -20,6 +23,7 @@ moverable =
     @positionate()
   
   arrive: ->
+    debugger unless @holder
     if @freed = not @holder.getAttribute('free')?
       @holder.setAttribute 'free', true
       @holder.addClass 'current'
@@ -86,12 +90,15 @@ Template.pathway.onRendered ->
         userView : @userView
       
     arrive: ->
+      debugger unless @holder
       if @freed = not @holder.getAttribute('free')?
         @holder.setAttribute 'free', true
-        @holder.addClass 'current'
+        @holder.classList.add 'current'
+
+  user = Meteor.user()
   
   @autorun ->
-    return unless user = Meteor.user()
+    return unless user
 
     # Search for user current position
     dot = Dots.find(_id: user.position).fetch()[0]
@@ -99,6 +106,8 @@ Template.pathway.onRendered ->
     # User is not in any actionable dot, use an empty dot in his current position
     dot = _.extend position: user.position, emptyDotable unless dot
 
+    return unless domable.element dot
+    
     # TODO listen to only position changes in user
     if mover.dot?.position == user.position
       return console.warn 'Trying to move to the already positioned dot'

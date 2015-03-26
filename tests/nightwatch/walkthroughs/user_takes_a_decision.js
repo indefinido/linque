@@ -33,13 +33,27 @@ module.exports = {
             });
     },
     "User sees feedback of leveling up Rule": function(client) {
+        console.log(Logger.colors.yellow('! Pending: Wainting for animations implementation.'));
 
-        return client
+        client.end();
+        //return client
+        //    .walkUntilDot('decision', function (dot) {
+        //        var currentDot = dot.selector();
+
+        //        client
+        //            .end();
+        //    });
+    },
+    "User sees feedback of taken Decision": function(client) {
+        client
             .walkUntilDot('decision', function (dot) {
                 var currentDot = dot.selector();
-                console.log(Logger.colors.yellow('! Pending: Wainting for animations implementation.'));
 
                 client
+                    // Walk one more dot after taken decision
+                    // TODO remove when user walks automatically
+                    .click('track-button')
+                    .waitForElementPresent(dot.selector(' [icon="decision:decided"]'), 2000, 'Decision icon is marked as completed')
                     .end();
             });
     }
