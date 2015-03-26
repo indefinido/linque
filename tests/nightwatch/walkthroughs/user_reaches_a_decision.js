@@ -7,7 +7,7 @@ module.exports = {
             .waitForSplash()
             .login()
     },
-    "User sees warning Decision in path": function(client) {
+    "User sees upcoming Decision in path": function(client) {
         return client
             .dots(function () {
                 var dots = client.globals.dots, decision = dots.findByType('decision');
@@ -18,7 +18,7 @@ module.exports = {
             });
 
     },
-    "User is prompted to make a decision in a pre-defined Dot in the path": function(client) {
+    "User is prompted to make a decision in a pre-defined dot in the path": function(client) {
         return client
             .walkUntilDot('decision', function (dot) {
                 var currentDot = dot.selector();

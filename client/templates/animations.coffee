@@ -10,12 +10,22 @@ share.animator =
     
   pulse: (target, movement = true) ->
     {pulse}      = @animations
-    pulse.target = target
-    pulse[if movement then 'play' else 'cancel']()
+    if movement
+      pulse.target = target
+      pulse.play()
+    else
+      pulse.target.classList.toggle 'core-animation-target', false
+      pulse.target = null
+      pulse.cancel()
 
   blink: (target, movement = true) ->
     {blink}      = @animations
-    blink.target = target
-    blink[if movement then 'play' else 'cancel']()
+    if movement
+      blink.target = target
+      blink.play()
+    else
+      blink.target.classList.toggle 'core-animation-target', false
+      blink.target = null
+      blink.cancel()
 
 Template.animations.onRendered share.animator.initialize

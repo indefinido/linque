@@ -14,7 +14,7 @@
   @status alpha
   @homepage http://indefinido.github.io/linque-dot
 -->
-<polymer-element name="linque-dot" on-click="clicked" attributes="opened free vivid completed" on-core-overlay-close-completed="overlayClosed">
+<polymer-element name="linque-dot" on-click="clicked" attributes="opened free vivid completed">
 
   <template>
     <style>
@@ -65,12 +65,9 @@
       this.overlay = this.querySelector('core-overlay');
     },
     openedChanged: function (old, value) {
-      if (this.overlay && !this.overlay.opened && value) {
-        this.overlay.opened = true;
+      if (this.overlay && this.overlay.opened != value) {
+        this.overlay.opened = value;
       }
-    },
-    clicked: function () {
-      this.opened = ! this.opened;
     }
   };
 

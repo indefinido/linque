@@ -2,12 +2,17 @@ Meteor.subscribe 'dots'
 {animator} = share
 
 domable =
-  element: ->
-    holder  = $ "linque-path > linque-dot:nth-last-child(#{@dot.position})"
-    console.error("moverable.move: Target dot not found with position: #{@dot.position}}") unless holder.length
+  element: (dot = @dot) ->
+    holder  = $ "linque-path > linque-dot:nth-last-child(#{dot.position})"
+    console.error("moverable.move: Target dot not found with position: #{dot.position}}") unless holder.length
     @holder = holder.get(0)
 
 moverable =
+  dot: null
+  holder: null
+  freed: null
+  userView: null
+  
   move: (@dot) ->
     @remove() if @holder
     opener.target = @element()
@@ -24,8 +29,8 @@ moverable =
   remove: ->
     Blaze.remove @userView
     
-    @holder.removeAttribute 'free'   if @freed
-    opener.close @dot
+    @holder.removeAttribute 'free' if @freed
+
     
   # put user in position
   positionate: ->
@@ -38,8 +43,9 @@ opener =
     switch dot.type
       when 'warning'
         @target.setAttribute 'opened', true
-        holder = domable.element Dots.find(type: 'decision', _id: {$gt: dot.position})[0]
-        animator.blink target, true
+        # TODO simplify query, maybe store next dot on current dot?
+        holder = domable.element Dots.find(type: 'decision', _id: {$gt: dot.position}).fetch()[0]
+        animator.blink holder, true
       else
         @target.setAttribute 'opened', true
         
@@ -49,8 +55,9 @@ opener =
     switch dot.type
       when 'warning'
         @target.setAttribute 'opened', false
-        holder = domable.element Dots.find(type: 'decision', _id: {$gt: dot.position})[0]
-        animator.blink target, false
+        # TODO simplify query, maybe store next dot on current dot?
+        holder = domable.element Dots.find(type: 'decision', _id: {$gt: dot.position}).fetch()[0]
+        animator.blink holder, false
       else
         @target.setAttribute 'opened', false
     
@@ -61,7 +68,19 @@ emptyDotable =
   completed: false
 
 Template.pathway.onRendered ->
-  mover    = $.extend moverable, domable
+  mover    = $.extend {}, moverable, domable,
+    move: ->
+      moverable.move.apply @, arguments
+      
+      mover = $.extend {}, moverable, domable, 
+        dot      : @dot
+        holder   : @holder
+        freed    : @freed
+        userView : @userView
+      
+    arrive: ->
+      if @freed = not @holder.getAttribute('free')?
+        @holder.setAttribute 'free', true
   
   @autorun ->
     return unless user = Meteor.user()
@@ -71,7 +90,11 @@ Template.pathway.onRendered ->
 
     # User is not in any actionable dot, use an empty dot in his current position
     dot = _.extend position: user.position, emptyDotable unless dot
-    
+
+    # TODO listen to only position changes in user
+    if mover.dot?.position == user.position
+      return console.warn 'Trying to move to the already positioned dot'
+
     mover.move dot
 
 Template.pathway.helpers
@@ -122,20 +145,28 @@ Template.pathway.helpers
         level.number == rule.level || level.number == rule.level + 1
 
       # Update view with levels
-      options.push {id: id, current: levels.shift(), next: levels.shift()}
+      options.push
+        # Rule decision data
+        id: id
+        current: levels.shift()
+        next: levels.shift()
+
+        # Dot data
+        type: 'decision'
+        position: user.position
 
     options[0].splited = true
 
     options
       
 Template.pathway.events
-  # TODO Take advantage of event bubbling
-  'click paper-button.decision-rule-next': (event, template) ->
-    Meteor.call 'decide', this.id
-    _.defer =>
-      # TODO check why linque-dot.opened = false is not working 
-      $(event.target).parents('core-overlay').get(0).close()
-    , 10
+  # This method handles all modal closings. In all cases, except the decision
+  # modal the handler context is a dot. On decision modal the context is the
+  # rule option with some decision dot available data
+  'click core-overlay paper-button:not([disabled])': (event, template) ->
+    # Send rule id to compute user decision on decision overlays
+    Meteor.call 'decide', @id if @type == 'decision'
 
-  'core-overlay-close-completed core-overlay': ->
-  'core-overlay-open-completed core-overlay': ->
+    # Close decision overlay
+    opener.close @
+

@@ -9,13 +9,11 @@ module.exports = {
 
         return client
             .walkUntilDot('event', function (dot) {
-                var currentDot = dot.selector();
-
                 client
-                    .waitForElementVisible(currentDot + ' core-overlay'       , 2000, 'Current dot overlay opened.')
-                    .waitForElementVisible(currentDot + ' [icon="dot:event"]' , 2000, 'Overlay of type Event detected.')
-                    .click(currentDot + ' core-overlay paper-button')
-                    .waitForElementNotVisible(currentDot + ' core-overlay'    , 2000, 'Current dot overlay closed.')
+                    .waitForElementVisible(dot.selector(' core-overlay')       , 2000, 'Current dot overlay opened.')
+                    .waitForElementVisible(dot.selector(' [icon="dot:event"]') , 2000, 'Overlay of type Event detected.')
+                    .click(dot.selector(' core-overlay paper-button'))
+                    .waitForElementNotVisible(dot.selector(' core-overlay')    , 2000, 'Current dot overlay closed.')
                     .end()
             })
 

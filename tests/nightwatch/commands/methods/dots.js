@@ -8,8 +8,13 @@ var extend = require('util')._extend,
     },
 
     dotable = {
+        emptyDotable: {
+            _id: null,
+            type: 'empty',
+            isEmpty: true,
+            completed: false
+        },
         upgrade: function () {
-
             var dot = null, i = this.length;
 
             while (i--) {
@@ -20,9 +25,16 @@ var extend = require('util')._extend,
             var dot = null, i = this.length;
 
             while (i--) {
-                if (this[i].type === type) {
-                    dot = this[i];
-                    break;
+                // Accept only the dot with the smallest position and a walkable dot
+                if (this[i].type === type && this[i].position > 1) {
+
+                    if (dot) {
+                        if (this[i].position < dot.position) {
+                            dot = this[i]
+                        }
+                    } else {
+                        dot = this[i];
+                    }
                 }
             }
 
@@ -38,6 +50,15 @@ var extend = require('util')._extend,
                 }
             }
 
+
+            if (!dot) {
+                if (position > this[0].position && position <= this[this.length - 1].position) {
+                    dot = extend(extend({_id: position, position: position}, this.emptyDotable), domable);
+                } else {
+                    console.error(Logger.colors.red("✖  "), 'Dots: Can\'t walk to dot. Its outside of path or it is already there', position);
+                }
+            }
+
             return dot;
         }
     },
@@ -49,7 +70,7 @@ var extend = require('util')._extend,
             var model;
 
             if (!result.value) {
-                console.log(Logger.colors.yellow("!  ") + "Dots: Could not get dots from meteor client, will retry forever.");
+                console.log(Logger.colors.yellow("!  "), "Dots: Could not get dots from meteor client, will retry forever.");
 
                 dots.retry = true;
                 dots.get.call(this, dots.callback);

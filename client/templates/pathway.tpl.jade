@@ -1,7 +1,7 @@
 +animations
+
 linque-path
   each dots
-  
    if isEvent
      linque-dot( completed = completed ) 
        core-overlay.console( autoCloseDisabled backdrop )
@@ -10,7 +10,7 @@ linque-path
            span #{title}
          div.console-content #{body}
          div( horizontal end-justified layout )
-           paper-button( core-overlay-toggle ) Continuar
+           paper-button Continuar
          
    else if isWarning
      linque-dot( completed = completed ) 
@@ -20,7 +20,7 @@ linque-path
            span #{title}
          div.console-content #{body}
          div( horizontal end-justified layout )
-           paper-button( core-overlay-toggle ) Entendi 
+           paper-button Entendi 
          
    else if isTip
      linque-dot( vivid completed = completed )
@@ -30,7 +30,7 @@ linque-path
            span.console-title Dica: #{title}
          div.console-content #{body}
          div( horizontal end-justified layout )
-           paper-button( core-overlay-toggle ) Entendi 
+           paper-button Entendi 
          
    else if isDecision
      linque-dot( free completed = completed )
