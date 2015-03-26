@@ -35,7 +35,11 @@ linque-path
    else if isDecision
      linque-dot( free completed = completed )
        div( center horizontal center-justified layout )
-         core-icon.icon-decision( icon="decision:decision" )
+         if completed
+           core-icon.icon-decision( icon="decision:decided" )
+         else
+           core-icon.icon-decision( icon="decision:decision")
+           
        core-overlay.console( autoCloseDisabled backdrop )
          h2.console-title
            core-icon.icon-decision( icon="decision:decision" )

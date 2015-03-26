@@ -1,30 +1,30 @@
 Meteor.startup ->
   Meteor.call 'getEnvironment', (error, environment) ->
-    Meteor.env = environment
-    GAnalytics.pageview() unless environment == 'development'
+     Meteor.env = environment
+     integrations() unless computation.stopped
 
+  integrations = ->
+    return unless user        = Meteor.user()
+    return unless environment = Meteor.env
     
-  Tracker.autorun (computation) ->
-    user = Meteor.user()
+    unless environment == 'development'
+      ga 'set', '&uid', user._id
+      GAnalytics.event "User", "Session Restored"
+      GAnalytics.pageview()
     
-    if user
-	
-      unless Meteor.env == 'development'
-        ga 'set', '&uid', user._id
-        GAnalytics.event "User", "Session Restored"
-
-      olark 'api.visitor.getDetails', ->
-        details = arguments[0]
-
-        unless details.fullName == user.profile.name
-          olark 'api.visitor.updateFullName',
-          fullName: user.profile.name
-
-        emailAddress = user.services.facebook?.email || user.services.google?.email
-        unless details.emailAddress == emailAddress 
-          olark 'api.visitor.updateEmailAddress',
-          emailAddress: emailAddress
-
+    olark 'api.visitor.getDetails', ->
+      details = arguments[0]
       
-      computation.stop()
+      unless details.fullName == user.profile.name
+        olark 'api.visitor.updateFullName',
+        fullName: user.profile.name
+      
+      emailAddress = user.services.facebook?.email || user.services.google?.email
+      unless details.emailAddress == emailAddress 
+        olark 'api.visitor.updateEmailAddress',
+        emailAddress: emailAddress
+        
+    computation.stop();
+
+  computation  = Tracker.autorun integrations
       
