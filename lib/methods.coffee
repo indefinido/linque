@@ -35,7 +35,6 @@ Meteor.methods
   decide: (id) ->
     user      = Meteor.user()
 
-
     # update user rule level
     operation = $inc: {}
     operation.$inc["rules.#{id}.level"] = 1

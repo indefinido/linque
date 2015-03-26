@@ -18,6 +18,10 @@
         qualifier: "1,5 L"
         summary: "Você pode ter apenas uma Garrafa de volume até 1,5 L"
         number: 4
+      ,
+        qualifier: "Livre"
+        summary: "Você pode usar o recipiente que quiser quando achar melhor."
+        number: 5
     ]
   ,
     _id: 'fill'
@@ -30,8 +34,16 @@
         summary: "Você pode encher seu recipiente atual até 2 vezes por dia."
         number: 2
       ,
+        qualifier: "3x / dia"
+        summary: "Você pode encher seu recipiente atual até 3 vezes por dia."
+        number: 3
+      ,
+        qualifier: "4x / dia"
+        summary: "Você pode encher seu recipiente atual até 4 vezes por dia."
+        number: 4
+      ,
         qualifier: "Livre"
         summary: "Você pode encher seu recipiente quantas vezes quiser no mesmo dia (cuidado para não tomar água em excesso!)."
-        number: 3
+        number: 5
     ]
 ]

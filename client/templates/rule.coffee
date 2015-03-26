@@ -1,9 +1,14 @@
+
+ruleLevel = (ruleId) ->
+  Meteor.user().rules[ruleId].level
+
+
 # TODO lock rule if it is on maximun level
 Template.rule.helpers
 
   id      : -> @_id
 
-  level   : -> Meteor.user().rules[@_id].level
+  level   : -> ruleLevel @_id
 
 
   # name of current level of user rule
@@ -15,7 +20,7 @@ Template.rule.helpers
   
     # get current level
     for level in @levels
-      if level.level == Meteor.user().rules[ruleId].level
+      if level.number == ruleLevel ruleId
         currentLevel = level
   
     currentLevel

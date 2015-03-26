@@ -23,8 +23,8 @@
   ,
     _id: 9
     type: 'warning'
-    # TODO update
-    body: 'Deve acontecer daqui menos de 2 dias.'
+    title: 'Uma mudança se aproxima!'
+    body: 'Você prefere adquirir um recipiente maior ou poder encher seu recipiente mais vezes por dia?\n\nPense agora e esteja preparado para quando chegar a hora de escolher.'
   ,
     _id: 20
     type: 'event'
@@ -57,12 +57,17 @@
   ,
     _id: 64
     type: 'warning'
-    # TODO update
-    body: 'Deve acontecer daqui menos de 2 dias.'
+    title: 'Uma mudança se aproxima!'
+    body: 'Você prefere adquirir um recipiente maior ou poder encher seu recipiente mais vezes por dia?\n\nPense agora e esteja preparado para quando chegar a hora de escolher.'
   ,
     _id: 77
     type: 'decision'
     body: 'O que você prefere? (1) Trocar seu recipiente por outro maior; ou (2) Poder encher seu recipiente atual mais vezes.'
+  ,
+    _id: 156
+    type: 'warning'
+    title: 'Uma mudança se aproxima!'
+    body: 'Você prefere adquirir um recipiente maior ou poder encher seu recipiente mais vezes por dia?\n\nPense agora e esteja preparado para quando chegar a hora de escolher.'
   ,
     _id: 176
     type: 'decision'
@@ -75,8 +80,8 @@
   ,
     _id: 310
     type: 'warning'
-    # TODO update
-    body: 'Deve acontecer daqui menos de 2 dias.'
+    title: 'Uma mudança se aproxima!'
+    body: 'Você prefere adquirir um recipiente maior ou poder encher seu recipiente mais vezes por dia?\n\nPense agora e esteja preparado para quando chegar a hora de escolher.'
   ,
     _id: 330
     type: 'decision'

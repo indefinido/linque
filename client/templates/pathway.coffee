@@ -22,6 +22,7 @@ moverable =
   arrive: ->
     if @freed = not @holder.getAttribute('free')?
       @holder.setAttribute 'free', true
+      @holder.addClass 'current'
 
     opener.open @dot
     
@@ -30,6 +31,7 @@ moverable =
     Blaze.remove @userView
     
     @holder.removeAttribute 'free' if @freed
+    @holder.removeClass 'current'
 
     
   # put user in position
@@ -40,6 +42,7 @@ moverable =
 opener =
   target: null
   open: (dot) ->
+    $('#dashboard').addClass 'consoling'
     switch dot.type
       when 'warning'
         @target.setAttribute 'opened', true
@@ -52,6 +55,7 @@ opener =
         
   
   close: (dot) ->
+    $('#dashboard').removeClass 'consoling'
     switch dot.type
       when 'warning'
         @target.setAttribute 'opened', false
@@ -67,6 +71,9 @@ emptyDotable =
   isEmpty: true
   completed: false
 
+
+
+
 Template.pathway.onRendered ->
   mover    = $.extend {}, moverable, domable,
     move: ->
@@ -81,6 +88,7 @@ Template.pathway.onRendered ->
     arrive: ->
       if @freed = not @holder.getAttribute('free')?
         @holder.setAttribute 'free', true
+        @holder.addClass 'current'
   
   @autorun ->
     return unless user = Meteor.user()
@@ -96,6 +104,9 @@ Template.pathway.onRendered ->
       return console.warn 'Trying to move to the already positioned dot'
 
     mover.move dot
+
+
+
 
 Template.pathway.helpers
   dots: ->
@@ -158,6 +169,8 @@ Template.pathway.helpers
     options[0].splited = true
 
     options
+      
+      
       
 Template.pathway.events
   # This method handles all modal closings. In all cases, except the decision
