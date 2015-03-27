@@ -108,7 +108,6 @@ control =
     # User is not in any actionable dot, use an empty dot in his current position
     dot = _.extend position: user.position, emptyDotable unless dot
 
-    
     dot
 
   initialMovement: ->
@@ -154,16 +153,15 @@ Template.pathway.helpers
     while (i--) 
       next           = dots.shift()
       empty          = next.position - previous.position
-      next.completed = userPosition > j
 
       
       while (--empty)
         path.push _.extend {}, emptyDotable, 
           _id      : "empty-#{i}-#{empty}"
           completed: userPosition > j
-          
         j++
 
+      next.completed = userPosition > j
       path.push        next
       previous       = next
       j++

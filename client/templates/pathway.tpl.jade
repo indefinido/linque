@@ -52,14 +52,16 @@ linque-path
                 div( vertical layout )
                   div( horizontal center-justified layout )
                     paper-button.decision-rule( disabled ) #{current.qualifier}
-                      
-                  div( horizontal center-justified layout )
-                    paper-button.decision-rule.decision-rule-next
-                      core-icon( id="icon" icon="water:#{id}_#{next.number}" )
-                      span #{next.qualifier}
-                          
-                if splited
-                  div( horizontal center layout ) ou
+                    
+                  if next
+                    div( horizontal center-justified layout )
+                      paper-button.decision-rule.decision-rule-next
+                        core-icon( id="icon" icon="water:#{id}_#{next.number}" )
+                        span #{next.qualifier}
+                
+                if next
+                  if splited
+                    div( horizontal center layout ) ou
                   
                   
     else

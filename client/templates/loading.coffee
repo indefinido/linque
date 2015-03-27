@@ -18,7 +18,6 @@ loader =
   helper  : -> Session.get 'loaded'
 
   finished: _.debounce ->
-    console.log 'presenting'
     animator.presentTo '.user'
     @removeEventListener 'webkitAnimationEnd', loader.finished
   , 1000

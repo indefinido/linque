@@ -11,7 +11,7 @@ share.animator =
     {target} = animation
     
     classes  = target.getAttribute 'class'
-    target.setAttribute 'classes', classes.replace 'core-animation-target', ''
+    target.setAttribute 'class', classes.replace 'core-animation-target', ''
     
     animation.target = null
   
