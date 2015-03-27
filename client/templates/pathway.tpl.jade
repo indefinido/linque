@@ -2,65 +2,66 @@
 
 linque-path
   each dots
-   if isEvent
-     linque-dot( completed = completed ) 
-       core-overlay.console( autoCloseDisabled backdrop )
-         h2.console-title
-           core-icon.icon-dot( icon="dot:event" )
-           span #{title}
-         div.console-content #{body}
-         div( horizontal end-justified layout )
-           paper-button Continuar
-         
-   else if isWarning
-     linque-dot( completed = completed ) 
-       core-overlay.console( autoCloseDisabled backdrop )
-         h2.console-title
-           core-icon.icon-decision( icon="decision:warning" )
-           span #{title}
-         div.console-content #{body}
-         div( horizontal end-justified layout )
-           paper-button Entendi 
-         
-   else if isTip
-     linque-dot( vivid completed = completed )
-       core-overlay.console( autoCloseDisabled backdrop vertical layout )
-         h2.console-title
-           core-icon.icon-dot( icon="dot:tip" )
-           span.console-title Dica: #{title}
-         div.console-content #{body}
-         div( horizontal end-justified layout )
-           paper-button Entendi 
-         
-   else if isDecision
-     linque-dot( free completed = completed )
-       div( center horizontal center-justified layout )
-         if completed
-           core-icon.icon-decision( icon="decision:decided" )
-         else
-           core-icon.icon-decision( icon="decision:decision")
-           
-       core-overlay.console( autoCloseDisabled backdrop )
-         h2.console-title
-           core-icon.icon-decision( icon="decision:decision" )
-           span #{title}
-         div.console-content 
-           div #{body}
-           br
-           div.decision( horizontal around-justified layout )
-             each options
-               div( vertical layout )
-                 div( horizontal center-justified layout )
-                   paper-button.decision-rule( disabled ) #{current.qualifier}
-                     
-                 div( horizontal center-justified layout )
-                   paper-button.decision-rule.decision-rule-next
-                     core-icon( id="icon" icon="water:#{id}_#{next.number}" )
-                     span #{next.qualifier}
-                         
-               if splited
-                 div( horizontal center layout ) ou
-                 
-                 
-   else
-     linque-dot( completed = completed )
+    if isEvent
+      linque-dot( completed = completed ) 
+        core-overlay.console( autoCloseDisabled backdrop )
+          h2.console-title
+            core-icon.icon-dot( icon="dot:event" )
+            span #{title}
+          div.console-content #{body}
+          div( horizontal end-justified layout )
+            paper-button Continuar
+          
+    else if isWarning
+      linque-dot( completed = completed ) 
+        core-overlay.console( autoCloseDisabled backdrop )
+          h2.console-title
+            core-icon.icon-decision( icon="decision:warning" )
+            span #{title}
+          div.console-content #{body}
+          div( horizontal end-justified layout )
+            paper-button Entendi 
+          
+    else if isTip
+      linque-dot( vivid completed = completed )
+        core-overlay.console( autoCloseDisabled backdrop vertical layout )
+          h2.console-title
+            core-icon.icon-dot( icon="dot:tip" )
+            span.console-title Dica: #{title}
+          div.console-content #{body}
+          div( horizontal end-justified layout )
+            paper-button Entendi 
+          
+    else if isDecision
+      linque-dot( free completed = completed )
+        div( center horizontal center-justified layout )
+          if completed
+            core-icon.icon-decision( icon="decision:decided" )
+          else
+            core-icon.icon-decision( icon="decision:decision")
+            
+        core-overlay.console( autoCloseDisabled backdrop )
+          h2.console-title
+            core-icon.icon-decision( icon="decision:decision" )
+            span #{title}
+          div.console-content 
+            div #{body}
+            br
+            div.decision( horizontal around-justified layout )
+              each options
+                div( vertical layout )
+                  div( horizontal center-justified layout )
+                    paper-button.decision-rule( disabled ) #{current.qualifier}
+                      
+                  div( horizontal center-justified layout )
+                    paper-button.decision-rule.decision-rule-next
+                      core-icon( id="icon" icon="water:#{id}_#{next.number}" )
+                      span #{next.qualifier}
+                          
+                if splited
+                  div( horizontal center layout ) ou
+                  
+                  
+    else
+      linque-dot( completed = completed )
+

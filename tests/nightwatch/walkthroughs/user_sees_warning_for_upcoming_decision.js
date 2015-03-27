@@ -14,7 +14,7 @@ module.exports = {
 
                 client
                     .waitForElementVisible(dot.selector(' core-overlay')                  , 2000, 'Current dot overlay opened.')
-                    .waitForElementPresent(decision.selector('.core-animation-target')    , 2000, 'Next decision dot animated.')
+                    .waitForElementPresent(decision.selector(' .core-animation-target')   , 2000, 'Next decision dot animated.')
                     .waitForElementVisible(dot.selector(' [icon="decision:warning"]')     , 2000, 'Overlay of type warning detected.')
 
                     // To allow developer see the animation
@@ -22,7 +22,7 @@ module.exports = {
 
                     .click(dot.selector(' core-overlay paper-button'))
                     .waitForElementNotVisible(dot.selector(' core-overlay')               , 2000, 'Current dot overlay closed.')
-                    .waitForElementNotPresent(decision.selector('.core-animation-target') , 2000, 'Next decision dot stoped animation.')
+                    .waitForElementNotPresent(decision.selector(' .core-animation-target'), 2000, 'Next decision dot stoped animation.')
                     .end()
             });
     }

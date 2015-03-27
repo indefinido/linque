@@ -7,15 +7,21 @@ share.animator =
     
   target: null
   animations: {}
+  clear: (animation) ->
+    {target} = animation
     
+    classes  = target.getAttribute 'class'
+    target.setAttribute 'classes', classes.replace 'core-animation-target', ''
+    
+    animation.target = null
+  
   pulse: (target, movement = true) ->
     {pulse}      = @animations
     if movement
       pulse.target = target
       pulse.play()
     else
-      pulse.target.classList.toggle 'core-animation-target', false
-      pulse.target = null
+      @clear pulse
       pulse.cancel()
 
   blink: (target, movement = true) ->
@@ -24,19 +30,19 @@ share.animator =
       blink.target = target
       blink.play()
     else
-      blink.target.classList.toggle 'core-animation-target', false
-      blink.target = null
+      @clear blink
       blink.cancel()
       
   presentTo: (target) ->
-    container = $('html, body')
+    container = $ 'html, body'
+    target    = $ target
     container.scrollTop(0)
     container.animate
       scrollTop: document.body.scrollHeight
       , 1000
       , ->
         container.delay(700).animate
-          scrollTop: $(target).offset().top - $(window).height() + $(target).height()*1.5
+          scrollTop: target.offset().top - $(window).height() + target.height()*1.5
           , 1000
-    
+
 Template.animations.onRendered share.animator.initialize

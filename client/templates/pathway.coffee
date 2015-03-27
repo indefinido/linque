@@ -1,12 +1,11 @@
-Meteor.subscribe 'dots'
 {animator} = share
+
+mover = undefined
 
 domable =
   element: (dot = @dot) ->
     holder  = $ "linque-path > linque-dot:nth-last-child(#{dot.position})"
-    unless holder.length
-      console.error("moverable.move: Target dot not found with position: #{dot.position}")
-      # debugger
+    console.error("moverable.move: Target dot not found with position: #{dot.position}") unless holder.length
       
     @holder = holder.get(0)
 
@@ -15,18 +14,32 @@ moverable =
   holder: null
   freed: null
   userView: null
-  
-  move: (@dot) ->
-    @remove() if @holder
+
+  initialize: (@dot) ->
     opener.target = @element()
+
+    # Free without opening
+    if @freed = not @holder.getAttribute('free')?
+      @holder.setAttribute 'free', true
+      @holder.classList.add 'current'
+    
+    @positionate()
+  
+  move: (dot) ->
+    # Remove old dot settings
+    @remove() if @holder
+
+    # Find new dot
+    @dot          = dot
+    @element()
+    opener.target = @holder
     
     @positionate()
   
   arrive: ->
-    debugger unless @holder
     if @freed = not @holder.getAttribute('free')?
       @holder.setAttribute 'free', true
-      @holder.addClass 'current'
+      @holder.classList.add 'current'
 
     opener.open @dot
     
@@ -34,40 +47,45 @@ moverable =
   remove: ->
     Blaze.remove @userView
     
-    @holder.removeAttribute 'free' if @freed
-    @holder.removeClass 'current'
+    @holder.removeAttribute 'free'     if @freed
+    @holder.classList.remove 'current'
+    opener.close @dot if @holder.hasAttribute 'opened' 
 
     
   # put user in position
   positionate: ->
-    @arrive()
     @userView = Blaze.render Template.character, @holder
+    @arrive()
 
 opener =
   target: null
   open: (dot) ->
     $('#dashboard').addClass 'consoling'
     switch dot.type
+      when 'decision'
+        @target.setAttribute 'opened', true
+        animator.pulse @target.querySelector '.user .user-circle'
       when 'warning'
         @target.setAttribute 'opened', true
         # TODO simplify query, maybe store next dot on current dot?
         holder = domable.element Dots.find(type: 'decision', _id: {$gt: dot.position}).fetch()[0]
-        animator.blink holder, true
+        animator.blink holder.querySelector '#circle'
       else
         @target.setAttribute 'opened', true
-        
-        
   
   close: (dot) ->
     $('#dashboard').removeClass 'consoling'
     switch dot.type
+      when 'decision'
+        @target.removeAttribute 'opened'
+        animator.pulse @target.querySelector('.user .user-circle'), false
       when 'warning'
-        @target.setAttribute 'opened', false
+        @target.removeAttribute 'opened'
         # TODO simplify query, maybe store next dot on current dot?
         holder = domable.element Dots.find(type: 'decision', _id: {$gt: dot.position}).fetch()[0]
-        animator.blink holder, false
+        animator.blink holder.querySelector('#circle'), false
       else
-        @target.setAttribute 'opened', false
+        @target.removeAttribute 'opened'
     
 emptyDotable =
   _id: null
@@ -76,47 +94,46 @@ emptyDotable =
   completed: false
 
 
+control =
 
-
-Template.pathway.onRendered ->
-  mover    = $.extend {}, moverable, domable,
-    move: ->
-      moverable.move.apply @, arguments
-      
-      mover = $.extend {}, moverable, domable, 
-        dot      : @dot
-        holder   : @holder
-        freed    : @freed
-        userView : @userView
-      
-    arrive: ->
-      debugger unless @holder
-      if @freed = not @holder.getAttribute('free')?
-        @holder.setAttribute 'free', true
-        @holder.classList.add 'current'
-      
-
-  user = Meteor.user()
-  
-  @autorun ->
-    return unless user
-
+  initialize: (@template) ->
+    mover = $.extend {}, moverable, domable
+    
+    Tracker.afterFlush @initialMovement
+    
+  findOrBuildDot: (user) ->
     # Search for user current position
     dot = Dots.find(_id: user.position).fetch()[0]
-
+  
     # User is not in any actionable dot, use an empty dot in his current position
     dot = _.extend position: user.position, emptyDotable unless dot
 
-    return unless domable.element dot
+    
+    dot
+
+  initialMovement: ->
+    return unless user = Meteor.user()
+
+    dot = control.findOrBuildDot user
+    
+    mover.initialize dot
+
+    control.template.autorun control.movement
+
+  movement: (computation) ->
+    # Must be first line in order to allow Tracker to detect it's subscription
+    return unless user = Meteor.user()
+    
+    return if computation.firstRun
     
     # TODO listen to only position changes in user
-    if mover.dot?.position == user.position
-      return console.warn 'Trying to move to the already positioned dot'
+    if mover.dot.position == user.position
+      return console.warn 'Trying to control.movement to current dot'
 
-    mover.move dot
+    mover.move control.findOrBuildDot user
 
-
-
+Template.pathway.onRendered ->
+  @subscribe 'dots', [], => control.initialize @
 
 Template.pathway.helpers
   dots: ->
@@ -126,6 +143,9 @@ Template.pathway.helpers
     i            = dots.length - 1
     j            = 1
     path         = []
+
+    # When there is no dots in database, do not try to render them
+    return path unless dots.length
 
     previous = dots.shift()
     previous.completed = userPosition > j++
@@ -149,8 +169,9 @@ Template.pathway.helpers
       j++
 
 
-    # TODO implement path construction in the write order
+    # TODO implement path construction in the right order
     path.reverse()
+
     path
 
   # Render rule options for the decision modal
@@ -190,6 +211,6 @@ Template.pathway.events
     # Send rule id to compute user decision on decision overlays
     Meteor.call 'decide', @id if @type == 'decision'
 
-    # Close decision overlay
+    # Clos edecision overlay
     opener.close @
 

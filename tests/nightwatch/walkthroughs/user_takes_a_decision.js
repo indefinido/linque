@@ -26,10 +26,15 @@ module.exports = {
                 client
                     .waitForElementVisible(currentDot + ' core-overlay'               , 2000, 'Current dot overlay opened.')
                     .waitForElementVisible(currentDot + ' [icon="decision:decision"]' , 2000, 'Overlay of type Decision detected.')
-                    .pause(500)
+                    .waitForElementPresent(dot.selector(' .core-animation-target' )   , 2000, 'User avatar animation started')
+
+                    .pause(1500)
+                  
                     .execute('$("' + dot.selector(' core-overlay:visible paper-button:not([disabled]):first') + '").click()')
-                    .waitForElementNotVisible(currentDot + ' core-overlay'            , 2000, 'Current dot overlay closed.')
-                    .end()
+                    .pause(500)
+                    .waitForElementNotPresent(dot.selector(' .core-animation-target'), 2000, 'User avatar animation stoped')
+                    .waitForElementNotVisible(currentDot + ' core-overlay'           , 2000, 'Current dot overlay closed.')
+                    .end();
             });
     },
     "User sees feedback of leveling up Rule": function(client) {
