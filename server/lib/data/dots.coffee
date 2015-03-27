@@ -5,7 +5,7 @@
     _id: 1
     type: 'event'
     title: 'Woooohayyy!'
-    body: 'Sua jornada começa aqui. Clique em "Continuar" e prepare-se para o seu primeiro gatilho.'
+    body: 'Sua jornada começa aqui. \n\nClique em "Continuar" e prepare-se para o seu primeiro gatilho.'
   ,
     _id: 3
     type: 'tip'

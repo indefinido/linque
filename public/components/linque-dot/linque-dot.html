@@ -29,12 +29,6 @@
        background-color: white;
      }
      
-     :host(.free) {
-       margin: 1px 0 0px;
-       height: auto;
-       background-color: transparent;
-     }
-     
      polyfill-next-selector { content: ':host(.free) [center]'; }
      :host(.free) ::content > [center] {
        width: 210px;
@@ -43,6 +37,12 @@
      
      :host(.vivid) {
       background-color: #EADC60;
+     }
+     
+     :host(.free) {
+       margin: 1px 0 0px;
+       height: auto;
+       background-color: transparent;
      }
 
     </style>

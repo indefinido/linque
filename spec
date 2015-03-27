@@ -45,70 +45,39 @@ function usage()
     echo ""
 }
 
-# Execute getopt on the arguments passed to this program, identified by the special character $@
-PARSED_OPTIONS=$(getopt -n "$0"  -o "hHe:c:t:g:s:f:v" --long "help,HELP,env:,config:,test:,group:,skipgroup:,filter:,verbose"  -- "$@")
+while getopts "hHe:c:t:g:s:f:v" opt; do
 
-# A little magic, necessary when using getopt.
-eval set -- "$PARSED_OPTIONS"
-#echo "PARSED_OPTIONS:  $PARSED_OPTIONS"
-
-# Now goes through all the options with a case and using shift to analyse 1 argument at a time.
-#$1 identifies the first argument, and when we use shift we discard the first argument, so $2 becomes $1 and goes again through the case.
-
-if [ $9 ]
-  then
-  _ARGS=true
-fi
-
-while $_ARGS;
-do
-  case "$8" in
-    -H | --HELP)
+  case $opt in
+    H | --HELP)
         usage
         exit;;
-    -h | --help)
+    h | --help)
         _HELP=" --help"
-        shift;;
-    -v | --verbose)
+        ;;
+    v | --verbose)
         _VERBOSE=" --verbose"
-        shift;;
-    -c | --config)
-        if [ -n "$2" ];
-        then
-            CONFIG=$2
-        fi
-        shift 9;;
-    -e | -E | --env | --environment)
-        if [ -n "$2" ]; then
-            ENVIRONMENT=$2
-        fi
-        shift 9;;
-    -t)
-        #echo 'found a -t'
-        if [ -n "$9" ]; then
-            _TESTS=" -t $9"
-            #echo $_TESTS
-        fi
-        #shift 9;;
-        break;;
-    -g | --group)
-        if [ -n "$2" ]; then
-            _GROUP=" -g $2"
-        fi
-        shift 9;;
-    -s | --skipgroup)
-        if [ -n "$2" ]; then
-            _SKIP=" -s $s"
-        fi
-        shift 9;;
-    -f | --filter)
-        if [ -n "$2" ]; then
-            _FILTER=" -f $2"
-        fi
-        shift 9;;
-    --)
-        shift
-        break;;
+        ;;
+    c)
+        CONFIG=$OPTARG
+        ;;
+    e | -E | --env | --environment)
+        ENVIRONMENT=$OPTARG
+        ;;
+    t)
+        _TESTS=" -t $OPTARG"
+        ;;
+    g)
+        _GROUP=" -g $OPTARG"
+        ;;
+    s | --skipgroup)
+        _SKIP=" -s $OPTARG"
+        ;;
+    f | --filter)
+        _FILTER=" -f $OPTARG"
+        ;;
+    \?)
+        echo "Invalid option -$OPTARG" >& 2
+        ;;
     esac
 done
 

@@ -2,4 +2,6 @@
 
 Template.tracker.events
 
-  'click track-button': (event) -> Meteor.call "track"
+  'click track-button': _.debounce (event) ->
+    Meteor.call "track"
+  , 200

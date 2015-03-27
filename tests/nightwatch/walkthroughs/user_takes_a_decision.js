@@ -29,13 +29,15 @@ module.exports = {
                     .waitForElementPresent(dot.selector(' .core-animation-target' )   , 2000, 'User avatar animation started')
 
                     .pause(1500)
-                  
+
                     .execute('$("' + dot.selector(' core-overlay:visible paper-button:not([disabled]):first') + '").click()')
-                    .pause(500)
+
                     .waitForElementNotPresent(dot.selector(' .core-animation-target'), 2000, 'User avatar animation stoped')
                     .waitForElementNotVisible(currentDot + ' core-overlay'           , 2000, 'Current dot overlay closed.')
-                    .end();
-            });
+                    .walkUntilDot(406, function () {
+                        client.pause()
+                    });
+            })
     },
     "User sees feedback of leveling up Rule": function(client) {
         console.log(Logger.colors.yellow('! Pending: Wainting for animations implementation.'));

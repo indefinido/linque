@@ -2,7 +2,7 @@ Logger = require('nightwatch/lib/util/logger.js')
 
 var user = {
     ask: function () {
-       return Meteor.user()
+        return Meteor.user()
     },
     asked: function (result) {
 

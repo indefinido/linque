@@ -113,7 +113,6 @@ control =
     # User is not in any actionable dot, use an empty dot in his current position
     dot = _.extend position: user.position, emptyDotable unless dot
 
-    
     dot
 
   initialMovement: ->
@@ -168,8 +167,6 @@ Template.pathway.helpers
       next           = dots.shift()
       empty          = next.position - previous.position
       
-      next.completed = userPosition > j
-      
       while (--empty)
         dot = _.extend {}, emptyDotable, 
           _id      : "empty-#{i}-#{empty}"
@@ -185,9 +182,11 @@ Template.pathway.helpers
           
         j++
 
+      next.completed = userPosition > j
       classes = []
       classes.push 'completed' if next.completed
       classes.push 'free'      if next.type    == 'decision'
+      classes.push 'vivid'     if next.type    == 'decision'
       classes.push 'vivid'     if next.type    == 'tip'
       classes.push 'current'   if userPosition == j
       classes.push 'free'      if userPosition == j
@@ -195,6 +194,7 @@ Template.pathway.helpers
 
       path.push  next
       previous = next
+
       j++
 
 
