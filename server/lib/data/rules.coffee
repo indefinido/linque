@@ -7,7 +7,7 @@
         summary: "Você pode ter apenas um Copo de volume de 250 ml"
         number: 1 
       ,
-        qualifier: "600 ml"
+        qualifier: "500 ml"
         summary: "Você pode ter apenas uma Garrafa de volume de até 500 ml"
         number: 2
       ,
