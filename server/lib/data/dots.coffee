@@ -4,12 +4,13 @@
     # _id == Dot position
     _id: 1
     type: 'event'
-    body: 'Sua jornada começa aqui'
+    title: 'Woooohayyy!'
+    body: 'Sua jornada começa aqui. Clique em "Continuar" e prepare-se para o seu primeiro gatilho.'
   ,
     _id: 3
     type: 'tip'
     title: 'Por que um copo e não uma garrafa?'
-    body: 'Não se preocupe, você não vai ficar com o copo para sempre. É questão de 2 ou 3 dias. Você está usando ele pra poder começar rápido a desenvolver seu hábito. Principalmente porque é fácil conseguir um copo.'
+    body: 'Não se preocupe, você não vai ficar com o copo para sempre. É questão de 2 ou 3 dias. Você está usando ele pra poder começar rápido a desenvolver seu hábito. \n\n Principalmente porque é fácil conseguir um copo.'
   ,
     _id: 5
     type: 'tip'
@@ -19,7 +20,7 @@
     _id: 7
     type: 'tip'
     title: 'Ainda não se convenceu?'
-    body: 'O Linque existe justamente porque vimos várias pessoas tentarem criar o mesmo hábito que você está tentando, de beber bastante água, e foram com muita sede ao pote. Já começaram colocando ao lado uma garrafa de 1,5 L. Adivinha quanto tempo durou? 1 semana. É. Melhor você ir devagarinho. Seguindo o que o Linque sugere, você vai caminhar na velocidade certa ;)'
+    body: 'O Linque existe justamente porque vimos várias pessoas tentarem criar o mesmo hábito que você está tentando, de beber bastante água, e foram com muita sede ao pote. Já começaram colocando ao lado uma garrafa de 1,5 L. Adivinha quanto tempo durou? **1 semana**. \n\nÉ... É melhor você ir devagarinho. Seguindo o que o Linque sugere, você vai caminhar na velocidade certa ;)'
   ,
     _id: 9
     type: 'warning'
@@ -29,11 +30,12 @@
     _id: 20
     type: 'event'
     title: 'Você encontrou um copo quebrado'
-    body: 'Outros usuários que já passaram por aqui estão jogando fora seus copos e trocando por garrafas. A maioria prefere assim, já que evita ter que encher o copo muitas vezes para tomar mais água. Lembre-se disso quando chegar a hora de decidir.'
+    body: 'Outros usuários que já passaram por aqui estão jogando fora seus copos e trocando por garrafas. \n\nA maioria prefere assim, já que evita ter que encher o copo muitas vezes para tomar mais água. Lembre-se disso quando chegar a hora de decidir.'
   ,
     _id: 22
     type: 'decision'
-    body: 'O que você prefere? (1) Trocar seu recipiente por outro maior; ou (2) Poder encher seu recipiente atual mais vezes.'
+    title: 'Hora da mudança!'
+    body: 'O que você prefere? \n\n1. Trocar seu recipiente por outro maior; ou \n2. Poder encher seu recipiente atual mais vezes.'
   ,
     _id: 30
     type: 'tip'
@@ -53,7 +55,7 @@
     _id: 60
     type: 'tip'
     title: 'Sua garrafa é sagrada.'
-    body: 'Não leve sua garrafa de casa para o trabalho ou do trabalho para casa. Isso dificulta manter seu hábito. A menos é claro, que você tenha um Vessyl (https://www.myvessyl.com). Ele deve te dar motivação suficiente pra levar para todo lado e encher quantas vezes for preciso!'
+    body: 'Não leve sua garrafa de casa para o trabalho ou do trabalho para casa. Isso dificulta manter seu hábito. \n\nA menos é claro, que você tenha um [Vessyl](https://www.myvessyl.com) (abre em outra aba). Ele deve te dar motivação suficiente pra levar para todo lado e encher quantas vezes for preciso!'
   ,
     _id: 64
     type: 'warning'
@@ -62,7 +64,8 @@
   ,
     _id: 77
     type: 'decision'
-    body: 'O que você prefere? (1) Trocar seu recipiente por outro maior; ou (2) Poder encher seu recipiente atual mais vezes.'
+    title: 'Hora da mudança!'
+    body: 'O que você prefere? \n\n1. Trocar seu recipiente por outro maior; ou \n2. Poder encher seu recipiente atual mais vezes.'
   ,
     _id: 156
     type: 'warning'
@@ -71,7 +74,8 @@
   ,
     _id: 176
     type: 'decision'
-    body: 'O que você prefere? (1) Trocar seu recipiente por outro maior; ou (2) Poder encher seu recipiente atual mais vezes.'
+    title: 'Hora da mudança!'
+    body: 'O que você prefere? \n\n1. Trocar seu recipiente por outro maior; ou \n2. Poder encher seu recipiente atual mais vezes.'
   ,
     _id: 180
     type: 'tip'
@@ -85,23 +89,28 @@
   ,
     _id: 330
     type: 'decision'
-    body: 'O que você prefere? (1) Trocar seu recipiente por outro maior; ou (2) Poder encher seu recipiente atual mais vezes.'
+    title: 'Hora da mudança!'
+    body: 'O que você prefere? \n\n1. Trocar seu recipiente por outro maior; ou \n2. Poder encher seu recipiente atual mais vezes.'
   ,
     _id: 407
     type: 'decision'
-    body: 'O que você prefere? (1) Trocar seu recipiente por outro maior; ou (2) Poder encher seu recipiente atual mais vezes.'
+    title: 'Hora da mudança!'
+    body: 'O que você prefere? \n\n1. Trocar seu recipiente por outro maior; ou \n2. Poder encher seu recipiente atual mais vezes.'
   ,
     _id: 484
     type: 'decision'
-    body: 'O que você prefere? (1) Trocar seu recipiente por outro maior; ou (2) Poder encher seu recipiente atual mais vezes.'
+    title: 'Hora da mudança!'
+    body: 'O que você prefere? \n\n1. Trocar seu recipiente por outro maior; ou \n2. Poder encher seu recipiente atual mais vezes.'
   ,
     _id: 572
     type: 'decision'
-    body: 'O que você prefere? (1) Trocar seu recipiente por outro maior; ou (2) Poder encher seu recipiente atual mais vezes.'
+    title: 'Hora da mudança!'
+    body: 'O que você prefere? \n\n1. Trocar seu recipiente por outro maior; ou \n2. Poder encher seu recipiente atual mais vezes.'
   ,
     _id: 660
     type: 'decision'
-    body: 'O que você prefere? (1) Trocar seu recipiente por outro maior; ou (2) Poder encher seu recipiente atual mais vezes.'
+    title: 'Hora da mudança!'
+    body: 'O que você prefere? \n\n1. Trocar seu recipiente por outro maior; ou \n2. Poder encher seu recipiente atual mais vezes.'
   ,
     _id: 661
     type: 'final'

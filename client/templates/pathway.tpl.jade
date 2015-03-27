@@ -8,7 +8,9 @@ linque-path
           h2.console-title
             core-icon.icon-dot( icon="dot:event" )
             span #{title}
-          div.console-content #{body}
+            div.console-content
+              +markdown 
+                #{body}
           div( horizontal end-justified layout )
             paper-button Continuar
           
@@ -18,7 +20,9 @@ linque-path
           h2.console-title
             core-icon.icon-decision( icon="decision:warning" )
             span #{title}
-          div.console-content #{body}
+          div.console-content
+            +markdown 
+              #{body}
           div( horizontal end-justified layout )
             paper-button Entendi 
           
@@ -28,7 +32,9 @@ linque-path
           h2.console-title
             core-icon.icon-dot( icon="dot:tip" )
             span.console-title Dica: #{title}
-          div.console-content #{body}
+            div.console-content
+              +markdown 
+                #{body}
           div( horizontal end-justified layout )
             paper-button Entendi 
           
@@ -45,7 +51,9 @@ linque-path
             core-icon.icon-decision( icon="decision:decision" )
             span #{title}
           div.console-content 
-            div #{body}
+            div
+              +markdown 
+                #{body}
             br
             div.decision( horizontal around-justified layout )
               each options
