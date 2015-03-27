@@ -14,7 +14,7 @@
   @status alpha
   @homepage http://indefinido.github.io/linque-dot
 -->
-<polymer-element name="linque-dot" on-click="clicked" attributes="opened free vivid completed">
+<polymer-element name="linque-dot" on-click="clicked" attributes="opened">
 
   <template>
     <style>
@@ -25,23 +25,23 @@
        background-color: rgba(255,255,255,0.3);
      }
      
-     :host([completed]) {
+     :host(.completed) {
        background-color: white;
      }
      
-     :host([free]) {
+     :host(.free) {
        margin: 1px 0 0px;
        height: auto;
        background-color: transparent;
      }
      
-     polyfill-next-selector { content: ':host([free]) [center]'; }
-     :host([free]) ::content > [center] {
+     polyfill-next-selector { content: ':host(.free) [center]'; }
+     :host(.free) ::content > [center] {
        width: 210px;
        margin-left: calc(-105px + 50%);
      }
      
-     :host([vivid]) {
+     :host(.vivid) {
       background-color: #EADC60;
      }
 
@@ -54,9 +54,6 @@
   //<![CDATA[
   proto = {
     // TODO migrate these attributes to classes
-    completed: false,
-    free: false,
-    vivid: false,
 
     opened: false,
 

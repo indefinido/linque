@@ -18,10 +18,10 @@ moverable =
   initialize: (@dot) ->
     opener.target = @element()
 
-    # Free without opening
-    if @freed = not @holder.getAttribute('free')?
-      @holder.setAttribute 'free', true
-      @holder.classList.add 'current'
+    # # Free without opening
+    # if @freed = not @holder.className.match('free')?
+    #   @holder.classList.add 'free'
+    #   @holder.classList.add 'current'
     
     @positionate()
   
@@ -37,9 +37,9 @@ moverable =
     @positionate()
   
   arrive: ->
-    if @freed = not @holder.getAttribute('free')?
-      @holder.setAttribute 'free', true
-      @holder.classList.add 'current'
+    # if @freed = not @holder.className.match('free')?
+    #   @holder.classList.add 'free'
+    #   @holder.classList.add 'current'
 
     opener.open @dot
     
@@ -47,9 +47,9 @@ moverable =
   remove: ->
     Blaze.remove @userView
     
-    @holder.removeAttribute 'free'     if @freed
-    @holder.classList.remove 'current'
-    opener.close @dot if @holder.hasAttribute 'opened' 
+    # @holder.classList.remove 'free'     if @freed
+    # @holder.classList.remove 'current'
+    # opener.close @dot if @holder.hasAttribute 'opened'
 
     
   # put user in position
@@ -62,6 +62,8 @@ opener =
   open: (dot) ->
     $('#dashboard').addClass 'consoling'
     switch dot.type
+      when 'tip'
+        @target.setAttribute 'opened', true
       when 'decision'
         @target.setAttribute 'opened', true
         animator.pulse @target.querySelector '.user .user-circle'
@@ -76,6 +78,8 @@ opener =
   close: (dot) ->
     $('#dashboard').removeClass 'consoling'
     switch dot.type
+      when 'tip'
+        @target.setAttribute 'opened', false
       when 'decision'
         @target.removeAttribute 'opened'
         animator.pulse @target.querySelector('.user .user-circle'), false
@@ -92,6 +96,7 @@ emptyDotable =
   type: 'empty'
   isEmpty: true
   completed: false
+  attrs: {}
 
 
 control =
@@ -148,24 +153,48 @@ Template.pathway.helpers
     return path unless dots.length
 
     previous = dots.shift()
-    previous.completed = userPosition > j++
+    previous.completed = userPosition > j
+
+    classes = []
+    classes.push 'completed' if previous.completed
+    classes.push 'current'   if userPosition == j
+    classes.push 'free'      if userPosition == j
+    previous.attrs = class: classes.join ' '
+            
     path.push previous
+    j++
 
     while (i--) 
       next           = dots.shift()
       empty          = next.position - previous.position
+      
       next.completed = userPosition > j
-
       
       while (--empty)
-        path.push _.extend {}, emptyDotable, 
+        dot = _.extend {}, emptyDotable, 
           _id      : "empty-#{i}-#{empty}"
           completed: userPosition > j
+
+        classes = []
+        classes.push 'completed' if dot.completed
+        classes.push 'current'   if userPosition == j
+        classes.push 'free'      if userPosition == j
+        dot.attrs = class: classes.join ' '
+          
+        path.push dot
           
         j++
 
-      path.push        next
-      previous       = next
+      classes = []
+      classes.push 'completed' if next.completed
+      classes.push 'free'      if next.type    == 'decision'
+      classes.push 'vivid'     if next.type    == 'tip'
+      classes.push 'current'   if userPosition == j
+      classes.push 'free'      if userPosition == j
+      next.attrs = class: classes.join ' '
+
+      path.push  next
+      previous = next
       j++
 
 

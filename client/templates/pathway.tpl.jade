@@ -3,7 +3,7 @@
 linque-path
   each dots
     if isEvent
-      linque-dot( completed = completed ) 
+      linque-dot( $dyn = attrs ) 
         core-overlay.console( autoCloseDisabled backdrop )
           h2.console-title
             core-icon.icon-dot( icon="dot:event" )
@@ -15,7 +15,7 @@ linque-path
             paper-button Continuar
           
     else if isWarning
-      linque-dot( completed = completed ) 
+      linque-dot( $dyn = attrs ) 
         core-overlay.console( autoCloseDisabled backdrop )
           h2.console-title
             core-icon.icon-decision( icon="decision:warning" )
@@ -27,7 +27,7 @@ linque-path
             paper-button Entendi 
           
     else if isTip
-      linque-dot( vivid completed = completed )
+      linque-dot( $dyn = attrs )
         core-overlay.console( autoCloseDisabled backdrop vertical layout )
           h2.console-title
             core-icon.icon-dot( icon="dot:tip" )
@@ -39,7 +39,7 @@ linque-path
             paper-button Entendi 
           
     else if isDecision
-      linque-dot( free completed = completed )
+      linque-dot( $dyn = attrs )
         div( center horizontal center-justified layout )
           if completed
             core-icon.icon-decision( icon="decision:decided" )
@@ -71,4 +71,4 @@ linque-path
                   
                   
     else
-      linque-dot( completed = completed )
+      linque-dot( $dyn = attrs )
