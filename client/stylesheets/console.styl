@@ -8,13 +8,14 @@
 
   background-color transparent
   color #FFF
-
-  top 5em
-  left 1em
-  bottom 14em
-  right calc(50% + 80px + 1em)
+  overflow auto
   
-  padding 0 1em
+  padding 5em calc(50% + 80px + 1em) 1em 2em
+  
+  bottom 0
+  left 0
+  right 0
+  top 0
 
 
   .console-title
@@ -32,3 +33,10 @@
     font-size 0.9em
     font-weight 300
     margin 1em 0
+    
+    
++mobile()
+
+  .console
+    padding 5em 2em 1em 2em
+    

@@ -8,9 +8,9 @@ linque-path
           h2.console-title
             core-icon.icon-dot( icon="dot:event" )
             span #{title}
-            div.console-content
-              +markdown 
-                #{body}
+          div.console-content
+            +markdown 
+              #{body}
           div( horizontal end-justified layout )
             paper-button Continuar
           
@@ -28,13 +28,13 @@ linque-path
           
     else if isTip
       linque-dot( $dyn = attrs )
-        core-overlay.console( autoCloseDisabled backdrop vertical layout )
+        core-overlay.console( autoCloseDisabled backdrop )
           h2.console-title
             core-icon.icon-dot( icon="dot:tip" )
             span.console-title Dica: #{title}
-            div.console-content
-              +markdown 
-                #{body}
+          div.console-content
+            +markdown 
+              #{body}
           div( horizontal end-justified layout )
             paper-button Entendi 
           
