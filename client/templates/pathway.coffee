@@ -234,19 +234,24 @@ Template.pathway.helpers
       
       
 Template.pathway.events
+
   # This method handles all modal closings. In all cases, except the decision
   # modal the handler context is a dot. On decision modal the context is the
   # rule option with some decision dot available data
   'click core-overlay paper-button:not([disabled])': (event, template) ->
-    # Send rule id to compute user decision on decision overlays
-    if @type == 'decision'
-      Meteor.call 'decide', @id 
-      # TODO move to another place
-      try
-        animator.bounscale $("##{@id}::shadow core-icon").get(0)
-      catch e
-        animator.bounscale $("##{@id}").get(0).$.icon
 
-    # Clos edecision overlay
+    # Close decision overlay
     opener.close @
+    
+    # Send rule id to compute user decision on decision overlays
+    Meteor.call 'decide', @id if @type == 'decision'
+
+    _.delay =>
+      if @type == 'decision'
+        # TODO move to another place
+        try
+          animator.bounscale $("##{@id}::shadow core-icon").get(0)
+        catch e
+          animator.bounscale $("##{@id}").get(0).$.icon
+    , 500
 
