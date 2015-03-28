@@ -29,8 +29,8 @@
        background-color: white;
      }
      
-     polyfill-next-selector { content: ':host(.free) [center]'; }
-     :host(.free) ::content > [center] {
+     polyfill-next-selector { content: ':host(.free) > .center'; }
+     :host(.free) ::content > .center {
        width: 210px;
        margin-left: calc(-105px + 50%);
      }

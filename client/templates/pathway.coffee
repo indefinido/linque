@@ -193,6 +193,7 @@ Template.pathway.helpers
       classes.push 'completed' if next.completed
       classes.push 'free'      if next.type    == 'decision'
       classes.push 'vivid'     if next.type    == 'decision'
+      classes.push 'free'      if next.type    == 'final'
       classes.push 'vivid'     if next.type    == 'tip'
       classes.push 'current'   if userPosition == j
       classes.push 'free'      if userPosition == j
@@ -239,13 +240,24 @@ Template.pathway.helpers
       
       
 Template.pathway.events
+
   # This method handles all modal closings. In all cases, except the decision
   # modal the handler context is a dot. On decision modal the context is the
   # rule option with some decision dot available data
   'click core-overlay paper-button:not([disabled])': (event, template) ->
+
+    # Close decision overlay
+    opener.close @
+    
     # Send rule id to compute user decision on decision overlays
     Meteor.call 'decide', @id if @type == 'decision'
 
-    # Clos edecision overlay
-    opener.close @
+    _.delay =>
+      if @type == 'decision'
+        # TODO move to another place
+        try
+          animator.bounscale $("##{@id}::shadow core-icon").get(0)
+        catch e
+          animator.bounscale $("##{@id}").get(0).$.icon
+    , 500
 

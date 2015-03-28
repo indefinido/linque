@@ -33,22 +33,51 @@ share.animator =
       @clear blink
       blink.cancel()
 
+  bounscale: (target) ->
+    animation = new CoreAnimation
+    animation.duration = 1800
+    animation.keyframes = [
+      { transform: 'scale(4.0) translate(0     , 0   ) rotate(0      )' }
+      { transform: 'scale(3.0) translate(0     , 0   ) rotate(0      )' }
+      { transform: 'scale(3.0) translate(0     , 0   ) rotate(0      )' }
+      { transform: 'scale(3.0) translate(0     , 0   ) rotate(0      )' }
+      { transform: 'scale(3.0) translate(0     , 0   ) rotate(0      )' }
+      { transform: 'scale(3.0) translate(-0.7em, 0   ) rotate(-20deg )' }
+      { transform: 'scale(3.0) translate(0.7em , 0   ) rotate(20deg  )' }
+      { transform: 'scale(3.0) translate(-0.7em, 0   ) rotate(-20deg )' }
+      { transform: 'scale(3.0) translate(0.7em , 0   ) rotate(20deg  )' }
+      { transform: 'scale(3.0) translate(0     , 0   ) rotate(0      )' }
+      { transform: 'scale(3.0) translate(0     , 0   ) rotate(0      )' }
+      { transform: 'scale(3.0) translate(0     , 0   ) rotate(0      )' }
+      { transform: 'scale(3.0) translate(0     , 0   ) rotate(0      )' }
+      { transform: 'scale(3.0) translate(0     , 0   ) rotate(0      )' }
+      { transform: 'scale(3.0) translate(0     , 0   ) rotate(0      )' }
+      { transform: 'scale(3.0) translate(0     , 0   ) rotate(0      )' }
+      { transform: 'scale(3.0) translate(0     , 0   ) rotate(0      )' }
+      { transform: 'scale(3.0) translate(0     , 0   ) rotate(0      )' }
+      { transform: 'scale(3.0) translate(0     , 0   ) rotate(0      )' }
+      { transform: 'scale(3.0) translate(0     , 0   ) rotate(0      )' }
+      { transform: 'scale(1.0) translate(0     , 0   ) rotate(0      )' }
+    ]
+    animation.target = target
+    animation.play()
+
   centerTo: (target) ->
     container = $ 'html, body'
     target    = $ target
     
-    Tracker.afterFlush -> 
+    Tracker.afterFlush ->
       container.animate
         scrollTop: target.offset().top - $(window).height() / 2 + target.height() / 2
       , 1000
-    
+
   presentTo: (target) ->
     container = $ 'html, body'
     target    = $ target
     
     container.scrollTop 0
 
-    Tracker.afterFlush -> 
+    Tracker.afterFlush ->
       container.animate
         scrollTop: document.body.scrollHeight
         , 1000
