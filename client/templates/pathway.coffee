@@ -187,6 +187,7 @@ Template.pathway.helpers
       classes.push 'completed' if next.completed
       classes.push 'free'      if next.type    == 'decision'
       classes.push 'vivid'     if next.type    == 'decision'
+      classes.push 'free'      if next.type    == 'final'
       classes.push 'vivid'     if next.type    == 'tip'
       classes.push 'current'   if userPosition == j
       classes.push 'free'      if userPosition == j
@@ -238,7 +239,13 @@ Template.pathway.events
   # rule option with some decision dot available data
   'click core-overlay paper-button:not([disabled])': (event, template) ->
     # Send rule id to compute user decision on decision overlays
-    Meteor.call 'decide', @id if @type == 'decision'
+    if @type == 'decision'
+      Meteor.call 'decide', @id 
+      # TODO move to another place
+      try
+        animator.bounscale $("##{@id}::shadow core-icon").get(0)
+      catch e
+        animator.bounscale $("##{@id}").get(0).$.icon
 
     # Clos edecision overlay
     opener.close @

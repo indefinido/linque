@@ -70,7 +70,11 @@ linque-path
                 if next
                   if splited
                     div( horizontal center layout ) ou
-                  
+          
+    else if isFinal
+      linque-dot( $dyn = attrs )
+        .center
+          img( src="/images/final-dot.png" ) 
                   
     else
       linque-dot( $dyn = attrs )
