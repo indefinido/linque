@@ -17,12 +17,6 @@ moverable =
 
   initialize: (@dot) ->
     opener.target = @element()
-
-    # # Free without opening
-    # if @freed = not @holder.className.match('free')?
-    #   @holder.classList.add 'free'
-    #   @holder.classList.add 'current'
-    
     @positionate()
   
   move: (dot) ->
@@ -36,20 +30,9 @@ moverable =
     
     @positionate()
   
-  arrive: ->
-    # if @freed = not @holder.className.match('free')?
-    #   @holder.classList.add 'free'
-    #   @holder.classList.add 'current'
-
-    opener.open @dot
-    
+  arrive: -> opener.open @dot 
   # remove user from current dot
-  remove: ->
-    Blaze.remove @userView
-    
-    # @holder.classList.remove 'free'     if @freed
-    # @holder.classList.remove 'current'
-    # opener.close @dot if @holder.hasAttribute 'opened'
+  remove: -> Blaze.remove @userView    
 
     
   # put user in position
@@ -59,35 +42,44 @@ moverable =
 
 opener =
   target: null
+  dashboard: null
   open: (dot) ->
-    $('#dashboard').addClass 'consoling'
+    @dashboard.addClass 'consoling'
+    
     switch dot.type
-      when 'tip'
-        @target.setAttribute 'opened', true
       when 'decision'
         @target.setAttribute 'opened', true
+
+        animator.centerTo @target
         animator.pulse @target.querySelector '.user .user-circle'
+        
       when 'warning'
         @target.setAttribute 'opened', true
+        
         # TODO simplify query, maybe store next dot on current dot?
-        holder = domable.element Dots.find(type: 'decision', _id: {$gt: dot.position}).fetch()[0]
-        animator.blink holder.querySelector '#circle'
+        decision = domable.element Dots.find(type: 'decision', _id: {$gt: dot.position}).fetch()[0]
+        
+        animator.centerTo decision
+        animator.blink decision.querySelector '#circle'
       else
         @target.setAttribute 'opened', true
+        animator.centerTo @target
   
   close: (dot) ->
-    $('#dashboard').removeClass 'consoling'
+    @dashboard.removeClass 'consoling'
+    
     switch dot.type
-      when 'tip'
-        @target.setAttribute 'opened', false
       when 'decision'
         @target.removeAttribute 'opened'
         animator.pulse @target.querySelector('.user .user-circle'), false
       when 'warning'
         @target.removeAttribute 'opened'
+        
         # TODO simplify query, maybe store next dot on current dot?
-        holder = domable.element Dots.find(type: 'decision', _id: {$gt: dot.position}).fetch()[0]
-        animator.blink holder.querySelector('#circle'), false
+        decision = domable.element Dots.find(type: 'decision', _id: {$gt: dot.position}).fetch()[0]
+        
+        animator.centerTo @target
+        animator.blink decision.querySelector('#circle'), false
       else
         @target.removeAttribute 'opened'
     
@@ -101,10 +93,22 @@ emptyDotable =
 
 control =
 
-  initialize: (@template) ->
-    mover = $.extend {}, moverable, domable
+  readiness:
+    subscription: $.Deferred()
+    polymer     : $.Deferred()
+
+  waitReadiness: ->
+    deferreds = _.values @readiness
+    deferreds.unshift @
+    $.when(deferreds...).then @initialize
     
-    Tracker.afterFlush @initialMovement
+    document.addEventListener 'polymer-ready', => @readiness.polymer.resolveWith @, arguments
+ 
+  initialize: (self, template) ->
+    mover = $.extend {}, moverable, domable
+    opener.dashboard = $ '#dashboard'
+    self.template = template
+    Tracker.afterFlush self.initialMovement
     
   findOrBuildDot: (user) ->
     # Search for user current position
@@ -119,9 +123,9 @@ control =
     return unless user = Meteor.user()
 
     dot = control.findOrBuildDot user
-    
-    mover.initialize dot
 
+    mover.initialize dot
+    
     control.template.autorun control.movement
 
   movement: (computation) ->
@@ -135,9 +139,11 @@ control =
       return console.warn 'Trying to control.movement to current dot'
 
     mover.move control.findOrBuildDot user
+    
+control.waitReadiness();
 
 Template.pathway.onRendered ->
-  @subscribe 'dots', [], => control.initialize @
+  @subscribe 'dots', [], => control.readiness.subscription.resolveWith @, [@]
 
 Template.pathway.helpers
   dots: ->

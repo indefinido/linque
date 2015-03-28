@@ -1,7 +1,7 @@
 @Dot = 
   typefy: (type) ->
     if type
-      @[$.camelCase 'is-' + type] = true
+      @[$.camelCase 'is-' + type] = true unless Meteor.isServer
       @type = type
     else
       @type

@@ -11,11 +11,12 @@ module.exports = {
         return client
             .walkUntilDot('warning', function (dot) {
                 var dots = client.globals.dots, decision = dots.findByType('decision');
+                console.log(client.globals.user)
 
                 client
                     .waitForElementVisible(dot.selector(' core-overlay')                  , 2000, 'Current dot overlay opened.')
                     .waitForElementPresent(decision.selector(' .core-animation-target')   , 2000, 'Next decision dot animated.')
-                    .waitForElementVisible(dot.selector(' [icon="decision:warning"]')     , 2000, 'Overlay of type warning detected.')
+                    .waitForElementVisible(dot.selector(' core-overlay [icon="decision:warning"]')     , 2000, 'Overlay of type warning detected.')
 
                     // To allow developer see the animation
                     .pause(1000)

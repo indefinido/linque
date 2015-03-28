@@ -32,17 +32,29 @@ share.animator =
     else
       @clear blink
       blink.cancel()
-      
+
+  centerTo: (target) ->
+    container = $ 'html, body'
+    target    = $ target
+    
+    Tracker.afterFlush -> 
+      container.animate
+        scrollTop: target.offset().top - $(window).height() / 2 + target.height() / 2
+      , 1000
+    
   presentTo: (target) ->
     container = $ 'html, body'
     target    = $ target
-    container.scrollTop(0)
-    container.animate
-      scrollTop: document.body.scrollHeight
-      , 1000
-      , ->
-        container.delay(700).animate
-          scrollTop: target.offset().top - $(window).height() + target.height()*1.5
-          , 1000
+    
+    container.scrollTop 0
+
+    Tracker.afterFlush -> 
+      container.animate
+        scrollTop: document.body.scrollHeight
+        , 1000
+        , ->
+          container.delay(700).animate
+            scrollTop: target.offset().top - $(window).height() + target.height() * 1.5
+            , 1000
 
 Template.animations.onRendered share.animator.initialize

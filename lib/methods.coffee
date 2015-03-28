@@ -33,7 +33,12 @@ Meteor.methods
     meta.analytics 'Routine', 'Track', "position: #{position}"
       
   decide: (id) ->
-    user      = Meteor.user()
+    user = Meteor.user()
+
+    # check if user is on decision dot
+    dot  = Dots.find(_id: user.position).fetch()[0]
+    throw "User is on invalid dot to make decision. User position: #{user.position}, dot: #{dot && dot.position} #{dot.type}" unless dot && dot.type == 'decision'
+    
 
     # update user rule level
     operation = $inc: {}

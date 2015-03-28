@@ -14,9 +14,6 @@ function catch_errors() {
    exit $EXITCODE;
 }
 
-# can not use set -e, sadly - nightwatch bug?
-#set -e
-
 # defaults
 CONFIG="tests/nightwatch/config.json"
 ENVIRONMENT="default"
@@ -95,8 +92,6 @@ chmod 0777 tests/logs
 NWBIN=".meteor/local/build/node_modules/nightwatch/bin/nightwatch"
 
 if [ ! -f $NWBIN ]; then
-    pwd
-    echo "not found $NWBIN"
     NWBIN="node_modules/nightwatch/bin/nightwatch"
 fi
 if [ ! -f $NWBIN ]; then
