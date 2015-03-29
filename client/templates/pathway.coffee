@@ -246,8 +246,6 @@ Template.pathway.events
   # rule option with some decision dot available data
   'click core-overlay paper-button:not([disabled])': (event, template) ->
 
-    debugger
-    
     # Close decision overlay
     opener.close @
     
