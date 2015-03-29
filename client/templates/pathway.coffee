@@ -246,18 +246,15 @@ Template.pathway.events
   # rule option with some decision dot available data
   'click core-overlay paper-button:not([disabled])': (event, template) ->
 
+    debugger
+    
     # Close decision overlay
     opener.close @
     
     # Send rule id to compute user decision on decision overlays
     Meteor.call 'decide', @id if @type == 'decision'
 
-    _.delay =>
-      if @type == 'decision'
-        # TODO move to another place
-        try
-          animator.bounscale $("##{@id}::shadow core-icon").get(0)
-        catch e
-          animator.bounscale $("##{@id}").get(0).$.icon
-    , 500
+    # Animate rule
+    animator.bounscale document.querySelector("##{@id} /deep/ core-icon") if @type == 'decision'
+
 

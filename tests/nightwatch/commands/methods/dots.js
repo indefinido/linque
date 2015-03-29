@@ -68,7 +68,6 @@ var extend = require('util')._extend,
         },
         asked: function (result) {
             var model;
-            console.log(result);
 
             if (!result.value || !result.value.length) {
                 console.log(Logger.colors.yellow("!  "), "Dots: Could not get dots from meteor client, will retry forever.");

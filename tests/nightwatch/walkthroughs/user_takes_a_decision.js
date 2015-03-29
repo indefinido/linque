@@ -19,16 +19,19 @@ module.exports = {
 
     },
     "User sees feedback of leveling up Rule": function(client) {
-        console.log(Logger.colors.yellow('! Pending: Wainting for animations implementation.'));
 
-        client.end();
-        //return client
-        //    .walkUntilDot('decision', function (dot) {
-        //        var currentDot = dot.selector();
+        client
+            .walkUntilDot('decision', function (dot) {
+                var currentDot = dot.selector();
 
-        //        client
-        //            .end();
-        //    });
+                client
+                    // Close dialog by selecting the first rule to level up
+                    .execute('$("' + dot.selector(' core-overlay:visible paper-button:not([disabled]):first') + '").click()')
+                    .pause()
+                    .waitForElementPresent(   '.tool.rules /deep/ .core-animation-target', 2000, 'User rule animation started')
+                    .waitForElementNotPresent('.tool.rules /deep/ .core-animation-target', 2000, 'User rule animation finished')
+                    .end();
+            });
     },
     "User sees feedback of taken Decision": function(client) {
         client

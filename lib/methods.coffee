@@ -37,7 +37,7 @@ Meteor.methods
 
     # check if user is on decision dot
     dot  = Dots.find(_id: user.position).fetch()[0]
-    throw "User is on invalid dot to make decision. User position: #{user.position}, dot: #{dot && dot.position} #{dot.type}" unless dot && dot.type == 'decision'
+    throw "User is on invalid dot to make decision. User position: #{user.position}, dot: #{dot && dot.position} - #{dot && dot.type} position" unless dot && dot.type == 'decision'
     
 
     # update user rule level

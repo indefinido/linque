@@ -1,44 +1,17 @@
-share.animator =
-  presented: false
-  
-  initialize: ->
-    animations = @findAll 'core-animation'
-    _.each animations, (animation) ->
-      @animations[animation.id] = animation
-    , share.animator
-    
-  target: null
+manager =
   animations: {}
-  clear: (animation) ->
-    {target} = animation
-    
-    classes  = target.getAttribute 'class'
-    target.setAttribute 'class', classes.replace 'core-animation-target', ''
-    
-    animation.target = null
-  
-  pulse: (target, movement = true) ->
-    {pulse}      = @animations
-    if movement
-      pulse.target = target
-      pulse.play()
-    else
-      @clear pulse
-      pulse.cancel()
 
-  blink: (target, movement = true) ->
-    {blink}      = @animations
-    if movement
-      blink.target = target
-      blink.play()
-    else
-      @clear blink
-      blink.cancel()
+  initialize: ->
+    
+    elements = @findAll 'core-animation'
+    _.each elements, (animation) ->
+      @animations[animation.id] = animation
+    , manager
 
-  bounscale: (target) ->
-    animation = new CoreAnimation
-    animation.duration = 1800
-    animation.keyframes = [
+    bounscale = new CoreAnimation
+    bounscale.delay     = 1000
+    bounscale.duration  = 1800
+    bounscale.keyframes = [
       { transform: 'scale(4.0) translate(0     , 0   ) rotate(0      )' }
       { transform: 'scale(3.0) translate(0     , 0   ) rotate(0      )' }
       { transform: 'scale(3.0) translate(0     , 0   ) rotate(0      )' }
@@ -61,12 +34,56 @@ share.animator =
       { transform: 'scale(3.0) translate(0     , 0   ) rotate(0      )' }
       { transform: 'scale(1.0) translate(0     , 0   ) rotate(0      )' }
     ]
-    animation.target = target
-    animation.play()
+
+    manager.animations.bounscale = bounscale
+
+  presented: false
+  
+  clear: (animation) ->
+    {target} = animation
+    
+    classes  = target.getAttribute 'class'
+    target.setAttribute 'class', classes.replace /\s?core-animation-target/, ''
+    
+    animation.target = null
+
+  finished: (event) ->
+    {target: animation} = event
+    manager.clear animation
+    animation.removeEventListener @finished
+
+animator =
+  animations: manager.animations
+
+  pulse: (target, movement = true) ->
+    {pulse}      = @animations
+    if movement
+      pulse.target = target
+      pulse.play()
+    else
+      manager.clear pulse
+      pulse.cancel()
+
+  blink: (target, movement = true) ->
+    {blink}      = @animations
+    if movement
+      blink.target = target
+      blink.play()
+    else
+      manager.clear blink
+      blink.cancel()
+
+  bounscale: (target) ->
+    {bounscale} = @animations
+      
+    bounscale.addEventListener 'core-animation-finish', manager.finished
+      
+    bounscale.target = target
+    bounscale.play()
 
   centerTo: (target) ->
     # TODO improve
-    return unless share.animator.presented
+    return unless manager.presented
     
     container = $ 'html, body'
     target    = $ target
@@ -92,6 +109,9 @@ share.animator =
             , 1000
     
           # TODO improve
-          share.animator.presented = true
+          manager.presented = true
 
-Template.animations.onRendered share.animator.initialize
+Template.animations.onRendered ->
+  document.addEventListener 'polymer-ready', => manager.initialize.call @
+  
+share.animator = animator

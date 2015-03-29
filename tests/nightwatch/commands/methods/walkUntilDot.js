@@ -75,7 +75,7 @@ var Logger = require('nightwatch/lib/util/logger.js'), client, dots,
 
 exports.command = function (locator, callback) {
     client = this;
-    return this.user().dots(function () {
+    return this.dots(function () {
         var target = undefined, user, amount = 0;
         dots = client.globals.dots;
         user = client.globals.user;

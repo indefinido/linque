@@ -11,7 +11,6 @@ module.exports = {
         return client
             .walkUntilDot('warning', function (dot) {
                 var dots = client.globals.dots, decision = dots.findByType('decision');
-                console.log(client.globals.user)
 
                 client
                     .waitForElementVisible(dot.selector(' core-overlay')                  , 2000, 'Current dot overlay opened.')
