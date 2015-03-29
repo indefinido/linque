@@ -52,7 +52,6 @@ opener =
 
         animator.centerTo @target
         animator.pulse @target.querySelector '.user .user-circle'
-        
       when 'warning'
         @target.setAttribute 'opened', true
         
@@ -92,7 +91,7 @@ emptyDotable =
 
 
 control =
-
+  
   readiness:
     subscription: $.Deferred()
     polymer     : $.Deferred()

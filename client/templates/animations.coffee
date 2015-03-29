@@ -1,4 +1,6 @@
 share.animator =
+  presented: false
+  
   initialize: ->
     animations = @findAll 'core-animation'
     _.each animations, (animation) ->
@@ -63,27 +65,33 @@ share.animator =
     animation.play()
 
   centerTo: (target) ->
+    # TODO improve
+    return unless share.animator.presented
+    
     container = $ 'html, body'
     target    = $ target
-    
+
     Tracker.afterFlush ->
       container.animate
-        scrollTop: target.offset().top - $(window).height() / 2 + target.height() / 2
+        scrollTop: target.offset().top - $(window).height() + target.height() * 1.5
       , 1000
 
   presentTo: (target) ->
-    container = $ 'html, body'
+    container = $ 'body'
     target    = $ target
     
     container.scrollTop 0
 
     Tracker.afterFlush ->
-      container.animate
+      container.delay(1000).animate
         scrollTop: document.body.scrollHeight
-        , 1000
+        , 1500
         , ->
-          container.delay(700).animate
+          container.delay(1000).animate
             scrollTop: target.offset().top - $(window).height() + target.height() * 1.5
             , 1000
+    
+          # TODO improve
+          share.animator.presented = true
 
 Template.animations.onRendered share.animator.initialize

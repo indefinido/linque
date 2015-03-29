@@ -3,12 +3,13 @@
 loader =
   
   readiness:
-    rendering: $.Deferred()
-    polymer  : $.Deferred()
+    rendering: 
+      main     : $.Deferred()
+      character: $.Deferred()
+    polymer: $.Deferred()
   
   initialize: ->
     @unloaded()
-    
     $.when(_.values(loader.readiness)...).then @loaded
 
     # Callbacks
@@ -16,20 +17,19 @@ loader =
     Template.loading.onRendered @onRendered
     Template.loading.onDestroyed @onDestroyed
 
-    Template.signIn.onRendered  -> loader.readiness.rendering.resolve()
-    Template.pathway.onRendered -> loader.readiness.rendering.resolve()
+    Template.signIn.onRendered    -> loader.readiness.rendering.main.resolve()
+    Template.pathway.onRendered   -> loader.readiness.rendering.main.resolve()
+    Template.character.onRendered -> loader.readiness.rendering.character.resolve()
     
     document.addEventListener 'polymer-ready', -> loader.readiness.polymer.resolve()
 
   # Actions
   unloaded: -> Session.set 'loaded', false
-  loaded:   -> Session.set 'loaded', true
+  loaded  : -> Session.set 'loaded', true
   helper  : -> Session.get 'loaded'
 
-  finished: _.debounce ->
-    animator.presentTo '.user'
+  finished: ->
     @removeEventListener 'webkitAnimationEnd', loader.finished
-  , 1000
 
   # State
   options:
@@ -45,7 +45,9 @@ loader =
     screen = $('.pg-loading-screen').get(0)
     screen.addEventListener 'DOMNodeRemoved', loader.finished
     
-  onDestroyed: ->
+  onDestroyed: _.debounce ->
     @loading.finish() if @loading
+    animator.presentTo '#user'
+  , 1000
 
 loader.initialize()
