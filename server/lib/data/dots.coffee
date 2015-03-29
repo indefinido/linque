@@ -55,7 +55,7 @@
     _id: 60
     type: 'tip'
     title: 'Sua garrafa é sagrada.'
-    body: 'Não leve sua garrafa de casa para o trabalho ou do trabalho para casa. Isso dificulta manter seu hábito. \n\nA menos é claro, que você tenha um [Vessyl](https://www.myvessyl.com) (abre em outra aba). Ele deve te dar motivação suficiente pra levar para todo lado e encher quantas vezes for preciso!'
+    body: 'Não leve sua garrafa de casa para o trabalho ou do trabalho para casa. Isso dificulta manter seu hábito. \n\nA menos é claro, que você tenha um [Vessyl](https://www.myvessyl.com). Ele deve te dar motivação suficiente pra levar para todo lado e encher quantas vezes for preciso!'
   ,
     _id: 64
     type: 'warning'
