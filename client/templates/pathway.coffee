@@ -143,19 +143,20 @@ control =
 control.waitReadiness();
 
 Template.pathway.onRendered ->
-  @subscribe 'dots', [], => control.readiness.subscription.resolveWith @, [@]
+  @dotsSubscription = @subscribe 'dots', [], => control.readiness.subscription.resolveWith @, [@]
 
 Template.pathway.helpers
   dots: ->
+    dots  = Dots.find({}).fetch()
+    path  = []
+
+    ready = Template.instance().dotsSubscription?.ready()    
+    return path unless ready
+
     user         = Meteor.user()
     userPosition = user.position
-    dots         = Dots.find({}).fetch()
     i            = dots.length - 1
     j            = 1
-    path         = []
-
-    # When there is no dots in database, do not try to render them
-    return path unless dots.length
 
     previous = dots.shift()
     previous.completed = userPosition > j
