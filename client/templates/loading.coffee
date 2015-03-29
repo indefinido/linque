@@ -1,16 +1,25 @@
 {animator} = share
 
 loader =
+  
+  readiness:
+    rendering: $.Deferred()
+    polymer  : $.Deferred()
+  
   initialize: ->
     @unloaded()
+    
+    $.when(_.values(loader.readiness)...).then @loaded
 
     # Callbacks
     Template.registerHelper 'loaded', @helper
     Template.loading.onRendered @onRendered
     Template.loading.onDestroyed @onDestroyed
 
-    Template.signIn.onRendered @loaded
-    Template.pathway.onRendered @loaded
+    Template.signIn.onRendered  -> loader.readiness.rendering.resolve()
+    Template.pathway.onRendered -> loader.readiness.rendering.resolve()
+    
+    document.addEventListener 'polymer-ready', -> loader.readiness.polymer.resolve()
 
   # Actions
   unloaded: -> Session.set 'loaded', false
