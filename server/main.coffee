@@ -32,3 +32,12 @@ Meteor.startup ->
 Meteor.methods 
   getEnvironment: -> if process.env.ROOT_URL == "http://localhost:3000/" then "development" else "staging"
 
+
+configurations =
+  facebook:
+    loginStyle: 'redirect'
+
+for service, configuration of configurations
+  console.log service, configuration
+  ServiceConfiguration.configurations.upsert {service: service}, $set: configuration
+  
