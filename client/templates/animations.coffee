@@ -1,11 +1,20 @@
 manager =
+  readiness:
+    animations: $.Deferred()
+    polymer: $.Deferred()
+    
   animations: {}
 
   initialize: ->
+    readiness = _.values   @readiness
+    readiness.unshift      @
+    $.when(readiness...).then @build
     
-    elements = @findAll 'core-animation'
+  build: (manager, template) ->
+    
+    elements = template.findAll 'core-animation'
     _.each elements, (animation) ->
-      @animations[animation.id] = animation
+      manager.animations[animation.id] = animation
     , manager
 
     bounscale = new CoreAnimation
@@ -34,7 +43,7 @@ manager =
       { transform: 'scale(3.0) translate(0     , 0   ) rotate(0      )' }
       { transform: 'scale(1.0) translate(0     , 0   ) rotate(0      )' }
     ]
-
+    
     manager.animations.bounscale = bounscale
 
   presented: false
@@ -75,9 +84,9 @@ animator =
 
   bounscale: (target) ->
     {bounscale} = @animations
-      
+    
     bounscale.addEventListener 'core-animation-finish', manager.finished
-      
+    
     bounscale.target = target
     bounscale.play()
 
@@ -112,7 +121,8 @@ animator =
           manager.presented = true
     , 2000
 
-Template.animations.onRendered ->
-  document.addEventListener 'polymer-ready', => manager.initialize.call @
-  
+Template.animations.onRendered             -> manager.readiness.animations.resolveWith @, [@]
+document.addEventListener 'polymer-ready', -> manager.readiness.polymer.resolveWith @, [@]
+manager.initialize()
+
 share.animator = animator
