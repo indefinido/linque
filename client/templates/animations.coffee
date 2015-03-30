@@ -99,8 +99,8 @@ animator =
     
     container.scrollTop 0
 
-    Tracker.afterFlush ->
-      container.delay(1000).animate
+    Tracker.afterFlush _.debounce ->
+      container.animate
         scrollTop: document.body.scrollHeight
         , 1500
         , ->
@@ -110,6 +110,7 @@ animator =
     
           # TODO improve
           manager.presented = true
+    , 2000
 
 Template.animations.onRendered ->
   document.addEventListener 'polymer-ready', => manager.initialize.call @
