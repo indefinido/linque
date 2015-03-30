@@ -12,9 +12,9 @@ loader =
     signedIn = Meteor.userId() 
     
     loadingReady = []
-    loadingReady.push loader.readiness.character  if signedIn 
+    loadingReady.push loader.readiness.character  if signedIn
     loadingReady.push loader.readiness.pathway    if signedIn
-    loadingReady.push loader.readiness.signIn
+    loadingReady.push loader.readiness.signIn     unless signedIn
     loadingReady.push loader.readiness.polymer
     $.when(loadingReady...).then @loaded
         
