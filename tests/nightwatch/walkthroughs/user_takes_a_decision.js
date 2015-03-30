@@ -26,9 +26,9 @@ module.exports = {
 
                 client
                     // Close dialog by selecting the first rule to level up
-                    .execute('$("' + dot.selector(' core-overlay:visible paper-button:not([disabled]):first') + '").click()')
-                    .pause()
-                    .waitForElementPresent(   '.tool.rules /deep/ .core-animation-target', 2000, 'User rule animation started')
+                    .execute('$("' + dot.selector(' core-overlay paper-button:not([disabled]):first') + '").click()')
+
+                    .waitForElementPresent(   '.tool.rules /deep/ .core-animation-target', 4000, 'User rule animation started')
                     .waitForElementNotPresent('.tool.rules /deep/ .core-animation-target', 2000, 'User rule animation finished')
                     .end();
             });

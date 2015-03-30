@@ -48,20 +48,31 @@ opener =
     
     switch dot.type
       when 'decision'
-        @target.setAttribute 'opened', true
+        @target.opened = true
 
         animator.centerTo @target
         animator.pulse @target.querySelector '.user .user-circle'
       when 'warning'
-        @target.setAttribute 'opened', true
+        @target.opened = true
         
         # TODO simplify query, maybe store next dot on current dot?
         decision = domable.element Dots.find(type: 'decision', _id: {$gt: dot.position}).fetch()[0]
         
         animator.centerTo decision
         animator.blink decision.querySelector '#circle'
+
+        # Workaround for https://github.com/meteor/meteor/issues/3292
+        closeWarning = =>
+          animator.centerTo @target
+          animator.blink decision.querySelector('#circle'), false
+          @target.removeEventListener closeWarning
+
+        @target.addEventListener 'core-overlay-close-completed', closeWarning
+      when 'tip'
+        @target.opened = true
+      when 'event'
+        @target.opened = true
       else
-        @target.setAttribute 'opened', true
         animator.centerTo @target
   
   close: (dot) ->
@@ -69,18 +80,15 @@ opener =
     
     switch dot.type
       when 'decision'
-        @target.removeAttribute 'opened'
+        @target.opened = false
         animator.pulse @target.querySelector('.user .user-circle'), false
-      when 'warning'
-        @target.removeAttribute 'opened'
-        
+      # TODO uncoment when https://github.com/meteor/meteor/issues/3292 is fixed
+      # when 'warning'
         # TODO simplify query, maybe store next dot on current dot?
-        decision = domable.element Dots.find(type: 'decision', _id: {$gt: dot.position}).fetch()[0]
-        
-        animator.centerTo @target
-        animator.blink decision.querySelector('#circle'), false
-      else
-        @target.removeAttribute 'opened'
+        # decision = domable.element Dots.find(type: 'decision', _id: {$gt: dot.position}).fetch()[0]
+        # 
+        # animator.centerTo @target
+        # animator.blink decision.querySelector('#circle'), false
     
 emptyDotable =
   _id: null
@@ -236,9 +244,8 @@ Template.pathway.helpers
     options[0].splited = true
 
     options
-      
-      
-      
+    
+
 Template.pathway.events
 
   # This method handles all modal closings. In all cases, except the decision
@@ -254,5 +261,3 @@ Template.pathway.events
 
     # Animate rule
     animator.bounscale document.querySelector("##{@id} /deep/ core-icon") if @type == 'decision'
-
-

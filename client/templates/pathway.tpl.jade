@@ -12,11 +12,11 @@ linque-path
             +markdown 
               #{body}
           div( horizontal end-justified layout )
-            paper-button Continuar
+            paper-button( core-overlay-toggle ) Continuar
           
     else if isWarning
       linque-dot( $dyn = attrs ) 
-        core-overlay.console( autoCloseDisabled backdrop )
+        core-overlay.console( autoCloseDisabled backdrop)
           h2.console-title
             core-icon.icon-decision( icon="decision:warning" )
             span #{title}
@@ -24,11 +24,11 @@ linque-path
             +markdown 
               #{body}
           div( horizontal end-justified layout )
-            paper-button Entendi 
+            paper-button( core-overlay-toggle ) Entendi 
           
     else if isTip
       linque-dot( $dyn = attrs )
-        core-overlay.console( autoCloseDisabled backdrop )
+        core-overlay.console( autoCloseDisabled backdrop)
           h2.console-title
             core-icon.icon-dot( icon="dot:tip" )
             span.console-title Dica: #{title}
@@ -36,7 +36,7 @@ linque-path
             +markdown 
               #{body}
           div( horizontal end-justified layout )
-            paper-button Entendi 
+            paper-button( core-overlay-toggle ) Entendi 
           
     else if isDecision
       linque-dot( $dyn = attrs )
