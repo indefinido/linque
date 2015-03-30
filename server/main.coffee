@@ -36,6 +36,8 @@ Meteor.methods
 configurations =
   facebook:
     loginStyle: 'redirect'
+  google:
+    loginStyle: 'redirect'
 
 for service, configuration of configurations
   console.log service, configuration
