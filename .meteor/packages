@@ -4,16 +4,15 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
-meteor-platform
-coffeescript
-accounts-ui
-accounts-facebook
+coffeescript@1.2.4_1
+accounts-ui@1.1.9
+accounts-facebook@1.0.10
 mquandalle:jade
 
 velocity:html-reporter
 
 
-spiderable
+spiderable@1.0.13
 ecwyne:polymer
 differential:vulcanize
 mizzao:accounts-testing
@@ -26,9 +25,24 @@ random
 tkornblit:olark
 datariot:ganalytics
 pcel:loading
-fastclick
-accounts-google
+fastclick@1.0.12
+accounts-google@1.0.10
 mike:mocha
 clinical:nightwatch
-markdown
-service-configuration
+markdown@1.0.10
+service-configuration@1.0.10
+meteor-base
+mobile-experience
+mongo
+blaze-html-templates
+session
+jquery
+tracker
+logging
+reload
+ejson
+spacebars
+check
+standard-minifier-css
+standard-minifier-js
+shell-server
