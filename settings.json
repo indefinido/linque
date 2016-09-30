@@ -1,4 +1,9 @@
 {
+  "facebook": {
+    "appId": "1024351297588196",
+    "secret": "58e35cf1ea4133f043ea53cd79e64914"
+  },
+
   "public" : {
     "olark": {
       "identity": "6763-790-10-1997"
