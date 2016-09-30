@@ -18,18 +18,18 @@ Meteor.startup ->
       if user.services.facebook?
         # facebook profile picture
         options.profile.picture = "http://graph.facebook.com/#{user.services.facebook.id}/picture/?type=large"
-        
+
       if user.services.google?
         options.profile.picture = user.services.google.picture
 
       user.profile = options.profile
-      
-    user.profile.picture = 'http://placehold.it/250/0074B3/FFFFFF' unless user.profile.picture?
+
+    user.profile.picture = 'https://pbs.twimg.com/profile_images/1444393958/d_silhouette_gandalf_400x400.jpg' unless user.profile.picture?
 
     # return user document
     user
 
-Meteor.methods 
+Meteor.methods
   getEnvironment: -> if process.env.ROOT_URL == "http://localhost:3000/" then "development" else "staging"
 
 
@@ -42,4 +42,3 @@ configurations =
 for service, configuration of configurations
   console.log service, configuration
   ServiceConfiguration.configurations.upsert {service: service}, $set: configuration
-  

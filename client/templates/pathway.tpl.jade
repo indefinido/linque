@@ -12,7 +12,7 @@ linque-path
             +markdown 
               #{body}
           div( horizontal end-justified layout )
-            paper-button( core-overlay-toggle ) Continuar
+            paper-button( core-overlay-toggle ) Continue
           
     else if isWarning
       linque-dot( $dyn = attrs ) 
@@ -24,19 +24,19 @@ linque-path
             +markdown 
               #{body}
           div( horizontal end-justified layout )
-            paper-button( core-overlay-toggle ) Entendi 
+            paper-button( core-overlay-toggle ) Got it!
           
     else if isTip
       linque-dot( $dyn = attrs )
         core-overlay.console( autoCloseDisabled backdrop)
           h2.console-title
             core-icon.icon-dot( icon="dot:tip" )
-            span.console-title Dica: #{title}
+            span.console-title Tip: #{title}
           div.console-content
             +markdown 
               #{body}
           div( horizontal end-justified layout )
-            paper-button( core-overlay-toggle ) Entendi 
+            paper-button( core-overlay-toggle ) Got it! 
           
     else if isDecision
       linque-dot( $dyn = attrs )
@@ -69,7 +69,7 @@ linque-path
                 
                 if next
                   if splited
-                    div( horizontal center layout ) ou
+                    div( horizontal center layout ) or
           
     else if isFinal
       linque-dot( $dyn = attrs )

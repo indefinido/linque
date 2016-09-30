@@ -5,37 +5,37 @@
     _id: 1
     type: 'event'
     title: 'Woooohayyy!'
-    body: 'Sua jornada começa aqui. \n\nClique em "Continuar" e prepare-se para o seu primeiro gatilho.'
+    body: 'Your journey begins here. \n\nClick on "Continue" and get ready for your first trigger.'
   ,
     _id: 3
     type: 'tip'
-    title: 'Por que um copo e não uma garrafa?'
-    body: 'Não se preocupe, você não vai ficar com o copo para sempre. É questão de 2 ou 3 dias. Você está usando ele pra poder começar rápido a desenvolver seu hábito. \n\n Principalmente porque é fácil conseguir um copo.'
+    title: 'Why a cup and not a bottle?'
+    body: 'Do not worry, you will not keep the cup forever. It is a matter of 2 or 3 days. You are using it so you can start quick and develop your habit. \n\n Mainly because getting a cup is really easy.'
   ,
     _id: 5
     type: 'tip'
-    title: 'Não vá com muita sede ao pote!'
-    body: 'Lembre-se, a quantidade de água não é importante agora. Tente fazer a água do seu copo durar o dia todo. Isso evita que você tenha que enchê-lo mais de uma vez. (O esforço de encher o copo pode ser pouco, mas certamente pode atrapalhar o seu hábito.)'
+    title: 'Do not go with too much thirst to the pot!'
+    body: 'Remember, the water amount is not important now. Try to make water last the whole day. That prevents you from filling it up more than once. (The effort to refill the cup might be small, but certanly can get in the way of your habit.)'
   ,
     _id: 7
     type: 'tip'
-    title: 'Ainda não se convenceu?'
-    body: 'O Linque existe justamente porque vimos várias pessoas tentarem criar o mesmo hábito que você está tentando, de beber bastante água, e foram com muita sede ao pote. Já começaram colocando ao lado uma garrafa de 1,5 L. Adivinha quanto tempo durou? **1 semana**. \n\nÉ... É melhor você ir devagarinho. Seguindo o que o Linque sugere, você vai caminhar na velocidade certa ;)'
+    title: 'Not convinced yed?'
+    body: 'The Linque exists pricisely because we saw many people tring to create the same habit you are trying, the habit of drinking water, and they went with to much thrist to the pot. They started with a 1,5 L bottle right on their side. Guess how much it lasted? **1 week**. \n\nYeah... It\'s better if you take it slow. Following what the Linque suggests you will walk in the right speed ;)'
   ,
     _id: 9
     type: 'warning'
-    title: 'Uma mudança se aproxima!'
-    body: 'Você prefere adquirir um recipiente maior ou poder encher seu recipiente mais vezes por dia?\n\nPense agora e esteja preparado para quando chegar a hora de escolher.'
+    title: 'A change approaches!'
+    body: 'You rather adquire a bigger recipient or fill your recipient more times a day?\n\nThink now and be prepared for when the time to choose arrives.'
   ,
     _id: 20
     type: 'event'
-    title: 'Você encontrou um copo quebrado'
-    body: 'Outros usuários que já passaram por aqui estão jogando fora seus copos e trocando por garrafas. \n\nA maioria prefere assim, já que evita ter que encher o copo muitas vezes para tomar mais água. Lembre-se disso quando chegar a hora de decidir.'
+    title: 'You found a broken cup'
+    body: 'Other users who went through here are throwing out their cups and exchanging fro bottles. \n\nMost of them likes tht way, since it avoids having to fill up the glass lots of times to drink more water. Remember when the time to decide comes.'
   ,
     _id: 22
     type: 'decision'
-    title: 'Hora da mudança!'
-    body: 'O que você prefere? \n\n1. Trocar seu recipiente por outro maior; ou \n2. Poder encher seu recipiente atual mais vezes.'
+    title: 'Change time!'
+    body: 'What do you prefer? \n\n1. Change your recipient for a bigger one; or \n2. Power to fill your current cup more times.'
   ,
     _id: 30
     type: 'tip'

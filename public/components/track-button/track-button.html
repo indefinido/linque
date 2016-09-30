@@ -3,15 +3,17 @@
 <link href="../../bower_components/core-tooltip/core-tooltip.html" rel="import" />
 <link href="../../bower_components/core-media-query/core-media-query.html" rel="import" />
 <link href="../../bower_components/paper-icon-button/paper-icon-button.html" rel="import" />
+<link href="/bower_components/paper-tooltip/paper-tooltip.html" rel="import" />
+
 <link href="../../components/water-iconset/water-iconset.html" rel="import" />
 
 <!--
   Element to provide a track button: Basically a responsive paper button with tooltip
-  
+
   ##### Example
-  
+
   <track-button></track-button>
-  
+
   @element track-button
   @blurb Basically a responsive paper button with tooltip
   @status alpha
@@ -28,9 +30,9 @@
       }
     </style>
     <!-- TODO Implement a better solution to avoid displaying tooltip on mobile -->
-    
+
     <core-media-query query="max-width: 640px" queryMatches="{{phoneScreen}}"></core-media-query>
-    
+
     <template if="{{! phoneScreen}}">
       <core-tooltip position="{{ tooltip }}">
         <shadow></shadow>
@@ -40,9 +42,12 @@
 
     <template if="{{phoneScreen}}">
       <shadow></shadow>
-      <content select=":not([tip])"></content>
+      <paper-tooltip for="#content">Drink water!</paper-tooltip>
+      <div id="content">
+        <content select=":not([tip])"></content>
+      </div>
     </template>
-    
+
   </template>
   <script>
   //<![CDATA[
