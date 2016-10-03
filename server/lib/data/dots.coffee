@@ -5,7 +5,7 @@
     _id: 1
     type: 'event'
     title: 'Woooohayyy!'
-    body: 'Your journey begins here. \n\nClick on "Continue" and get ready for your first trigger.'
+    body: 'Your journey begins here.\n\n Press the big button on the top right every time you take a sip of water. \n\nClick on "Continue" and get ready for your first trigger.'
   ,
     _id: 3
     type: 'tip'
